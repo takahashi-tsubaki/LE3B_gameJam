@@ -2,11 +2,11 @@
 #include "SceneManager.h"
 void SceneObjects::Initialize(SceneManager* controller)
 {
-	Sprite::LoadTexture(1, L"Resources/kuribo-.jpg");
-	Sprite::LoadTexture(2, L"Resources/mario.jpg");
+	//Sprite::LoadTexture(1, L"Resources/kuribo-.jpg");
+	//Sprite::LoadTexture(2, L"Resources/mario.jpg");
 
-	Sprite::LoadTexture(4, L"Resources/sprite/clear.png");
-	Sprite::LoadTexture(5, L"Resources/sprite/over.png");
+	//Sprite::LoadTexture(4, L"Resources/sprite/clear.png");
+	//Sprite::LoadTexture(5, L"Resources/sprite/over.png");
 
 	controller_ = controller;
 
@@ -26,11 +26,6 @@ void SceneObjects::Initialize(SceneManager* controller)
 	//fbxObject->SetPosition({ 0,-50,0 });
 
 	fbxObject->SetPosition({ 0,-10,10 });
-
-	player_ = new Player();
-	enemy_ = new Enemy();
-	enemy_->Initialize(controller_->dxCommon_, player_);
-	player_->Initialize(controller_->dxCommon_, enemy_);
 }
 
 void SceneObjects::Delete()
@@ -39,14 +34,10 @@ void SceneObjects::Delete()
 	delete skydomeM_;
 	delete fbxObject;
 	delete fbxModel;
-	delete player_;
-	delete enemy_;
 }
 
 void SceneObjects::Reset()
 {
-	enemy_->Reset();
-	player_->Reset();
 }
 
 

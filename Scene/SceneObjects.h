@@ -15,8 +15,6 @@
 #include "Vector3.h"
 
 #include "FbxObject3d.h"
-#include "Player.h"
-#include "Enemy.h"
 
 class SceneManager;
 
@@ -47,9 +45,6 @@ public:
 
 	Model* model = nullptr;
 	Object3d* object = nullptr;
-
-	Player* player_ = nullptr;
-	Enemy* enemy_ = nullptr;
 
 	SceneManager* controller_;
 };
