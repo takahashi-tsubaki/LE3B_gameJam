@@ -5,8 +5,6 @@ TitleScene::TitleScene(SceneManager* controller, SceneObjects* sceneObj)
 	controller_ = controller;
 	sceneObj_ = sceneObj;
 
-	targetPos.translation_ = { 0,0,50 };
-
 }
 
 TitleScene::~TitleScene()
@@ -20,11 +18,7 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
-	controller_->camera_->SetFollowerPos(&followPos);
 
-	controller_->camera_->SetTargetPos(&targetPos);
-	Sprite::LoadTexture(3, L"Resources/sprite/title.png");
-	sprite_ = Sprite::Create(3, { 100,100 });
 }
 
 void TitleScene::Update(Input* input, GamePad* gamePad)
@@ -98,7 +92,6 @@ void TitleScene::Draw()
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
-	sprite_->Draw();
 	//
 	// スプライト描画後処理
 	Sprite::PostDraw();

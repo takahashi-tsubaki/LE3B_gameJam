@@ -4,8 +4,7 @@ PauseScene::PauseScene(SceneManager* controller, SceneObjects* sceneObj)
 {
 	controller_ = controller;
 	sceneObj_ = sceneObj;
-	player_ = sceneObj_->player_;
-	enemy_ = sceneObj_->enemy_;
+
 }
 
 PauseScene::~PauseScene()
@@ -23,14 +22,12 @@ void PauseScene::Update(Input* input, GamePad* gamePad)
 	gamePad->Update();
 	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X))
 	{
-		player_->Reset();
-		enemy_->Reset();
+
 		controller_->ChangeSceneNum(S_TITLE);
 	}
 	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START))
 	{
-		sceneObj_->player_ = player_;
-		sceneObj_->enemy_ = enemy_;
+
 		controller_->PopScene();
 
 	}
