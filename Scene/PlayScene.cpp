@@ -89,7 +89,7 @@ void PlayScene::Draw()
 
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
-	sceneObj_->skydomeO_->Draw();
+	//sceneObj_->skydomeO_->Draw();
 
 	
 
