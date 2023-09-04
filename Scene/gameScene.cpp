@@ -13,8 +13,7 @@ GameScene::~GameScene() {
 	delete fbxObject;
 	delete fbxModel;
 
-	/*safe_delete(fbxObject);
-	safe_delete(fbxModel);*/
+	
 }
 
 void GameScene::Initalize(DirectXCommon* dxCommon, Input* input, GamePad* gamePad)
