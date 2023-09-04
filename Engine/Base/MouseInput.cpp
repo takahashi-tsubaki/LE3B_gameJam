@@ -14,7 +14,7 @@ void MouseInput::Initialize(WinApp* winApp) {
 
 	// DirectInputの初期化
 	result = DirectInput8Create(
-		winApp->GetHInstance(), DIRECTINPUT_VERSION, IID_IDirectInput8,
+		winApp->GetInstance(), DIRECTINPUT_VERSION, IID_IDirectInput8,
 		(void**)&directInput, nullptr);
 	assert(SUCCEEDED(result));
 
@@ -25,7 +25,7 @@ void MouseInput::Initialize(WinApp* winApp) {
 	result = mouse->SetDataFormat(&c_dfDIMouse);
 
 	result = mouse->SetCooperativeLevel(
-		winApp->GetHwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+		winApp->Gethwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 	assert(SUCCEEDED(result));
 }
 
@@ -52,7 +52,7 @@ void MouseInput::UpdatePointPos() {
 	GetCursorPos(&mousePosition);
 
 	//クライアントエリア座標に変換する
-	HWND hwnd = winApp_->GetHwnd();
+	HWND hwnd = winApp_->Gethwnd();
 	ScreenToClient(hwnd, &mousePosition);
 
 	float xPos_absolute, yPos_absolute;

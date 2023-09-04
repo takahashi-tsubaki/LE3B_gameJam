@@ -89,7 +89,7 @@ public:
     FbxPropertyT<FbxTime> ReferenceStop;
   
     /** Reset the object time spans either to their default values or from the pTakeInfo structure, if provided.
-      * \param pTakeInfo The take info to be used during reset.
+      * \param pTakeInfo The take info_ to be used during reset.
       */
     void Reset(const FbxTakeInfo* pTakeInfo = NULL);
 

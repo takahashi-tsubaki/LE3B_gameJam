@@ -279,8 +279,8 @@ public:
 	  */
 	//@{
 
-	/** Get the scene info.
-	  * \return     Pointer to the scene info or \c NULL if no scene information
+	/** Get the scene info_.
+	  * \return     Pointer to the scene info_ or \c NULL if no scene information
 	  *             is available in the file.
 	  */
 	FbxDocumentInfo* GetSceneInfo();

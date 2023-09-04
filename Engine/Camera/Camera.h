@@ -185,12 +185,12 @@ public:
 	Vector3 rotation1_;
 	Vector3 rotation2_;
 
-	Vector3 target = {0,1,0};
+	//Vector3 target = {0,1,0};
 
 	// 視点座標
 	Vector3 eye_ = { 0, 0, -1 };
 	// 注視点座標
-	Vector3 target_ = { 0, 0, 0 };
+	Vector3 target_ = { 0, 1, 0 };
 
 	float focalLengs_ = 50;
 	float sensor_ = 35;

@@ -5,16 +5,16 @@ class Object3d;
 class BaseCollider;
 
 /// <summary>
-/// ƒNƒGƒŠƒB‚É‚æ‚éî•ñ‚ğ“¾‚é‚½‚ß‚Ì\‘¢‘Ì
+/// ã‚¯ã‚¨ãƒªã‚£ã«ã‚ˆã‚‹æƒ…å ±ã‚’å¾—ã‚‹ãŸã‚ã®æ§‹é€ ä½“
 /// </summary>
 struct QueryHit {
-	// Õ“Ë‘Šè‚ÌƒIƒuƒWƒFƒNƒg
+	// è¡çªç›¸æ‰‹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	Object3d* object = nullptr;
-	// Õ“Ë‘Šè‚ÌƒRƒ‰ƒCƒ_[
+	// è¡çªç›¸æ‰‹ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼
 	BaseCollider* coloder = nullptr;
-	// Õ“Ë“X
+	// è¡çªåº—
 	Vector3 inter;
-	// ”rËƒxƒNƒgƒ‹
+	// æ’æ–¥ãƒ™ã‚¯ãƒˆãƒ«
 	Vector3 reject;
 };
 
@@ -25,11 +25,11 @@ public:
 	virtual ~QueryCallback() = default;
 
 	/// <summary>
-	/// Œğ·ƒR[ƒ‹ƒoƒbƒN
+	/// äº¤å·®æ™‚ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	/// </summary>
-	/// <param name="info">Œğ·î•ñ</param>
-	/// <returns>ƒNƒGƒŠ[‚ğ‘±‚¯‚é‚È‚çtrueA‘Å‚¿Ø‚é‚È‚çfalse‚ğ•Ô‚·</returns>
-	virtual bool OnQueryHit(const QueryHit& info) = 0;
+	/// <param name="info_">äº¤å·®æƒ…å ±</param>
+	/// <returns>ã‚¯ã‚¨ãƒªãƒ¼ã‚’ç¶šã‘ã‚‹ãªã‚‰trueã€æ‰“ã¡åˆ‡ã‚‹ãªã‚‰falseã‚’è¿”ã™</returns>
+	virtual bool OnQueryHit(const QueryHit& info_) = 0;
 
 };
 

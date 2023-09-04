@@ -373,7 +373,7 @@ template<typename T> T* FbxNewArray(const int n)
 	else
 	{
 		// malloc usually provides 8-byte or 16-byte alignment on 32bit and 64bit architectures
-		// respectively. By allocating 8 or 16 bytes for the header info, rather than sizeof(int),
+		// respectively. By allocating 8 or 16 bytes for the header info_, rather than sizeof(int),
 		// we ensure this function maintains the same alignment behaviour as malloc.
 		void* const pTmp = FbxMalloc(lSize + MALLOC_HEADER_SIZE);
 		*static_cast<int*>(pTmp) = n;

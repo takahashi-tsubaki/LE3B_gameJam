@@ -1266,7 +1266,7 @@ public:
 				else {
 					mInstanceOf->Add(
 						lEntry->GetParentId(),
-						lEntry->Get(FBX_TYPE(FbxPropertyInfo)),        // The info
+						lEntry->Get(FBX_TYPE(FbxPropertyInfo)),        // The info_
 						lEntry->Get(FBX_TYPE(FbxPropertyValue)),       // The Value
 						0,                                              // The connections
 						false,
@@ -1520,7 +1520,7 @@ protected:
             {
                 if (lPage->ChangePropertyEntryState((FbxInt)j, FbxPropertyFlags::eOverride))
                 {
-                    // Clone the info and values. Don't clone the connections,
+                    // Clone the info_ and values. Don't clone the connections,
                     // since they aren't propagated.
                     lPage->ChangePropertyItemState(FBX_TYPE(FbxPropertyInfo), (FbxInt)j, FbxPropertyFlags::eOverride);
                     lPage->ChangePropertyItemState(FBX_TYPE(FbxPropertyValue), (FbxInt)j, FbxPropertyFlags::eOverride);

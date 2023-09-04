@@ -45,7 +45,7 @@ public:
 		* \param pType Property type. */
 		static FbxPropertyHandle Create(const char* pName, EFbxType pType=eFbxUndefined);
 
-		/** Create an instance with given name and type info.
+		/** Create an instance with given name and type info_.
 		* \param pName
 		* \param pTypeInfo */
 		static FbxPropertyHandle Create(const char* pName, FbxPropertyHandle pTypeInfo);
@@ -71,7 +71,7 @@ public:
 	//@}
 
 	/**
-	* \name Assignment and basic info
+	* \name Assignment and basic info_
 	*/
 	//@{
 		/** FbxPropertyHandle assignment operator.
@@ -98,7 +98,7 @@ public:
 		* \return \c true if greater, \c false otherwise. */
 		bool operator> (const FbxPropertyHandle& pHandle) const;
 
-		/** Compare type info together
+		/** Compare type info_ together
 		* \param pHandle FbxPropertyHandle compared with this one.   
 		* \return \c True if equal, \c false otherwise. */
 		bool Is(const FbxPropertyHandle& pHandle) const;
@@ -120,7 +120,7 @@ public:
 		//! Get the property type
 		EFbxType GetType() const;
 
-		//! Get the property type info
+		//! Get the property type info_
 		FbxPropertyHandle GetTypeInfo() const;
 
 		//! Get the property attribute state
@@ -225,7 +225,7 @@ public:
 
 		/** Add a property to the property page.
 		* \param pName The name of property.
-		* \param pTypeInfo The added property's type info.
+		* \param pTypeInfo The added property's type info_.
 		* \return The handle of the new added property */
 		FbxPropertyHandle Add(const char* pName, const FbxPropertyHandle& pTypeInfo);
 
@@ -257,9 +257,9 @@ public:
 		* \return  Return a property handle which be created with the found property. */
 		FbxPropertyHandle Find(const char* pName, bool pCaseSensitive) const;
 
-		/** Find the property with given name and type info.
+		/** Find the property with given name and type info_.
 		* \param pName The given property name
-		* \param pTypeInfo The given property type info
+		* \param pTypeInfo The given property type info_
 		* \param pCaseSensitive Decide if the given property name is case sensitive
 		* \return  Return a property handle which be created with the found property. */
 		FbxPropertyHandle Find(const char* pName, const FbxPropertyHandle& pTypeInfo, bool pCaseSensitive) const;
@@ -278,7 +278,7 @@ public:
 		*  of the name and continue search, until no property be found,then return the last found property.
 		* \param pName The given property name
 		* \param pChildrenSeparator The given children separator string 
-		* \param pTypeInfo The given property type info
+		* \param pTypeInfo The given property type info_
 		* \param pCaseSensitive Decide if the given property name is case sensitive
 		* \return  Return a property handle which be created with the found property. */
 		FbxPropertyHandle Find(const char* pName, const char* pChildrenSeparator, const FbxPropertyHandle& pTypeInfo, bool pCaseSensitive) const;

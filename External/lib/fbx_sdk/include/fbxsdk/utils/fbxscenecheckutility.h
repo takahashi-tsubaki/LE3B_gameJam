@@ -61,7 +61,7 @@ public:
 	  *        as specified by the check mode flags.
 	  * \return	\false if any issue is found in the scene
 	  * \remark  Depending on the check mode settings, the processing time can increase dramatically.
-	  * \remark  If a status and/or details object is provided, the error code is set and, details info is
+	  * \remark  If a status and/or details object is provided, the error code is set and, details info_ is
 	            logged.
 	  */
 	bool Validate(ECheckMode pCheckMode=eCheckCycles, bool pTryToRemoveBadData=false);

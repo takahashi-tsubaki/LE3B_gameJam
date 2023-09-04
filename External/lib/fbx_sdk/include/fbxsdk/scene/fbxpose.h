@@ -27,7 +27,7 @@ class FbxNode;
 class FbxUserNotification;
 
 /** This structure contains the description of a named pose.
-  * FbxPose contains one FbxPoseInfo array to store all of FBX nodes and their transform matrix info.
+  * FbxPose contains one FbxPoseInfo array to store all of FBX nodes and their transform matrix info_.
   */
 struct FbxPoseInfo
 {
@@ -40,7 +40,7 @@ typedef FbxArray<FbxNode*> NodeList;
 typedef FbxArray<FbxPose*> PoseList;
 typedef FbxArray<FbxPoseInfo*> PoseInfoList;
 
-/** This class contains the description of a Pose and provide some methods to access Pose info in one FBX scene.
+/** This class contains the description of a Pose and provide some methods to access Pose info_ in one FBX scene.
   * \nosubgrouping
   * The FbxPose object can be setup to hold "Bind Pose" data or "Rest Pose" data.
   *

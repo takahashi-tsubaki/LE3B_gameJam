@@ -1,5 +1,6 @@
 #include "PlayScene.h"
 #include "ImguiManager.h"
+
 PlayScene::PlayScene(SceneManager* controller, SceneObjects* sceneObj)
 {
 	controller_ = controller;
@@ -22,7 +23,7 @@ void PlayScene::Initialize()
 void PlayScene::Update(Input* input, GamePad* gamePad)
 {
 	gamePad->Update();
-	//ƒV[ƒ“ƒ`ƒFƒ“ƒW
+	//ã‚·ãƒ¼ãƒ³ãƒã‚§ãƒ³ã‚¸
 	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X))
 	{
 
@@ -50,11 +51,11 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 	ImGui::InputFloat3("target", &camera_->target_.x);
 	ImGui::End();*/
 
-	sceneObj_->skydomeO_->Update();
+	/*sceneObj_->skydomeO_->Update();*/
 
 	
 
-	//ƒŠƒZƒbƒgˆ—
+	//ãƒªã‚»ãƒƒãƒˆå‡¦ç†
 	if (input->TriggerKey(DIK_R))
 	{
 		
@@ -67,25 +68,25 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 
 void PlayScene::Draw()
 {
-#pragma region ”wŒiƒXƒvƒ‰ƒCƒg•`‰æ
-	// ”wŒiƒXƒvƒ‰ƒCƒg•`‰æ‘Oˆ—
+#pragma region èƒŒæ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
+	// èƒŒæ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å‰å‡¦ç†
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
-	// ”wŒiƒXƒvƒ‰ƒCƒg•`‰æ
+	// èƒŒæ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
 
 
 	/// <summary>
-	/// ‚±‚±‚É”wŒiƒXƒvƒ‰ƒCƒg‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+	/// ã“ã“ã«èƒŒæ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 	/// </summary>
 
-	// ƒXƒvƒ‰ƒCƒg•`‰æŒãˆ—
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å¾Œå‡¦ç†
 	Sprite::PostDraw();
 #pragma endregion
 
-#pragma region 3DƒIƒuƒWƒFƒNƒg•`‰æ
-	//// 3DƒIƒuƒWƒFƒNƒg•`‰æ‘Oˆ—
+#pragma region 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæç”»
+	//// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæç”»å‰å‡¦ç†
 	Object3d::PreDraw(controller_->dxCommon_->GetCommandList());
 
-	//// 3DƒIƒuƒWƒFƒNƒg‚Ì•`‰æ
+	//// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»
 
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
@@ -94,21 +95,21 @@ void PlayScene::Draw()
 	
 
 	///// <summary>
-	///// ‚±‚±‚É3DƒIƒuƒWƒFƒNƒg‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+	///// ã“ã“ã«3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 	///// </summary>
 
-	//// 3DƒIƒuƒWƒFƒNƒg•`‰æŒãˆ—
+	//// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæç”»å¾Œå‡¦ç†
 	Object3d::PostDraw();
 #pragma endregion
 
 
-	//#pragma region ‚Ø‚çƒ|ƒŠƒSƒ“•`‰æ
+	//#pragma region ãºã‚‰ãƒãƒªã‚´ãƒ³æç”»
 	//	postEffect->PreDrawScene(dxCommon_->GetCommandList());
 	//
-	//	//// ‚Ø‚çƒ|ƒŠƒSƒ“‚Ì•`‰æ
+	//	//// ãºã‚‰ãƒãƒªã‚´ãƒ³ã®æç”»
 	//	postEffect->Draw(dxCommon_->GetCommandList());
 	//	///// <summary>
-	//	///// ‚±‚±‚É‚Ø‚çƒ|ƒŠƒSƒ“‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+	//	///// ã“ã“ã«ãºã‚‰ãƒãƒªã‚´ãƒ³ã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 	//	///// </summary>
 	//
 	//	
@@ -118,16 +119,16 @@ void PlayScene::Draw()
 	//
 	//
 	//#pragma endregion
-#pragma region ‘OŒiƒXƒvƒ‰ƒCƒg•`‰æ
-	// ‘OŒiƒXƒvƒ‰ƒCƒg•`‰æ‘Oˆ—
+#pragma region å‰æ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
+	// å‰æ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å‰å‡¦ç†
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
 	//sprite_->Draw();
 	/// <summary>
-	/// ‚±‚±‚É‘OŒiƒXƒvƒ‰ƒCƒg‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+	/// ã“ã“ã«å‰æ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 	/// </summary>
 	//
-	// ƒXƒvƒ‰ƒCƒg•`‰æŒãˆ—
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å¾Œå‡¦ç†
 	Sprite::PostDraw();
 
 #pragma endregion

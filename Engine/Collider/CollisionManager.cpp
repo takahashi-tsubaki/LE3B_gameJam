@@ -28,7 +28,7 @@ void CollisionManager::CheckAllCollisions()
 			BaseCollider* colA = *itA;
 			BaseCollider* colB = *itB;
 
-			if (colA->attribute == colB->attribute)
+			if (colA->attribute_ == colB->attribute_)
 			{
 				continue;
 			}
@@ -86,40 +86,40 @@ void CollisionManager::CheckAllCollisions()
 bool CollisionManager::Raycast(const Ray& ray , unsigned short attribute , RaycastHit* hitInfo , float maxDistance)
 {
 	bool result = false;
-	//‘–¸—p‚ÌƒCƒeƒŒ[ƒ^
+	//èµ°æŸ»ç”¨ã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿
 	std::forward_list<BaseCollider*>::iterator it;
-	//¡‚Ü‚Å‚ÅÅ‚à‹ß‚¢ƒRƒ‰ƒCƒ_[‚ğ‹L˜^‚·‚é‚½‚ß‚ÌƒCƒeƒŒ[ƒ^
+	//ä»Šã¾ã§ã§æœ€ã‚‚è¿‘ã„ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’è¨˜éŒ²ã™ã‚‹ãŸã‚ã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿
 	std::forward_list<BaseCollider*>::iterator it_hit;
-	//¡‚Ü‚Å‚ÅÅ‚à‹ß‚¢ƒRƒ‰ƒCƒ_[‚Ì‹——£‚ğ‹L˜^‚·‚é•Ï”
+	//ä»Šã¾ã§ã§æœ€ã‚‚è¿‘ã„ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã®è·é›¢ã‚’è¨˜éŒ²ã™ã‚‹å¤‰æ•°
 	float distance = maxDistance;
-	//¡‚Ü‚Å‚ÅÅ‚à‹ß‚¢ƒRƒ‰ƒCƒ_[‚Æ‚ÌŒğ“_‚ğ‹L˜^‚·‚é•Ï”
+	//ä»Šã¾ã§ã§æœ€ã‚‚è¿‘ã„ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã¨ã®äº¤ç‚¹ã‚’è¨˜éŒ²ã™ã‚‹å¤‰æ•°
 	Vector3 inter;
 
 	it = colliders.begin();
 	for (; it != colliders.end(); ++it)
 	{
 		BaseCollider* colA = *it;
-		//‹…‚Ìê‡
+		//çƒã®å ´åˆ
 		if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE)
 		{
 			Sphere* sphere = dynamic_cast<Sphere*>(colA);
 			float tempDistance;
 			Vector3 tempInter;
-			//“–‚½‚ç‚È‚¯‚ê‚ÎœŠO
+			//å½“ãŸã‚‰ãªã‘ã‚Œã°é™¤å¤–
 			if (!Collision::CheckRay2Sphere(ray , *sphere , &tempDistance , &tempInter))
 			{
 				continue;
 			}
-			//‹——£‚ªÅ¬‚Å‚È‚¯‚ê‚ÎœŠO
+			//è·é›¢ãŒæœ€å°ã§ãªã‘ã‚Œã°é™¤å¤–
 			if (tempDistance >= distance)
 			{
 				continue;
 			}
-			if (!(colA->attribute & attribute))
+			if (!(colA->attribute_ & attribute))
 			{
 				continue;
 			}
-			//¡‚Ü‚Å‚ÅÅ‚à‹ß‚¢‚Ì‚Å‹L˜^‚ğ‚Æ‚é
+			//ä»Šã¾ã§ã§æœ€ã‚‚è¿‘ã„ã®ã§è¨˜éŒ²ã‚’ã¨ã‚‹
 			result = true;
 			distance = tempDistance;
 			inter = tempInter;
@@ -139,7 +139,7 @@ bool CollisionManager::Raycast(const Ray& ray , unsigned short attribute , Rayca
 			{
 				continue;
 			}
-			if (!(colA->attribute & attribute))
+			if (!(colA->attribute_ & attribute))
 			{
 				continue;
 			}
@@ -170,16 +170,16 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 
 	std::forward_list<BaseCollider*>::iterator it;
 
-	// ‚·‚×‚Ä‚ÌƒRƒ‰ƒCƒ_[‚Æ‘“–‚½‚èƒ`ƒFƒbƒN
+	// ã™ã¹ã¦ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã¨ç·å½“ãŸã‚Šãƒã‚§ãƒƒã‚¯
 	it = colliders.begin();
 	for (; it != colliders.end(); ++it)
 	{
 		BaseCollider* col = *it;
 
-		if (!(col->attribute & attribute)) {
+		if (!(col->attribute_ & attribute)) {
 			continue;
 		}
-		//‹…
+		//çƒ
 		if (col->GetShapeType() == COLLISIONSHAPE_SPHERE) {
 			Sphere* sphereB = dynamic_cast<Sphere*>(col);
 
@@ -187,19 +187,19 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 			Vector3 tempReject;
 			if (!Collision::CheckSphere2Sphere(sphere, *sphereB, &tempInter, &tempReject))continue;
 
-			// Œğ·î•ñ‚ğƒZƒbƒg
-			QueryHit info;
-			info.coloder = col;
-			info.object = col->GetObject3d();
-			info.inter = tempInter;
-			info.reject = tempReject;
+			// äº¤å·®æƒ…å ±ã‚’ã‚»ãƒƒãƒˆ
+			QueryHit info_;
+			info_.coloder = col;
+			info_.object = col->GetObject3d();
+			info_.inter = tempInter;
+			info_.reject = tempReject;
 
-			// ƒNƒGƒŠ[ƒR[ƒ‹ƒoƒbƒNŒÄ‚Ño‚µ
-			if (!callback->OnQueryHit(info)) {
-				// –ß‚è’l‚ªfalse‚Ìê‡AŒp‘±‚¹‚¸I—¹
+			// ã‚¯ã‚¨ãƒªãƒ¼ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯å‘¼ã³å‡ºã—
+			if (!callback->OnQueryHit(info_)) {
+				// æˆ»ã‚Šå€¤ãŒfalseã®å ´åˆã€ç¶™ç¶šã›ãšçµ‚äº†
 				return;
 			}
-		}// ƒƒbƒVƒ…
+		}// ãƒ¡ãƒƒã‚·ãƒ¥
 		else if (col->GetShapeType() == COLLISIONSHAPE_MESH) {
 			MeshCollider* meshCollider = dynamic_cast<MeshCollider*>(col);
 
@@ -207,16 +207,16 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 			Vector3 tempReject;
 			if (!meshCollider->CheckCollisionSphere(sphere, &tempInter, &tempReject))continue;
 
-			// Œğ·î•ñ‚ğƒZƒbƒg
-			QueryHit info;
-			info.coloder = col;
-			info.object = col->GetObject3d();
-			info.inter = tempInter;
-			info.reject = tempReject;
+			// äº¤å·®æƒ…å ±ã‚’ã‚»ãƒƒãƒˆ
+			QueryHit info_;
+			info_.coloder = col;
+			info_.object = col->GetObject3d();
+			info_.inter = tempInter;
+			info_.reject = tempReject;
 
-			// ƒNƒGƒŠ[ƒR[ƒ‹ƒoƒbƒNŒÄ‚Ño‚µ
-			if (!callback->OnQueryHit(info)) {
-				// –ß‚è’l‚ªfalse‚Ìê‡AŒp‘±‚¹‚¸I—¹
+			// ã‚¯ã‚¨ãƒªãƒ¼ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯å‘¼ã³å‡ºã—
+			if (!callback->OnQueryHit(info_)) {
+				// æˆ»ã‚Šå€¤ãŒfalseã®å ´åˆã€ç¶™ç¶šã›ãšçµ‚äº†
 				return;
 			}
 		}

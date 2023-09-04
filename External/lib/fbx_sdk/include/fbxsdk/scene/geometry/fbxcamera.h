@@ -1053,7 +1053,7 @@ public:
       */
     FbxPropertyT<FbxBool>                         ShowName;
 
-    /** This property handles the flag to show info on moving or not.
+    /** This property handles the flag to show info_ on moving or not.
       *
       * To access this property do: ShowInfoOnMoving.Get().
       * To set this property do: ShowInfoOnMoving.Set(FbxBool).
