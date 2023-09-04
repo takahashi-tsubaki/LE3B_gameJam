@@ -39,6 +39,7 @@
     <ClCompile Include="Engine\Base\FPS.cpp" />
     <ClCompile Include="Engine\Base\GamePad.cpp" />
     <ClCompile Include="Engine\Base\Input.cpp" />
+    <ClCompile Include="Engine\Base\MouseInput.cpp" />
     <ClCompile Include="Engine\Base\WinApp.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\Camera\GameCamera.cpp" />
@@ -88,6 +89,7 @@
     <ClInclude Include="Engine\Base\FPS.h" />
     <ClInclude Include="Engine\Base\GamePad.h" />
     <ClInclude Include="Engine\Base\Input.h" />
+    <ClInclude Include="Engine\Base\MouseInput.h" />
     <ClInclude Include="Engine\Base\WinApp.h" />
     <ClInclude Include="Engine\Camera\Camera.h" />
     <ClInclude Include="Engine\Camera\GameCamera.h" />
