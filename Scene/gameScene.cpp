@@ -12,8 +12,6 @@ GameScene::~GameScene() {
 	delete camera_ ;
 	delete fbxObject;
 	delete fbxModel;
-
-	
 }
 
 void GameScene::Initalize(DirectXCommon* dxCommon, Input* input, GamePad* gamePad)
