@@ -18,7 +18,7 @@ void GameScene::Initalize(DirectXCommon* dxCommon, Input* input, GamePad* gamePa
 {
 	dxCommon_ = dxCommon;
 	input_ = input;
-	//ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŽæ“¾
+	//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å–å¾—
 	gamePad_ = gamePad;
 
 	//input_ = Input::GetInstance();
@@ -30,22 +30,22 @@ void GameScene::Initalize(DirectXCommon* dxCommon, Input* input, GamePad* gamePa
 
 	
 	
-	//// ƒJƒƒ‰’Ž‹“_‚ðƒZƒbƒg
+	//// ã‚«ãƒ¡ãƒ©æ³¨è¦–ç‚¹ã‚’ã‚»ãƒƒãƒˆ
 	//camera_->SetTarget({ 0, 0, 0 });
-	// 3DƒIƒuƒWƒFƒNƒg‚ÉƒJƒƒ‰‚ðƒZƒbƒg
+	// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚«ãƒ¡ãƒ©ã‚’ã‚»ãƒƒãƒˆ
 	Object3d::SetCamera(gameCamera);
-	//ƒ‰ƒCƒg¶¬
+	//ãƒ©ã‚¤ãƒˆç”Ÿæˆ
 	light_ = Light::Create();
-	//ƒ‰ƒCƒgF‚ðÝ’è
+	//ãƒ©ã‚¤ãƒˆè‰²ã‚’è¨­å®š
 	light_->SetLightColor({ 1,1,1 });
-	//3DƒIƒuƒWƒFƒNƒg‚Éƒ‰ƒCƒg‚ðƒZƒbƒg
+	//3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ãƒ©ã‚¤ãƒˆã‚’ã‚»ãƒƒãƒˆ
 	Object3d::SetLight(light_);
 
-	//ƒfƒoƒCƒX‚ðƒZƒbƒg
+	//ãƒ‡ãƒã‚¤ã‚¹ã‚’ã‚»ãƒƒãƒˆ
 	FbxObject3d::SetDevice(dxCommon_->GetDevice());
-	//ƒJƒƒ‰‚ðƒZƒbƒg
+	//ã‚«ãƒ¡ãƒ©ã‚’ã‚»ãƒƒãƒˆ
 	FbxObject3d::SetCamera(gameCamera);
-	//ƒOƒ‰ƒtƒBƒbƒNƒXƒpƒCƒvƒ‰ƒCƒ“¶¬
+	//ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ç”Ÿæˆ
 	FbxObject3d::CreateGraphicsPipeline();
 	ParticleManager::SetCamera(gameCamera);
 
@@ -63,6 +63,7 @@ void GameScene::Update()
 {
 	sceneManager->ChangeScene();
 	sceneManager->SceneUpdate(input_,gamePad_);
+	
 	//gameCamera->Update();
 	/*Vector3 nowEye = gameCamera->GetEye();
 
@@ -88,32 +89,32 @@ void GameScene::Update()
 	enemy_->Update();*/
 
 	
-	//“–‚½‚è”»’è
+	//å½“ãŸã‚Šåˆ¤å®š
 	colMan->CheckAllCollisions();
 
 }
 void GameScene::Draw()
 {
 	sceneManager->SceneDraw();
-//#pragma region ”wŒiƒXƒvƒ‰ƒCƒg•`‰æ
-//	// ”wŒiƒXƒvƒ‰ƒCƒg•`‰æ‘Oˆ—
+//#pragma region èƒŒæ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
+//	// èƒŒæ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å‰å‡¦ç†
 //	Sprite::PreDraw(dxCommon_->GetCommandList());
-//	// ”wŒiƒXƒvƒ‰ƒCƒg•`‰æ
+//	// èƒŒæ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
 //	
 //	
 //	/// <summary>
-//	/// ‚±‚±‚É”wŒiƒXƒvƒ‰ƒCƒg‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+//	/// ã“ã“ã«èƒŒæ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 //	/// </summary>
 //
-//	// ƒXƒvƒ‰ƒCƒg•`‰æŒãˆ—
+//	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å¾Œå‡¦ç†
 //	Sprite::PostDraw();
 //#pragma endregion
 //
-//#pragma region 3DƒIƒuƒWƒFƒNƒg•`‰æ
-//	//// 3DƒIƒuƒWƒFƒNƒg•`‰æ‘Oˆ—
+//#pragma region 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæç”»
+//	//// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæç”»å‰å‡¦ç†
 //	Object3d::PreDraw(dxCommon_->GetCommandList());
 //
-//	//// 3DƒIƒuƒWƒFƒNƒg‚Ì•`‰æ
+//	//// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»
 //
 //	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 //
@@ -123,36 +124,36 @@ void GameScene::Draw()
 //	enemy_->Draw();
 //
 //	///// <summary>
-//	///// ‚±‚±‚É3DƒIƒuƒWƒFƒNƒg‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+//	///// ã“ã“ã«3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 //	///// </summary>
 //
-//	//// 3DƒIƒuƒWƒFƒNƒg•`‰æŒãˆ—
+//	//// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæç”»å¾Œå‡¦ç†
 //	Object3d::PostDraw();
 //#pragma endregion
 //
-//#pragma region ƒp[ƒeƒBƒNƒ‹•`‰æ
+//#pragma region ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æç”»
 //
-//	//// ƒp[ƒeƒBƒNƒ‹•`‰æ‘Oˆ—
+//	//// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æç”»å‰å‡¦ç†
 //	Particle::PreDraw(dxCommon_->GetCommandList());
 //
-//	//// 3DƒIƒuƒWƒFƒNƒg‚Ì•`‰æ
+//	//// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»
 //	
 //	///// <summary>
-//	///// ‚±‚±‚É3DƒIƒuƒWƒFƒNƒg‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+//	///// ã“ã“ã«3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 //	///// </summary>
 //
-//	//// ƒp[ƒeƒBƒNƒ‹•`‰æŒãˆ—
+//	//// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æç”»å¾Œå‡¦ç†
 //	Particle::PostDraw();
 //
 //#pragma endregion
 //
-////#pragma region ‚Ø‚çƒ|ƒŠƒSƒ“•`‰æ
+////#pragma region ãºã‚‰ãƒãƒªã‚´ãƒ³æç”»
 ////	postEffect->PreDrawScene(dxCommon_->GetCommandList());
 ////
-////	//// ‚Ø‚çƒ|ƒŠƒSƒ“‚Ì•`‰æ
+////	//// ãºã‚‰ãƒãƒªã‚´ãƒ³ã®æç”»
 ////	postEffect->Draw(dxCommon_->GetCommandList());
 ////	///// <summary>
-////	///// ‚±‚±‚É‚Ø‚çƒ|ƒŠƒSƒ“‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+////	///// ã“ã“ã«ãºã‚‰ãƒãƒªã‚´ãƒ³ã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 ////	///// </summary>
 ////
 ////	
@@ -162,17 +163,17 @@ void GameScene::Draw()
 ////
 ////
 ////#pragma endregion
-//#pragma region ‘OŒiƒXƒvƒ‰ƒCƒg•`‰æ
-//	// ‘OŒiƒXƒvƒ‰ƒCƒg•`‰æ‘Oˆ—
+//#pragma region å‰æ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
+//	// å‰æ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å‰å‡¦ç†
 //	Sprite::PreDraw(dxCommon_->GetCommandList());
 //
 //	//sprite_->Draw();
 //	/// <summary>
-//	/// ‚±‚±‚É‘OŒiƒXƒvƒ‰ƒCƒg‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+//	/// ã“ã“ã«å‰æ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 //	/// </summary>
 //
 //	//
-//	// ƒXƒvƒ‰ƒCƒg•`‰æŒãˆ—
+//	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å¾Œå‡¦ç†
 //	Sprite::PostDraw();
 //
 //#pragma endregion
