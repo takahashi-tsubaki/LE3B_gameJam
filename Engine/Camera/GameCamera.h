@@ -41,10 +41,10 @@ private:
     WorldTransform* followerPos_ = nullptr;
 
     float cameraHeight_ = 6;
+    float cameraDistance_ = 20.0f;
     //ÉJÉÅÉâãóó£ä÷åW
     const float  MAX_CAMERA_DISTANCE = 50.0f;
     const float  MIN_CAMERA_DISTANCE = 7.0f;
-    float cameraDistance_ = 20.0f;
     const float MAX_CHANGE_TIMER = 30;
     int cameraModeChangeCountTimer = 30;
 
