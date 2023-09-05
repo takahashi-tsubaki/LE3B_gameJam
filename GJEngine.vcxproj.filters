@@ -91,6 +91,12 @@
     <Filter Include="シェーダーファイル">
       <UniqueIdentifier>{af33d989-982b-441c-ad22-31081c7ca657}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Json">
+      <UniqueIdentifier>{e9f2d562-f0d5-40b4-8a75-e697928b34ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Json">
+      <UniqueIdentifier>{ca2ee6b0-e89f-4819-8798-e10e9e1e22e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Base\DirectXCommon.cpp">
@@ -233,6 +239,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Base\MouseInput.cpp">
       <Filter>Base\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Json\JsonLoader.cpp">
+      <Filter>ソース ファイル\Json</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +403,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Base\MouseInput.h">
       <Filter>Base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Json\JsonLoader.h">
+      <Filter>ヘッダー ファイル\Json</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

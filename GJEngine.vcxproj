@@ -54,6 +54,7 @@
     <ClCompile Include="Engine\FBX\FbxObject3d.cpp" />
     <ClCompile Include="Engine\FrameWork\Framework.cpp" />
     <ClCompile Include="Engine\FrameWork\MyGame.cpp" />
+    <ClCompile Include="Engine\Json\JsonLoader.cpp" />
     <ClCompile Include="Engine\Light\Light.cpp" />
     <ClCompile Include="Engine\Math\Affin.cpp" />
     <ClCompile Include="Engine\Math\Ease.cpp" />
@@ -109,6 +110,7 @@
     <ClInclude Include="Engine\FBX\FbxObject3d.h" />
     <ClInclude Include="Engine\FrameWork\Framework.h" />
     <ClInclude Include="Engine\FrameWork\MyGame.h" />
+    <ClInclude Include="Engine\Json\JsonLoader.h" />
     <ClInclude Include="Engine\Light\Light.h" />
     <ClInclude Include="Engine\Math\Affin.h" />
     <ClInclude Include="Engine\Math\Ease.h" />
