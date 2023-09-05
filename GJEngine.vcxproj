@@ -261,9 +261,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LibraryPath>$(ProjectDir)External\lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)External\json;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>$(ProjectDir)External\lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)External\json;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -299,7 +301,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -316,7 +318,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
