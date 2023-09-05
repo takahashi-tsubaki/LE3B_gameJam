@@ -42,7 +42,7 @@ struct FbxTakeLayerInfo
   * Example of use: to get the list of all 
   * animation take names of FBX file without loading all the scene content.
   * When a FbxImporter is initialized, the take information can be read and can be available
-  * before the long Import() step, this way, we can get the take info data very fast 
+  * before the long Import() step, this way, we can get the take info_ data very fast 
   * since we don't need to load all the animation scene data.
   * \code
   * // Ex: to get all take names in a FBX file

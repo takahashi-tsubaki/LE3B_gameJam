@@ -187,7 +187,7 @@ public:
 	virtual bool                GetFrameRate(FbxTime::EMode& pTimeMode) { pTimeMode = FbxTime::eDefaultMode; return false; }
 
 
-    /** Returns the scene info from the file.
+    /** Returns the scene info_ from the file.
       * \return NULL.
       */
     virtual FbxDocumentInfo*   GetSceneInfo(){return NULL;}

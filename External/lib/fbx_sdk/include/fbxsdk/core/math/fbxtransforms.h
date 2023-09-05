@@ -27,7 +27,7 @@
   * at this level, they are unitless values and will only have meaning within the context they are queried.
   *
   * For each limit, there is one flag to indicate if the limit is active or not. Before accessing the 
-  * limit info, the caller need to query the flag first to make sure that the retrieved values will be
+  * limit info_, the caller need to query the flag first to make sure that the retrieved values will be
   * meaningful.
   * \nosubgrouping
   */

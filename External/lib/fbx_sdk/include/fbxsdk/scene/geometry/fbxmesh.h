@@ -683,7 +683,7 @@ public:
 		/** Sets the flag indicating whether the face represents a hole or not.
 		* \param pFaceIndex Index of the processed polygon.
 		* \param pIsHole If \c true, this face represent a hole.
-		* \return \c true if successfully set the hole info. */
+		* \return \c true if successfully set the hole info_. */
 		bool SetPolyHoleInfo(int pFaceIndex, bool pIsHole);
 
 		/** Set hole flags array.

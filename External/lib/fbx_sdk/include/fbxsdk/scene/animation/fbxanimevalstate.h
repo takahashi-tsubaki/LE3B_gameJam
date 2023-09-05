@@ -113,7 +113,7 @@ public:
 	FbxAMatrix mGX;	//!< Used to hold result global transform matrix from node evaluation. Pivots, offsets, pre/post rotation and all other transforms are taken into consideration.
 
 	/** mTransform is used to hold the corresponding FbxTransform of the node.
-	* This FbxTransform takes all transform-related info, including pivots, offsets, pre/post rotation, rotation order, limits, etc.
+	* This FbxTransform takes all transform-related info_, including pivots, offsets, pre/post rotation, rotation order, limits, etc.
 	* The evaluation is actually done through the utility functions of FbxTransform. */
 	FbxTransform* mTransform;
 };

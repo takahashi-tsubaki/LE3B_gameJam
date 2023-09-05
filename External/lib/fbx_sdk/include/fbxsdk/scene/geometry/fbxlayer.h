@@ -2520,37 +2520,37 @@ public:
 
 	/** Returns this layer's vertex crease description.
 	  * \return      A pointer to the Crease layer element, or \c NULL if no Crease layer element is defined in this layer.
-	  * \remarks     Crease info should only be defined when the geometry is FbxSubDiv.
+	  * \remarks     Crease info_ should only be defined when the geometry is FbxSubDiv.
 	  */
 	FbxLayerElementCrease* GetVertexCrease();
 
 	/** Returns this layer's vertex crease description.
 	  * \return      A pointer to the Crease layer element, or \c NULL if no Crease layer element is defined in this layer.
-	  * \remarks     Crease info should only be defined when the geometry is FbxSubDiv.
+	  * \remarks     Crease info_ should only be defined when the geometry is FbxSubDiv.
 	  */
 	const FbxLayerElementCrease* GetVertexCrease() const;
 
     /** Returns this layer's edge crease description.
       * \return      A pointer to the Crease layer element, or \c NULL if no Crease layer element is defined in this layer.
-      * \remarks     Crease info should only be defined when the geometry is FbxSubDiv.
+      * \remarks     Crease info_ should only be defined when the geometry is FbxSubDiv.
       */
     FbxLayerElementCrease* GetEdgeCrease();
 
     /** Returns this layer's edge crease description.
       * \return      A pointer to the Crease layer element, or \c NULL if no Crease layer element is defined in this layer.
-      * \remarks     Crease info should only be defined when the geometry is FbxSubDiv.
+      * \remarks     Crease info_ should only be defined when the geometry is FbxSubDiv.
       */
     const FbxLayerElementCrease* GetEdgeCrease() const;
 
     /** Returns this layer's Hole description.
     * \return      A pointer to the Hole layer element, or \c NULL if no Hole layer element is defined in this layer.
-    * \remarks     Hole info should only be defined when the geometry is FbxMesh.
+    * \remarks     Hole info_ should only be defined when the geometry is FbxMesh.
     */
     FbxLayerElementHole* GetHole();
 
     /** Returns this layer's Hole description.
     * \return      A pointer to the Hole layer element, or \c NULL if no Hole layer element is defined in this layer.
-    * \remarks     Hole info should only be defined when the geometry is FbxMesh.
+    * \remarks     Hole info_ should only be defined when the geometry is FbxMesh.
     */
     const FbxLayerElementHole* GetHole() const;
 

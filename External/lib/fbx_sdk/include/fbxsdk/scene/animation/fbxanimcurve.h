@@ -1109,19 +1109,19 @@ public:
 		*/
 		virtual float KeyGetLeftAuto(int pIndex, bool pApplyOvershootProtection = false) = 0;
 
-		/** Get the left derivative info (of type FbxAnimCurveTangentInfo) of a key.
+		/** Get the left derivative info_ (of type FbxAnimCurveTangentInfo) of a key.
 		* \param pIndex Index of the queried key.
-		* \return Left derivative info.
+		* \return Left derivative info_.
 		* \remark Result is undetermined if animation curve has no key or if index 
 		* is out of bounds.
 		*/
 		virtual FbxAnimCurveTangentInfo KeyGetLeftDerivativeInfo(int pIndex) = 0;
 
-		/** Set the left derivative info (of type FbxAnimCurveTangentInfo) of a key.
+		/** Set the left derivative info_ (of type FbxAnimCurveTangentInfo) of a key.
 		* \param pIndex Index of the key.
-		* \param pValue Left derivative info.
-		* \param pForceDerivative If \c true, assign the tangent info's derivative value to the key derivative.
-		*  If \c false, use the tangent info's auto parametric value to recompute the key derivative.
+		* \param pValue Left derivative info_.
+		* \param pForceDerivative If \c true, assign the tangent info_'s derivative value to the key derivative.
+		*  If \c false, use the tangent info_'s auto parametric value to recompute the key derivative.
 		* \remark Result is undetermined if animation curve has no key or if index 
 		* is out of bounds.
 		* This function is only relevant if previous key interpolation
@@ -1158,19 +1158,19 @@ public:
 		*/
 		virtual float KeyGetRightAuto(int pIndex, bool pApplyOvershootProtection = false) = 0;
 
-		/** Get the right derivative info (of type FbxAnimCurveTangentInfo) of a key.
+		/** Get the right derivative info_ (of type FbxAnimCurveTangentInfo) of a key.
 		* \param pIndex Index of the queried key.
-		* \return Right derivative info.
+		* \return Right derivative info_.
 		* \remark Result is undetermined if animation curve has no key or if index 
 		* is out of bounds.
 		*/
 		virtual FbxAnimCurveTangentInfo KeyGetRightDerivativeInfo(int pIndex) = 0;
 
-		/** Set the right derivative info (of type FbxAnimCurveTangentInfo) of a key.
+		/** Set the right derivative info_ (of type FbxAnimCurveTangentInfo) of a key.
 		* \param pIndex Index of the key.
-		* \param pValue Right derivative info.
-		* \param pForceDerivative If \c true, assign the tangent info's derivative value to the key derivative.
-		*  If \c false, use the tangent info's auto parametric value to recompute the key derivative.
+		* \param pValue Right derivative info_.
+		* \param pForceDerivative If \c true, assign the tangent info_'s derivative value to the key derivative.
+		*  If \c false, use the tangent info_'s auto parametric value to recompute the key derivative.
 		* \remark Result is undetermined if animation curve has no key or if index 
 		* is out of bounds.
 		* This function is only relevant if previous key interpolation

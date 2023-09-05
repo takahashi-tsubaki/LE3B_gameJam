@@ -231,6 +231,9 @@
     <ClCompile Include="Engine\Particle\ParticleManager.cpp">
       <Filter>ソース ファイル\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Base\MouseInput.cpp">
+      <Filter>Base\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\WinApp.h">
@@ -388,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Particle\ParticleManager.h">
       <Filter>ヘッダー ファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Base\MouseInput.h">
+      <Filter>Base\.h</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

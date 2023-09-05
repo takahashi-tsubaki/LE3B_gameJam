@@ -5,7 +5,7 @@
 #include "CollisionInfo.h"
 
 
-//ƒRƒ‰ƒCƒ_[Šî’êƒNƒ‰ƒX
+//ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼åŸºåº•ã‚¯ãƒ©ã‚¹
 class BaseCollider
 {
 public:
@@ -13,7 +13,7 @@ public:
 
 public:
 	BaseCollider() = default;
-	//‰¼‘zƒfƒXƒgƒ‰ƒNƒ^
+	//ä»®æƒ³ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	virtual ~BaseCollider() = default;
 
 	inline void SetObject3d(Object3d* object)
@@ -26,9 +26,9 @@ public:
 		return object3d;
 	}
 
-	//XV
+	//æ›´æ–°
 	virtual void Update() = 0;
-	//Œ`óƒ^ƒCƒvæ“¾
+	//å½¢çŠ¶ã‚¿ã‚¤ãƒ—å–å¾—
 	inline CollisionShapeType GetShapeType()
 	{
 		return shapeType;
@@ -37,26 +37,26 @@ public:
 	inline void OnCollision(const CollisionInfo& info)
 	{
 		isHit = true;
-		this->info = info;
+		info_ = info;
 	}
 
 	inline void SetAttribute(unsigned short attribute)
 	{
-		this->attribute = attribute;
+		attribute_ = attribute;
 	}
 
 	unsigned short GetAttribute() {
-		return this->attribute;
+		return attribute_;
 	}
 
 	inline void AddAttribute(unsigned short attribute)
 	{
-		this->attribute |= attribute;
+		attribute_ |= attribute;
 	}
 
 	inline void RemoveAttribute(unsigned short attribute)
 	{
-		this->attribute &= !attribute;
+		attribute_ &= !attribute;
 	}
 
 	inline bool GetIsHit()
@@ -66,7 +66,7 @@ public:
 
 	inline CollisionInfo GetCollisionInfo()
 	{
-		return info;
+		return info_;
 	}
 
 protected:
@@ -74,14 +74,14 @@ protected:
 	
 	bool isHit = false;
 
-	CollisionInfo info = {
+	CollisionInfo info_ = {
 		nullptr ,
 		nullptr ,
 		{0 , 0 , 0}
 	};
 	
-	//Œ`óƒ^ƒCƒv
+	//å½¢çŠ¶ã‚¿ã‚¤ãƒ—
 	CollisionShapeType shapeType = SHAPE_UNKNOWN;
-	//“–‚½‚è”»’è‘®«
-	unsigned short attribute = 0b1111111111111111;
+	//å½“ãŸã‚Šåˆ¤å®šå±æ€§
+	unsigned short attribute_ = 0b1111111111111111;
 };

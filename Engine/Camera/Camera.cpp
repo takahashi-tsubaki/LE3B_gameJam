@@ -279,22 +279,22 @@ void Camera::MoveTarget(Input* input)
 {
 	if (input->PushKey(DIK_LEFT))
 	{
-		target.x -= 0.5f;
+		target_.x -= 0.5f;
 	}
 	if (input->PushKey(DIK_RIGHT))
 	{
-		target.x += 0.5f;
+		target_.x += 0.5f;
 	}
 	if (input->PushKey(DIK_UP))
 	{
-		target.z += 0.5f;
+		target_.z += 0.5f;
 	}
 	if (input->PushKey(DIK_DOWN))
 	{
-		target.z -= 0.5f;
+		target_.z -= 0.5f;
 	}
 
-	SetTarget(target);
+	SetTarget(target_);
 }
 
 
