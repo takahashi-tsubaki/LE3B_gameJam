@@ -1,0 +1,10 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl Material
+	Ka 0.3000 0.3000 0.3000
+	Kd 0.5000 0.2000 0.1000
+	Ks 0.0000 0.0000 0.0000
+	map_Kd nizi.png
+
+illum 2

@@ -1,5 +1,7 @@
 #include "PlayScene.h"
 #include "ImguiManager.h"
+#include "JsonLoader.h"
+#include <fstream>
 
 PlayScene::PlayScene(SceneManager* controller, SceneObjects* sceneObj)
 {
@@ -16,44 +18,49 @@ PlayScene::~PlayScene()
 
 void PlayScene::Initialize()
 {
-
-
+	LoadBlockData();
 }
 
 void PlayScene::Update(Input* input, GamePad* gamePad)
 {
 	gamePad->Update();
 	//シーンチェンジ
-	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X))
-	{
+	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X)){controller_->ChangeSceneNum(S_TITLE);}
 
-		controller_->ChangeSceneNum(S_TITLE);
-	}
+	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)){controller_->PushScene(S_PAUSE);}
 
-	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START))
-	{
-		controller_->PushScene(S_PAUSE);
-	}
-
-	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK))
-	{
-	
-	}
-
-	
-
+	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	}
 	controller_->camera_->Update();
-
-	/*ImGui::Begin("cameraPos");
-	//ImGui::SetWindowPos({ 200 , 200 });
-	ImGui::SetWindowSize({ 500,100 });
-	ImGui::InputFloat3("eye", &camera_->eye_.x);
-	ImGui::InputFloat3("target", &camera_->target_.x);
-	ImGui::End();*/
-
-	/*sceneObj_->skydomeO_->Update();*/
-
 	
+	if (input->PushKey(DIK_A)) {
+		controller_->camera_->eye_.x -= 0.1f;
+		controller_->camera_->SetEye(controller_->camera_->eye_);
+	}
+	if (input->PushKey(DIK_D)) {
+		controller_->camera_->eye_.x += 0.1f;
+		controller_->camera_->SetEye(controller_->camera_->eye_);
+	}
+	if (input->PushKey(DIK_W)) {
+		controller_->camera_->eye_.y += 0.5f;
+		controller_->camera_->SetEye(controller_->camera_->eye_);
+	}
+	if (input->PushKey(DIK_S)) {
+		controller_->camera_->eye_.y -= 0.5f;
+		controller_->camera_->SetEye(controller_->camera_->eye_);
+	}
+
+	///*ImGui::Begin("cameraPos");
+	////ImGui::SetWindowPos({ 200 , 200 });
+	//ImGui::SetWindowSize({ 500,100 });
+	//ImGui::InputFloat3("eye", &camera_->eye_.x);
+	//ImGui::InputFloat3("target", &camera_->target_.x);
+	//ImGui::End();*/
+
+	sceneObj_->skydomeO_->Update();
+	sceneObj_->asobj->Update();
+
+	//block発生
+	UpdataBlockCommands();
 
 	//リセット処理
 	if (input->TriggerKey(DIK_R))
@@ -90,9 +97,10 @@ void PlayScene::Draw()
 
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
-	//sceneObj_->skydomeO_->Draw();
+	sceneObj_->skydomeO_->Draw();
+	sceneObj_->asobj->Draw();
 
-	
+
 
 	///// <summary>
 	///// ここに3Dオブジェクトの描画処理を追加できる
@@ -132,4 +140,64 @@ void PlayScene::Draw()
 	Sprite::PostDraw();
 
 #pragma endregion
+}
+
+void PlayScene::LoadBlockData()
+{
+	//ファイルを開く
+	std::ifstream file;
+	file.open("Resources/stageBlock.csv");
+
+	assert(file.is_open());
+
+	//ファイルの内容を文字列ストリームにコピー
+	stageBlockCommands << file.rdbuf();
+
+	//ファイルを閉じる
+	file.close();
+}
+
+void PlayScene::UpdataBlockCommands()
+{
+	// 1行分の文字列を入れる変数
+	std::string line;
+
+	//コマンド実行ループ
+	while (getline(stageBlockCommands, line)) {
+		// 1行分の文字数をストリームに変換して解折しやすくなる
+		std::istringstream line_stream(line);
+
+		std::string word;
+		//,区切りで行の先頭文字を取得
+		getline(line_stream, word, ',');
+
+		//"//"から始まる行はコメント
+		if (word.find("//") == 0) {
+			//コメント行を飛ばす
+			continue;
+		}
+		// POPコマンド
+		if (word.find("POP") == 0) {
+			// X座標
+			std::getline(line_stream, word, ',');
+			float x = static_cast<float>(std::atof(word.c_str()));
+
+			// Y座標
+			std::getline(line_stream, word, ',');
+			float y = static_cast<float>(std::atof(word.c_str()));
+
+			// Z座標
+			std::getline(line_stream, word, ',');
+			float z = static_cast<float>(std::atof(word.c_str()));
+
+			GenerBlock(Vector3(x, y, z));
+		}
+	}
+}
+
+void PlayScene::GenerBlock(Vector3 BlockPos)
+{
+	sceneObj_->asobj->worldTransform.translation_.x = BlockPos.x;
+	sceneObj_->asobj->worldTransform.translation_.y = BlockPos.y;
+	sceneObj_->asobj->worldTransform.translation_.z = BlockPos.z;
 }

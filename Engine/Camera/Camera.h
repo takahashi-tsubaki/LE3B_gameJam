@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <DirectXMath.h>
 #include <Vector3.h>
@@ -188,7 +188,7 @@ public:
 	//Vector3 target = {0,1,0};
 
 	// 視点座標
-	Vector3 eye_ = { 0, 0, -1 };
+	Vector3 eye_ = { 0, 0, -10 };
 	// 注視点座標
 	Vector3 target_ = { 0, 1, 0 };
 

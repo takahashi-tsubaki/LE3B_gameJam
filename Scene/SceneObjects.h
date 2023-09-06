@@ -39,12 +39,15 @@ public:
 	FbxObject3d* fbxObject = nullptr;
 	Sprite* sprite_ = nullptr;
 
-	//ìVãÖ
+	//Â§©ÁêÉ
 	Object3d* skydomeO_ = nullptr;
 	Model* skydomeM_ = nullptr;
 
 	Model* model = nullptr;
 	Object3d* object = nullptr;
+
+	Model* asmodel = nullptr;
+	Object3d* asobj = nullptr;
 
 	SceneManager* controller_;
 };
