@@ -24,6 +24,12 @@ private:
 private:
 	void UpdatePointPos();
 public:
+
+	static MouseInput* GetInstance() {
+		static MouseInput instance;
+		return &instance;
+	}
+
 	/// <summary>
 	/// 初期化
 	/// </summary>
