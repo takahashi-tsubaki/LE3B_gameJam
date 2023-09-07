@@ -16,6 +16,8 @@
 
 #include "FbxObject3d.h"
 
+#include "Chip.h"
+
 class SceneManager;
 
 class SceneObjects
@@ -47,5 +49,6 @@ public:
 	Object3d* object = nullptr;
 
 	SceneManager* controller_;
+	Chip* chip_ = nullptr;
 };
 

@@ -10,11 +10,11 @@ void SceneObjects::Initialize(SceneManager* controller)
 
 	controller_ = controller;
 
-	/*skydomeO_ = Object3d::Create();
+	skydomeO_ = Object3d::Create();
 	skydomeM_ = Model::CreateFromOBJ("skydome");
 	skydomeO_->SetModel(skydomeM_);
 
-	skydomeO_->SetScale({ 1,1,1 });*/
+	skydomeO_->SetScale({ 1,1,1 });
 
 
 	fbxModel = FbxLoader::GetInstance()->LoadModelFromFile("boss_prot4");
@@ -26,6 +26,9 @@ void SceneObjects::Initialize(SceneManager* controller)
 	//fbxObject->SetPosition({ 0,-50,0 });
 
 	fbxObject->SetPosition({ 0,-10,10 });
+
+	chip_ = new Chip();
+	chip_->Initialize();
 }
 
 void SceneObjects::Delete()
@@ -34,6 +37,7 @@ void SceneObjects::Delete()
 	delete skydomeM_;*/
 	delete fbxObject;
 	delete fbxModel;
+	delete chip_;
 }
 
 void SceneObjects::Reset()
