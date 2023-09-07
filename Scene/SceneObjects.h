@@ -16,6 +16,8 @@
 
 #include "FbxObject3d.h"
 
+#include "Player.h"
+
 class SceneManager;
 
 class SceneObjects
@@ -39,13 +41,14 @@ public:
 	FbxObject3d* fbxObject = nullptr;
 	Sprite* sprite_ = nullptr;
 
-	//ìVãÖ
+	//Â§©ÁêÉ
 	Object3d* skydomeO_ = nullptr;
 	Model* skydomeM_ = nullptr;
 
 	Model* model = nullptr;
 	Object3d* object = nullptr;
 
+	Player* player_ = nullptr;
 	SceneManager* controller_;
 };
 

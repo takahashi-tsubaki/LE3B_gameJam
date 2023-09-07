@@ -16,8 +16,7 @@ PlayScene::~PlayScene()
 
 void PlayScene::Initialize()
 {
-
-
+	player_ = sceneObj_->player_;
 }
 
 void PlayScene::Update(Input* input, GamePad* gamePad)
@@ -40,8 +39,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 	
 	}
 
-	
-
+	player_->Update(input,gamePad);
+	controller_->camera_->SetEye({ player_->GetWorldPos().x,player_->GetWorldPos().y, player_->GetWorldPos().z - 100 });
 	controller_->camera_->Update();
 
 	/*ImGui::Begin("cameraPos");
@@ -54,6 +53,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 	/*sceneObj_->skydomeO_->Update();*/
 
 	
+	controller_->camera_->Update();
 
 	//リセット処理
 	if (input->TriggerKey(DIK_R))
@@ -92,7 +92,7 @@ void PlayScene::Draw()
 
 	//sceneObj_->skydomeO_->Draw();
 
-	
+	player_->Draw();
 
 	///// <summary>
 	///// ここに3Dオブジェクトの描画処理を追加できる

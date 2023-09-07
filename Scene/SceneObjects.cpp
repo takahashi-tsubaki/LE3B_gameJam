@@ -26,6 +26,9 @@ void SceneObjects::Initialize(SceneManager* controller)
 	//fbxObject->SetPosition({ 0,-50,0 });
 
 	fbxObject->SetPosition({ 0,-10,10 });
+
+	player_ = new Player();
+	player_->Initialize(controller_->dxCommon_);
 }
 
 void SceneObjects::Delete()

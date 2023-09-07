@@ -9,6 +9,7 @@ protected:
 	Input* input_ = nullptr;
 	GamePad* gamePad_ = nullptr;
 
+	Player* player_ = nullptr;
 	SceneObjects* sceneObj_;
 
 public:

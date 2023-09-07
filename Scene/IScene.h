@@ -17,6 +17,7 @@
 #include "Vector3.h"
 
 #include "FbxObject3d.h"
+#include "Player.h"
 class IScene
 {
 
