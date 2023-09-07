@@ -11,10 +11,8 @@ Chip::~Chip()
 
 /// シーンの更新を行う
 void Chip::Initialize() {
-	isFound = false;
-	isDead = false;
 
-	mouse_ = MouseInput::GetInstance();
+	//mouse_ = MouseInput::GetInstance();
 
 	model_ = Model::CreateFromOBJ("Cube2");
 
@@ -78,19 +76,19 @@ void Chip::Initialize() {
 }
 
 /// シーンの更新を行う
-void Chip::Update(Input* input) {
+void Chip::Update(Input* input ,MouseInput* mouse) {
 	if (input) {
 
 	}
 
-	Vector2 mousepos = mouse_->GetMousePosition();
+	Vector2 mousepos = mouse->GetMousePosition();
 	reticle->worldTransform.translation_ = { mousepos.x * mouseSensitivity_,0,mousepos.y * mouseSensitivity_ };
 
 	spherePos[0] = object_->worldTransform.translation_;
 	spherePos[1] = reticle->worldTransform.translation_;
 
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
-		if (mouse_->PushMouseButton(0)) {
+		if (mouse->PushMouseButton(0)) {
 			if (sphere[i]->GetIsHit() == true && sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP) {
 				object_->worldTransform.translation_ = reticle->worldTransform.translation_;
 			}
