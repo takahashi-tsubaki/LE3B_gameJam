@@ -13,6 +13,9 @@ Chip::~Chip()
 void Chip::Initialize() {
 	isFound = false;
 	isDead = false;
+
+	mouse_ = MouseInput::GetInstance();
+
 	model_ = Model::CreateFromOBJ("Cube2");
 
 	object_ = Object3d::Create();
@@ -80,14 +83,14 @@ void Chip::Update(Input* input) {
 
 	}
 
-	Vector2 mousepos = MouseInput::GetInstance()->GetMousePosition();
+	Vector2 mousepos = mouse_->GetMousePosition();
 	reticle->worldTransform.translation_ = { mousepos.x * mouseSensitivity_,0,mousepos.y * mouseSensitivity_ };
 
 	spherePos[0] = object_->worldTransform.translation_;
 	spherePos[1] = reticle->worldTransform.translation_;
 
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
-		if (MouseInput::GetInstance()->PushMouseButton(0)) {
+		if (mouse_->PushMouseButton(0)) {
 			if (sphere[i]->GetIsHit() == true && sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP) {
 				object_->worldTransform.translation_ = reticle->worldTransform.translation_;
 			}

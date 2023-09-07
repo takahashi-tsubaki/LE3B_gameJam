@@ -46,6 +46,8 @@ private:
 	//void ColiderUpdate();
 
 public:
+
+	MouseInput* mouse_;
 	Model* model_;
 	Object3d* reticle;
 	Object3d* object_;
