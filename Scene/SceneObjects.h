@@ -1,6 +1,7 @@
 #pragma once
 #include "Input.h"
 #include "GamePad.h"
+#include "MouseInput.h"
 
 #include "Sprite.h"
 #include "PostEffect.h"
@@ -15,6 +16,8 @@
 #include "Vector3.h"
 
 #include "FbxObject3d.h"
+
+#include "Player.h"
 
 class SceneManager;
 
@@ -39,13 +42,14 @@ public:
 	FbxObject3d* fbxObject = nullptr;
 	Sprite* sprite_ = nullptr;
 
-	//ìVãÖ
+	//Â§©ÁêÉ
 	Object3d* skydomeO_ = nullptr;
 	Model* skydomeM_ = nullptr;
 
 	Model* model = nullptr;
 	Object3d* object = nullptr;
 
+	Player* player_ = nullptr;
 	SceneManager* controller_;
 };
 
