@@ -1,5 +1,6 @@
 #include "SceneObjects.h"
 #include "SceneManager.h"
+#include "Framework.h"
 void SceneObjects::Initialize(SceneManager* controller)
 {
 	//Sprite::LoadTexture(1, L"Resources/kuribo-.jpg");
@@ -65,6 +66,7 @@ void SceneObjects::Update(Input* input)
 			changeModelTimer = 0;
 		}
 
+
 		if (changeModelTimer >= 1 && changeModelTimer <= 10) {
 			plaobject->SetModel(walkmodel1);
 		}
@@ -81,10 +83,22 @@ void SceneObjects::Update(Input* input)
 	else {
 		plaobject->SetModel(plamodel);
 	}
+
+	fbxObject->SetPosition({ 0,-10,10 });
+
+
+	chip_ = new Chip();
+	chip_->Initialize();
+
+	player_ = new Player();
+	player_->Initialize(controller_->dxCommon_);
+
+
 }
 
 void SceneObjects::Delete()
 {
+
 	delete skydomeO_;
 	delete skydomeM_;
 	delete asobj_[0];
@@ -99,6 +113,10 @@ void SceneObjects::Delete()
 	delete dashmodel0;
 	delete dashmodel1;
 	delete dashmodel2;
+	delete fbxObject;
+	delete fbxModel;
+	delete chip_;
+
 }
 
 void SceneObjects::Reset()

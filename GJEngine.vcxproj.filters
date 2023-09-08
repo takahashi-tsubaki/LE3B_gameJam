@@ -97,6 +97,24 @@
     <Filter Include="ヘッダー ファイル\Json">
       <UniqueIdentifier>{ca2ee6b0-e89f-4819-8798-e10e9e1e22e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Chip">
+      <UniqueIdentifier>{493678ee-478f-451d-b012-f329708a7a1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Chip">
+      <UniqueIdentifier>{e0753cc9-e4ae-4a12-bb4a-33da4373833e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player">
+      <UniqueIdentifier>{fb36c18c-b94b-4319-a863-96928085816c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Player">
+      <UniqueIdentifier>{6fb25cca-14a9-400f-8f1c-54f76d972289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player\PlayerManager">
+      <UniqueIdentifier>{3d31ef7e-dc0c-49e6-9efa-291747d8411b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Player\PlayerManager">
+      <UniqueIdentifier>{1de37fb2-76e6-404f-b780-96806c531f61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Base\DirectXCommon.cpp">
@@ -195,15 +213,6 @@
     <ClCompile Include="Engine\Collider\SphereCollider.cpp">
       <Filter>ソース ファイル\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\FBX\FbxLoader.cpp">
-      <Filter>ソース ファイル\FBX</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\FBX\FbxModel.cpp">
-      <Filter>ソース ファイル\FBX</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\FBX\FbxObject3d.cpp">
-      <Filter>ソース ファイル\FBX</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\FrameWork\Framework.cpp">
       <Filter>ソース ファイル\FrameWork</Filter>
     </ClCompile>
@@ -242,6 +251,39 @@
     </ClCompile>
     <ClCompile Include="Engine\Json\JsonLoader.cpp">
       <Filter>ソース ファイル\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Chip\Chip.cpp">
+      <Filter>ソース ファイル\Chip</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Chip\ChipManager.cpp">
+      <Filter>ソース ファイル\Chip</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Player\Player.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\FBX\FbxLoader.cpp">
+      <Filter>ソース ファイル\FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\FBX\FbxModel.cpp">
+      <Filter>ソース ファイル\FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\FBX\FbxObject3d.cpp">
+      <Filter>ソース ファイル\FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerAction.cpp">
+      <Filter>ソース ファイル\Player\PlayerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerActionManager.cpp">
+      <Filter>ソース ファイル\Player\PlayerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerDash.cpp">
+      <Filter>ソース ファイル\Player\PlayerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerMove.cpp">
+      <Filter>ソース ファイル\Player\PlayerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerJump.cpp">
+      <Filter>ソース ファイル\Player\PlayerManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -359,15 +401,6 @@
     <ClInclude Include="Engine\Collider\SphereCollider.h">
       <Filter>ヘッダー ファイル\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\FBX\FbxLoader.h">
-      <Filter>ヘッダー ファイル\FBX</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\FBX\FbxModel.h">
-      <Filter>ヘッダー ファイル\FBX</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\FBX\FbxObject3d.h">
-      <Filter>ヘッダー ファイル\FBX</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\FrameWork\Framework.h">
       <Filter>ヘッダー ファイル\FrameWork</Filter>
     </ClInclude>
@@ -406,6 +439,39 @@
     </ClInclude>
     <ClInclude Include="Engine\Json\JsonLoader.h">
       <Filter>ヘッダー ファイル\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Chip\Chip.h">
+      <Filter>ヘッダー ファイル\Chip</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Chip\ChipManager.h">
+      <Filter>ヘッダー ファイル\Chip</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Player\Player.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\FBX\FbxLoader.h">
+      <Filter>ヘッダー ファイル\FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\FBX\FbxModel.h">
+      <Filter>ヘッダー ファイル\FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\FBX\FbxObject3d.h">
+      <Filter>ヘッダー ファイル\FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerAction.h">
+      <Filter>ヘッダー ファイル\Player\PlayerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerActionManager.h">
+      <Filter>ヘッダー ファイル\Player\PlayerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerDash.h">
+      <Filter>ヘッダー ファイル\Player\PlayerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerMove.h">
+      <Filter>ヘッダー ファイル\Player\PlayerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerJump.h">
+      <Filter>ヘッダー ファイル\Player\PlayerManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

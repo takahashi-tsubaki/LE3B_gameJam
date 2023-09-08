@@ -1,6 +1,7 @@
 #pragma once
 #include "Input.h"
 #include "GamePad.h"
+#include "MouseInput.h"
 
 #include "Sprite.h"
 #include "PostEffect.h"
@@ -15,6 +16,12 @@
 #include "Vector3.h"
 
 #include "FbxObject3d.h"
+
+
+#include "Chip.h"
+
+#include "Player.h"
+
 
 class SceneManager;
 
@@ -43,6 +50,7 @@ public:
 	Model* model = nullptr;
 	Object3d* object = nullptr;
 
+
 	Model* asmodel = nullptr;
 	Object3d* asobj_[2] = {0};
 
@@ -58,6 +66,8 @@ public:
 	int changeModelTimer = 0;
 	int changeModelTimerD = 0;
 
+	Player* player_ = nullptr;
 	SceneManager* controller_;
+	Chip* chip_ = nullptr;
 };
 

@@ -21,9 +21,11 @@ void TitleScene::Initialize()
 
 }
 
-void TitleScene::Update(Input* input, GamePad* gamePad)
+void TitleScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
-	/*sceneObj_->skydomeO_->Update();*/
+	controller_->camera_->eye_ = {0,0,-100.0f};
+	sceneObj_->chip_->Update(input,mouse);
+	sceneObj_->skydomeO_->Update();
 	controller_->camera_->Update();
 	gamePad->Update();
 	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X))
@@ -56,7 +58,7 @@ void TitleScene::Draw()
 
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
-	/*sceneObj_->skydomeO_->Draw();*/
+	sceneObj_->skydomeO_->Draw();
 	//skydomeO_->Draw();
 
 	///// <summary>
@@ -65,6 +67,7 @@ void TitleScene::Draw()
 
 	//// 3Dオブジェクト描画後処理
 	Object3d::PostDraw();
+	sceneObj_->chip_->Draw(controller_->dxCommon_);
 #pragma endregion
 
 

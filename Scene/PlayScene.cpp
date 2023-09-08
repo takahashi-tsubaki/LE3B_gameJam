@@ -18,10 +18,13 @@ PlayScene::~PlayScene()
 
 void PlayScene::Initialize()
 {
+
 	LoadBlockData();
+	player_ = sceneObj_->player_;
+
 }
 
-void PlayScene::Update(Input* input, GamePad* gamePad)
+void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	gamePad->Update();
 	sceneObj_->Update(input);
@@ -32,15 +35,33 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 
 	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	}
 	controller_->camera_->Update();
-	
-	
+	}
 
-	///*ImGui::Begin("cameraPos");
-	////ImGui::SetWindowPos({ 200 , 200 });
-	//ImGui::SetWindowSize({ 500,100 });
-	//ImGui::InputFloat3("eye", &camera_->eye_.x);
-	//ImGui::InputFloat3("target", &camera_->target_.x);
-	//ImGui::End();*/
+	player_->Update(input,gamePad);
+	controller_->camera_->SetEye({ player_->GetWorldPos().x,player_->GetWorldPos().y, player_->GetWorldPos().z - 100 });
+	controller_->camera_->Update();
+
+	//左クリック時
+	if (mouse->TriggerMouseButton(0))
+	{
+		mouseCheckNum = 0;
+		mousePos = mouse->GetMousePosition();
+	}
+	//右クリック時
+	if (mouse->TriggerMouseButton(1))
+	{
+		mouseCheckNum = 1;
+		mousePos = mousePos;
+	}
+
+	mouse->Update();
+
+	ImGui::Begin("mouseCheck");
+	//ImGui::SetWindowPos({ 200 , 200 });
+	ImGui::SetWindowSize({ 500,100 });
+	ImGui::InputInt("mouseNum", &mouseCheckNum);
+	ImGui::InputFloat2("position", &mousePos.x);
+	ImGui::End();
 
 	sceneObj_->skydomeO_->Update();
 	sceneObj_->asobj_[0]->Update();
@@ -48,6 +69,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 	sceneObj_->plaobject->Update();
 
 	
+	controller_->camera_->Update();
 
 	//block発生
 	UpdataBlockCommands();
@@ -93,6 +115,7 @@ void PlayScene::Draw()
 	sceneObj_->asobj_[1]->Draw();
 
 	sceneObj_->plaobject->Draw();
+	player_->Draw();
 
 	///// <summary>
 	///// ここに3Dオブジェクトの描画処理を追加できる
