@@ -81,6 +81,8 @@
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\SceneObjects.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="User\Chip\Chip.cpp" />
+    <ClCompile Include="User\Chip\ChipManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\2D\ImguiManager.h" />
@@ -143,6 +145,8 @@
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\SceneObjects.h" />
     <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="User\Chip\Chip.h" />
+    <ClInclude Include="User\Chip\ChipManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\FBX.hlsli" />
@@ -313,7 +317,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include;$(SolutionDir)Engine\Player;$(SolutionDir)Engine\Player\PlayerManager</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)User\Chip;$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include;$(SolutionDir)Engine\Player;$(SolutionDir)Engine\Player\PlayerManager</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
@@ -332,7 +336,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include;$(SolutionDir)Engine\Player;$(SolutionDir)Engine\Player\PlayerManager</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)User\Chip;$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include;$(SolutionDir)Engine\Player;$(SolutionDir)Engine\Player\PlayerManager</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>

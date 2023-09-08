@@ -23,7 +23,8 @@ void Framework::Initialize()
 	imgui->Initialize(winApp, dxCommon_);
 	endRequest_ = false;
 
-
+	mouse_ = new MouseInput();
+	mouse_->Initialize(winApp);
 
 	/*Sprite::LoadTexture(100,L"Resources/white1x1.png");*/
 
@@ -41,6 +42,7 @@ void Framework::Finalize()
 	delete winApp;
 	delete dxCommon_;
 	delete fps;
+	delete mouse_;
 }
 
 void Framework::Update()
@@ -54,6 +56,7 @@ void Framework::Update()
 
 	fps->FpsControlBegin();
 	input->Update();
+	mouse_->Update();
 	imgui->Begin();
 }
 

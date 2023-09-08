@@ -17,7 +17,11 @@
 
 #include "FbxObject3d.h"
 
+
+#include "Chip.h"
+
 #include "Player.h"
+
 
 class SceneManager;
 
@@ -51,5 +55,6 @@ public:
 
 	Player* player_ = nullptr;
 	SceneManager* controller_;
+	Chip* chip_ = nullptr;
 };
 
