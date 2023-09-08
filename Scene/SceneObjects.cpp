@@ -15,7 +15,7 @@ void SceneObjects::Initialize(SceneManager* controller)
 	skydomeM_ = Model::CreateFromOBJ("skydome");
 	skydomeO_->SetModel(skydomeM_);
 
-	skydomeO_->SetScale({ 1,1,1 });
+	skydomeO_->SetScale({ 10,10,10 });
 
 
 	fbxModel = FbxLoader::GetInstance()->LoadModelFromFile("boss_prot4");

@@ -36,11 +36,12 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK))
 	{
-	
+
 	}
 
-	player_->Update(input,gamePad);
+	player_->Update(input, gamePad);
 	controller_->camera_->SetEye({ player_->GetWorldPos().x,player_->GetWorldPos().y, player_->GetWorldPos().z - 100 });
+	controller_->camera_->SetTarget(player_->GetWorldPos());
 	controller_->camera_->Update();
 
 	//左クリック時
@@ -65,20 +66,20 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	ImGui::InputFloat2("position", &mousePos.x);
 	ImGui::End();
 
-	/*sceneObj_->skydomeO_->Update();*/
+	sceneObj_->skydomeO_->Update();
 
-	
+
 	controller_->camera_->Update();
 
 	//リセット処理
 	if (input->TriggerKey(DIK_R))
 	{
-		
+
 		//player_->Initialize(controller_->dxCommon_,enemy_);
 		//enemy_->Initialize(controller_->dxCommon_,player_);
 	}
 
-	
+
 }
 
 void PlayScene::Draw()
@@ -105,7 +106,7 @@ void PlayScene::Draw()
 
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
-	//sceneObj_->skydomeO_->Draw();
+	sceneObj_->skydomeO_->Draw();
 
 	player_->Draw();
 
