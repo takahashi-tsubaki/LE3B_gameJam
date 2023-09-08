@@ -201,3 +201,5 @@ void PlayScene::GenerBlock(Vector3 BlockPos)
 	sceneObj_->asobj->worldTransform.translation_.y = BlockPos.y;
 	sceneObj_->asobj->worldTransform.translation_.z = BlockPos.z;
 }
+
+
