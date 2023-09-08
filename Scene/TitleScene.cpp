@@ -23,7 +23,7 @@ void TitleScene::Initialize()
 
 void TitleScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
-	controller_->camera_->eye_ = {0,100,0.1f};
+	controller_->camera_->eye_ = {0,0,-100.0f};
 	sceneObj_->chip_->Update(input,mouse);
 	sceneObj_->skydomeO_->Update();
 	controller_->camera_->Update();
