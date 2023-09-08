@@ -9,7 +9,11 @@ protected:
 	Input* input_ = nullptr;
 	GamePad* gamePad_ = nullptr;
 
+	Player* player_ = nullptr;
 	SceneObjects* sceneObj_;
+
+	Vector2 mousePos;
+	int mouseCheckNum = 0;
 
 public:
 
@@ -18,7 +22,7 @@ public:
 
     void Initialize()override;
 
-    void Update(Input*input, GamePad* gamePad) override;
+    void Update(Input*input, GamePad* gamePad, MouseInput* mouse) override;
 
     void Draw() override;
 

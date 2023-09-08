@@ -21,7 +21,7 @@ void TitleScene::Initialize()
 
 }
 
-void TitleScene::Update(Input* input, GamePad* gamePad)
+void TitleScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	controller_->camera_->eye_ = {0,100,0.1f};
 	sceneObj_->chip_->Update(input);

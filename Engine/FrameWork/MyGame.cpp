@@ -20,16 +20,16 @@ void MyGame::Initialize()
 	OutputDebugStringA("Hello DirectX!!\n");
 
 
-	//î“I‰Šú‰»
+	//æƒ…çš„åˆæœŸåŒ–
 	Sprite::StaticInitialize(dxCommon_->GetDevice(), WinApp::window_width, WinApp::window_height);
-	// 3DƒIƒuƒWƒFƒNƒgÃ“I‰Šú‰»
+	// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé™çš„åˆæœŸåŒ–
 	Object3d::StaticInitialize(dxCommon_->GetDevice());
-	//ƒ‰ƒCƒgî“I‰Šú‰»
+	//ãƒ©ã‚¤ãƒˆæƒ…çš„åˆæœŸåŒ–
 	Light::StaticInitalize(dxCommon_->GetDevice());
-	//ƒp[ƒeƒBƒNƒ‹î“I‰Šú‰»
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æƒ…çš„åˆæœŸåŒ–
 	ParticleManager::StaticInitialize(dxCommon_->GetDevice(), dxCommon_->GetCommandList());
 
-	//FBX‚Ì‰Šú‰»
+	//FBXã®åˆæœŸåŒ–
 	FbxLoader::GetInstance()->Initialize(dxCommon_->GetDevice());
 
 	/*Sprite::LoadTexture(100,L"Resources/white1x1.png");*/
@@ -37,9 +37,9 @@ void MyGame::Initialize()
 	postEffect = new PostEffect();
 	postEffect->Initialize();
 
-	//ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
+	//ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã®åˆæœŸåŒ–
 	gameScene = new GameScene();
-	gameScene->Initalize(dxCommon_,input,gamePad_);
+	gameScene->Initalize(dxCommon_,input,gamePad_,mouse_);
 }
 
 void MyGame::Finalize()
@@ -47,14 +47,14 @@ void MyGame::Finalize()
 
 	delete gameScene;
 	delete postEffect;
-	//Šî’êƒNƒ‰ƒX‚ÌI—¹ˆ—
+	//åŸºåº•ã‚¯ãƒ©ã‚¹ã®çµ‚äº†å‡¦ç†
 	Framework::Finalize();
 }
 
 void MyGame::Update()
 {
 
-	//Šî’êƒNƒ‰ƒX‚ÌXVˆ—
+	//åŸºåº•ã‚¯ãƒ©ã‚¹ã®æ›´æ–°å‡¦ç†
 	Framework::Update();
 
 	gameScene->Update();
@@ -68,9 +68,9 @@ void MyGame::Draw()
 	
 	/*postEffect->PostDrawScene(dxCommon_->GetCommandList());*/
 
-	//•`‰æ‘Oˆ—
+	//æç”»å‰å‡¦ç†
 	dxCommon_->preDraw();
-	//ƒQ[ƒ€ƒV[ƒ“‚Ì•`‰æ
+	//ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã®æç”»
 	gameScene->Draw();
 
 	/*postEffect->Draw(dxCommon_->GetCommandList());*/
@@ -79,7 +79,7 @@ void MyGame::Draw()
 
 	imgui->Draw();
 
-	//•`‰æŒãˆ—
+	//æç”»å¾Œå‡¦ç†
 	dxCommon_->postDraw();
 
 	fps->FpsControlEnd();

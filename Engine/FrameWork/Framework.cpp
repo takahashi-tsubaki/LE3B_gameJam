@@ -13,6 +13,9 @@ void Framework::Initialize()
 
 	gamePad_ = new GamePad();
 
+	mouse_ = new MouseInput();
+	mouse_->Initialize(winApp);
+
 	dxCommon_ = new DirectXCommon();
 	dxCommon_->Initialize(winApp);
 

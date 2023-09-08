@@ -14,13 +14,17 @@ void ResultScene::Initialize()
 {
 }
 
-void ResultScene::Update(Input* input, GamePad* gamePad)
+void ResultScene::Update(Input* input, GamePad* gamePad,MouseInput*mouse)
 {
 	if (input) 
 	{
 
 	}
 	if (gamePad)
+	{
+
+	}
+	if (mouse)
 	{
 
 	}

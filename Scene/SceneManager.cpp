@@ -22,9 +22,9 @@ void SceneManager::SceneInitialize()
 	_scene.top().get()->Initialize();
 }
 
-void SceneManager::SceneUpdate(Input* input, GamePad* gamePad)
+void SceneManager::SceneUpdate(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
-	_scene.top().get()->Update(input,gamePad);
+	_scene.top().get()->Update(input,gamePad,mouse);
 }
 
 void SceneManager::SceneDraw()

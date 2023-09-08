@@ -21,7 +21,7 @@ public:
 
 	void Initialize() override;
 
-	void Update(Input* input, GamePad* gamePad) override;
+	void Update(Input* input, GamePad* gamePad, MouseInput* mouse) override;
 
 	void Draw() override;
 

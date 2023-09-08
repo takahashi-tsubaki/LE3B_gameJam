@@ -3,9 +3,13 @@
 #include <stack>
 
 #include "DirectXCommon.h"
-#include "GameCamera.h"
 #include "Input.h"
 #include "GamePad.h"
+#include "MouseInput.h"
+
+#include "GameCamera.h"
+
+
 #include "SceneObjects.h"
 class IScene;
 class Input;
@@ -18,6 +22,7 @@ public:
 
 	Input* input_ = nullptr;
 	GamePad* gamePad_ = nullptr;
+	MouseInput* mouse_ = nullptr;
 protected:
 	std::stack<std::shared_ptr<IScene>> _scene;
 	SceneObjects* sceneObjects_;
@@ -30,17 +35,17 @@ public:
 	SceneManager(DirectXCommon* dxCommon,GameCamera* camera, SceneObjects* sceneObjects);
 	~SceneManager();
 
-	//ƒIƒuƒWƒFƒNƒg‚ÌInitialize‚ğŒÄ‚Ño‚·
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Initializeã‚’å‘¼ã³å‡ºã™
 	void ObjectInitialize();
-	// ŠeƒV[ƒ“‚ÌInitialize‚ğŒÄ‚Ño‚·
+	// å„ã‚·ãƒ¼ãƒ³ã®Initializeã‚’å‘¼ã³å‡ºã™
 	void SceneInitialize();
-	// ŠeƒV[ƒ“‚ÌUpdate‚ğŒÄ‚Ño‚·
-	void SceneUpdate(Input* input,GamePad* gamePad);
-	// ŠeƒV[ƒ“‚ÌDraw‚ğŒÄ‚Ño‚·
+	// å„ã‚·ãƒ¼ãƒ³ã®Updateã‚’å‘¼ã³å‡ºã™
+	void SceneUpdate(Input* input,GamePad* gamePad,MouseInput*mouse);
+	// å„ã‚·ãƒ¼ãƒ³ã®Drawã‚’å‘¼ã³å‡ºã™
 	void SceneDraw();
 
 	void ChangeSceneNum(int number);
-	// ƒV[ƒ“‚ğ•ÏX‚·‚é
+	// ã‚·ãƒ¼ãƒ³ã‚’å¤‰æ›´ã™ã‚‹
 	void ChangeScene();
 
 	void PushScene(int number);

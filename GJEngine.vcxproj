@@ -64,6 +64,12 @@
     <ClCompile Include="Engine\Math\Vector3.cpp" />
     <ClCompile Include="Engine\Math\Vector4.cpp" />
     <ClCompile Include="Engine\Particle\ParticleManager.cpp" />
+    <ClCompile Include="Engine\Player\Player.cpp" />
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerAction.cpp" />
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerActionManager.cpp" />
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerDash.cpp" />
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerJump.cpp" />
+    <ClCompile Include="Engine\Player\PlayerManager\PlayerMove.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\GameClearScene.cpp" />
     <ClCompile Include="Scene\GameOverScene.cpp" />
@@ -122,6 +128,12 @@
     <ClInclude Include="Engine\Math\Vector3.h" />
     <ClInclude Include="Engine\Math\Vector4.h" />
     <ClInclude Include="Engine\Particle\ParticleManager.h" />
+    <ClInclude Include="Engine\Player\Player.h" />
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerAction.h" />
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerActionManager.h" />
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerDash.h" />
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerJump.h" />
+    <ClInclude Include="Engine\Player\PlayerManager\PlayerMove.h" />
     <ClInclude Include="Scene\GameClearScene.h" />
     <ClInclude Include="Scene\GameOverScene.h" />
     <ClInclude Include="Scene\gameScene.h" />
@@ -305,7 +317,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)User\Chip;$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)User\Chip;$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include;$(SolutionDir)Engine\Player;$(SolutionDir)Engine\Player\PlayerManager</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
@@ -324,7 +336,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)User\Chip;$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)User\Chip;$(SolutionDir)Engine\Json;$(SolutionDir)Engine\Base;$(SolutionDir)Engine\2D;$(SolutionDir)Engine\3D;$(SolutionDir)Scene;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Particle;$(SolutionDir)Engine\FBX;$(SolutionDir)External\DirectXTex;$(SolutionDir)Engine\FrameWork;$(SolutionDir)Engine\Camera;$(SolutionDir)Engine\Light;$(SolutionDir)Engine\Collider;$(SolutionDir)External\imgui;$(SolutionDir)External\lib\fbx_sdk\include;$(SolutionDir)Engine\Player;$(SolutionDir)Engine\Player\PlayerManager</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
