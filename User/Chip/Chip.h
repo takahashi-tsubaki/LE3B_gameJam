@@ -53,18 +53,8 @@ public:
 	float mouseSensitivity_ = 0.099f;	//マウス感度 0.05
 private:
 	int Tribe_ = 1;
-
-	Vector3 frontVec_;
-	bool isDead = false;
-
-
-	//移動速度
-	const float kMoveSpeed_ = 0.5f;
-	bool isRun_ = false;
-	//移動ベクトル
-	Vector3 velocity_;
-	// 初期回転向き保存
-	Vector3 restRotate_;
+	bool isChipGet_;
+	bool nowDrag_;
 
 	//コライダー
 public:
