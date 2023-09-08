@@ -33,7 +33,7 @@ public:
 
 	virtual void Initialize() = 0;
 
-	virtual void Update(Input*input,GamePad* gamePad) = 0;
+	virtual void Update(Input*input,GamePad* gamePad, MouseInput* mouse) = 0;
 
 	virtual void Draw() = 0;
 

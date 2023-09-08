@@ -1,6 +1,7 @@
 #pragma once
 #include "Input.h"
 #include "GamePad.h"
+#include "MouseInput.h"
 
 #include "Sprite.h"
 #include "PostEffect.h"

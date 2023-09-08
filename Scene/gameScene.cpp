@@ -14,12 +14,13 @@ GameScene::~GameScene() {
 	delete fbxModel;
 }
 
-void GameScene::Initalize(DirectXCommon* dxCommon, Input* input, GamePad* gamePad)
+void GameScene::Initalize(DirectXCommon* dxCommon, Input* input, GamePad* gamePad,MouseInput*mouse)
 {
 	dxCommon_ = dxCommon;
 	input_ = input;
 	//インスタンスの取得
 	gamePad_ = gamePad;
+	mouse_ = mouse;
 
 	//input_ = Input::GetInstance();
 	camera_ = new Camera(WinApp::window_width, WinApp::window_height);
@@ -62,7 +63,7 @@ void GameScene::Initalize(DirectXCommon* dxCommon, Input* input, GamePad* gamePa
 void GameScene::Update()
 {
 	sceneManager->ChangeScene();
-	sceneManager->SceneUpdate(input_,gamePad_);
+	sceneManager->SceneUpdate(input_,gamePad_,mouse_);
 	
 	//gameCamera->Update();
 	/*Vector3 nowEye = gameCamera->GetEye();

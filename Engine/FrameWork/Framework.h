@@ -3,6 +3,8 @@
 #include "DirectXCommon.h"
 #include "Input.h"
 #include "GamePad.h"
+#include "MouseInput.h"
+
 #include "FPS.h"
 
 #include "ImguiManager.h"
@@ -14,27 +16,27 @@ class Framework
 {
 public:
 
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	virtual void Initialize();
 
-	//I—¹
+	//çµ‚äº†
 	virtual void Finalize();
 
-	//–ˆƒtƒŒ[ƒ€XV
+	//æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°
 	virtual void Update();
 
-	//•`‰æ
+	//æç”»
 	virtual void Draw() = 0;
 
 	virtual void SetRequest(bool request) { endRequest_ = request; }
 
-	//I—¹ƒ`ƒFƒbƒN
+	//çµ‚äº†ãƒã‚§ãƒƒã‚¯
 	virtual bool IsEndRequest() { return endRequest_; }
 
-	//ƒfƒXƒgƒ‰ƒNƒ^
+	//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	virtual ~Framework() = default;
 
-	//Às
+	//å®Ÿè¡Œ
 	void Run();
 
 protected:
@@ -43,6 +45,7 @@ protected:
 	WinApp* winApp = nullptr;
 	Input* input = nullptr;
 	GamePad* gamePad_ = nullptr;
+	MouseInput* mouse_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
 	ImguiManager* imgui = nullptr;
 	bool endRequest_ = false;

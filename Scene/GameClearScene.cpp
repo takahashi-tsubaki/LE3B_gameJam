@@ -16,7 +16,7 @@ void GameClearScene::Initialize()
 
 }
 
-void GameClearScene::Update(Input* input, GamePad* gamePad)
+void GameClearScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	gamePad->Update();
 	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X))
@@ -30,17 +30,17 @@ void GameClearScene::Update(Input* input, GamePad* gamePad)
 
 void GameClearScene::Draw()
 {
-#pragma region ‘OŒiƒXƒvƒ‰ƒCƒg•`‰æ
-	// ‘OŒiƒXƒvƒ‰ƒCƒg•`‰æ‘Oˆ—
+#pragma region å‰æ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
+	// å‰æ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å‰å‡¦ç†
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
 	//sprite_->Draw();
 	/// <summary>
-	/// ‚±‚±‚É‘OŒiƒXƒvƒ‰ƒCƒg‚Ì•`‰æˆ—‚ð’Ç‰Á‚Å‚«‚é
+	/// ã“ã“ã«å‰æ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æç”»å‡¦ç†ã‚’è¿½åŠ ã§ãã‚‹
 	/// </summary>
 
 	//
-	// ƒXƒvƒ‰ƒCƒg•`‰æŒãˆ—
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»å¾Œå‡¦ç†
 	Sprite::PostDraw();
 
 #pragma endregion

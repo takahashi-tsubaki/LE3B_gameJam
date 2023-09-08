@@ -21,7 +21,7 @@ void TitleScene::Initialize()
 
 }
 
-void TitleScene::Update(Input* input, GamePad* gamePad)
+void TitleScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	/*sceneObj_->skydomeO_->Update();*/
 	controller_->camera_->Update();
