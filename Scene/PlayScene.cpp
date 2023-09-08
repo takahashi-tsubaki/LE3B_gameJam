@@ -24,6 +24,7 @@ void PlayScene::Initialize()
 void PlayScene::Update(Input* input, GamePad* gamePad)
 {
 	gamePad->Update();
+	sceneObj_->Update(input);
 	//シーンチェンジ
 	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X)){controller_->ChangeSceneNum(S_TITLE);}
 
@@ -32,22 +33,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	}
 	controller_->camera_->Update();
 	
-	if (input->PushKey(DIK_A)) {
-		controller_->camera_->eye_.x -= 0.1f;
-		controller_->camera_->SetEye(controller_->camera_->eye_);
-	}
-	if (input->PushKey(DIK_D)) {
-		controller_->camera_->eye_.x += 0.1f;
-		controller_->camera_->SetEye(controller_->camera_->eye_);
-	}
-	if (input->PushKey(DIK_W)) {
-		controller_->camera_->eye_.y += 0.5f;
-		controller_->camera_->SetEye(controller_->camera_->eye_);
-	}
-	if (input->PushKey(DIK_S)) {
-		controller_->camera_->eye_.y -= 0.5f;
-		controller_->camera_->SetEye(controller_->camera_->eye_);
-	}
+	
 
 	///*ImGui::Begin("cameraPos");
 	////ImGui::SetWindowPos({ 200 , 200 });
@@ -59,6 +45,10 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 	sceneObj_->skydomeO_->Update();
 	sceneObj_->asobj_[0]->Update();
 	sceneObj_->asobj_[1]->Update();
+	sceneObj_->plaobject->Update();
+
+	
+
 	//block発生
 	UpdataBlockCommands();
 
@@ -98,9 +88,11 @@ void PlayScene::Draw()
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
 	sceneObj_->skydomeO_->Draw();
+
 	sceneObj_->asobj_[0]->Draw();
 	sceneObj_->asobj_[1]->Draw();
 
+	sceneObj_->plaobject->Draw();
 
 	///// <summary>
 	///// ここに3Dオブジェクトの描画処理を追加できる
