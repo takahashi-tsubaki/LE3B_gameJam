@@ -82,7 +82,7 @@ void Chip::Update(Input* input ,MouseInput* mouse) {
 	}
 
 	Vector2 mousepos = mouse->GetMousePosition();
-	reticle->worldTransform.translation_ = { mousepos.x * mouseSensitivity_,0,mousepos.y * mouseSensitivity_ };
+	reticle->worldTransform.translation_ = { (mousepos.x * mouseSensitivity_) * -1,0,(mousepos.y * mouseSensitivity_) * -1 };
 
 	spherePos[0] = object_->worldTransform.translation_;
 	spherePos[1] = reticle->worldTransform.translation_;
