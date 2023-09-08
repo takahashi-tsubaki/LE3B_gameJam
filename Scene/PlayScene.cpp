@@ -1,5 +1,7 @@
 #include "PlayScene.h"
 #include "ImguiManager.h"
+#include "JsonLoader.h"
+#include <fstream>
 
 PlayScene::PlayScene(SceneManager* controller, SceneObjects* sceneObj)
 {
@@ -16,27 +18,23 @@ PlayScene::~PlayScene()
 
 void PlayScene::Initialize()
 {
+
+	LoadBlockData();
 	player_ = sceneObj_->player_;
+
 }
 
 void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	gamePad->Update();
+	sceneObj_->Update(input);
 	//シーンチェンジ
-	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X))
-	{
+	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X)){controller_->ChangeSceneNum(S_TITLE);}
 
-		controller_->ChangeSceneNum(S_TITLE);
-	}
+	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)){controller_->PushScene(S_PAUSE);}
 
-	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START))
-	{
-		controller_->PushScene(S_PAUSE);
-	}
-
-	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK))
-	{
-	
+	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	}
+	controller_->camera_->Update();
 	}
 
 	player_->Update(input,gamePad);
@@ -65,10 +63,16 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	ImGui::InputFloat2("position", &mousePos.x);
 	ImGui::End();
 
-	/*sceneObj_->skydomeO_->Update();*/
+	sceneObj_->skydomeO_->Update();
+	sceneObj_->asobj_[0]->Update();
+	sceneObj_->asobj_[1]->Update();
+	sceneObj_->plaobject->Update();
 
 	
 	controller_->camera_->Update();
+
+	//block発生
+	UpdataBlockCommands();
 
 	//リセット処理
 	if (input->TriggerKey(DIK_R))
@@ -105,8 +109,12 @@ void PlayScene::Draw()
 
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
-	//sceneObj_->skydomeO_->Draw();
+	sceneObj_->skydomeO_->Draw();
 
+	sceneObj_->asobj_[0]->Draw();
+	sceneObj_->asobj_[1]->Draw();
+
+	sceneObj_->plaobject->Draw();
 	player_->Draw();
 
 	///// <summary>
@@ -148,3 +156,69 @@ void PlayScene::Draw()
 
 #pragma endregion
 }
+
+void PlayScene::LoadBlockData()
+{
+	//ファイルを開く
+	std::ifstream file;
+	file.open("Resources/stageBlock.csv");
+
+	assert(file.is_open());
+
+	//ファイルの内容を文字列ストリームにコピー
+	stageBlockCommands << file.rdbuf();
+
+	//ファイルを閉じる
+	file.close();
+}
+
+void PlayScene::UpdataBlockCommands()
+{
+	// 1行分の文字列を入れる変数
+	std::string line;
+
+	//コマンド実行ループ
+	while (getline(stageBlockCommands, line)) {
+		// 1行分の文字数をストリームに変換して解折しやすくなる
+		std::istringstream line_stream(line);
+
+		std::string word;
+		//,区切りで行の先頭文字を取得
+		getline(line_stream, word, ',');
+
+		//"//"から始まる行はコメント
+		if (word.find("//") == 0) {
+			//コメント行を飛ばす
+			continue;
+		}
+		// POPコマンド
+		if (word.find("POP") == 0) {
+			// X座標
+			std::getline(line_stream, word, ',');
+			float x = static_cast<float>(std::atof(word.c_str()));
+
+			// Y座標
+			std::getline(line_stream, word, ',');
+			float y = static_cast<float>(std::atof(word.c_str()));
+
+			// Z座標
+			std::getline(line_stream, word, ',');
+			float z = static_cast<float>(std::atof(word.c_str()));
+
+			//blockの番号
+			std::getline(line_stream, word, ',');
+			int num = static_cast<float>(std::atof(word.c_str()));
+
+			GenerBlock(Vector3(x, y, z),num);
+		}
+	}
+}
+
+void PlayScene::GenerBlock(Vector3 BlockPos, int num)
+{
+	sceneObj_->asobj_[num]->worldTransform.translation_.x = BlockPos.x;
+	sceneObj_->asobj_[num]->worldTransform.translation_.y = BlockPos.y;
+	sceneObj_->asobj_[num]->worldTransform.translation_.z = BlockPos.z;
+}
+
+

@@ -17,14 +17,72 @@ void SceneObjects::Initialize(SceneManager* controller)
 
 	skydomeO_->SetScale({ 1,1,1 });
 
+	asobj_[0] = Object3d::Create();
+	asmodel = Model::CreateFromOBJ("as");
+	asobj_[0]->SetModel(asmodel);
 
-	fbxModel = FbxLoader::GetInstance()->LoadModelFromFile("boss_prot4");
+	asobj_[1] = Object3d::Create();
+	asmodel = Model::CreateFromOBJ("as");
+	asobj_[1]->SetModel(asmodel);
 
-	fbxObject = new FbxObject3d();
-	fbxObject->Initialize();
-	fbxObject->SetModel(fbxModel);
-	//fbxObject->SetScale({0.1f,0.1f,0.1f});
-	//fbxObject->SetPosition({ 0,-50,0 });
+	plaobject = Object3d::Create();
+	plamodel = Model::CreateFromOBJ("human");
+	walkmodel1 = Model::CreateFromOBJ("walk1");
+	walkmodel2 = Model::CreateFromOBJ("walk2");
+	jumpmodel = Model::CreateFromOBJ("jump");
+	jumpmodelL = Model::CreateFromOBJ("jumpL");
+	dashmodel0 = Model::CreateFromOBJ("dash0");
+	dashmodel1 = Model::CreateFromOBJ("dash1");
+	dashmodel2 = Model::CreateFromOBJ("dash2");
+	plaobject->SetModel(plamodel);
+	plaobject->SetScale({0.1f,0.1f,0.1f});
+}
+
+void SceneObjects::Update(Input* input)
+{
+	if (input->PushKey(DIK_W)) {plaobject->SetModel(jumpmodelL);}
+	else if (input->PushKey(DIK_S)) {plaobject->SetModel(jumpmodel);}
+	else if (input->PushKey(DIK_A)) {
+		changeModelTimer++;
+		if (changeModelTimer > 24) {
+			changeModelTimer = 0;
+		}
+		if (changeModelTimer >= 1 && changeModelTimer <= 6) {
+			plaobject->SetModel(dashmodel1);
+		}
+		else if (changeModelTimer >= 7 && changeModelTimer <= 12) {
+			plaobject->SetModel(dashmodel0);
+		}
+		else if (changeModelTimer >= 13 && changeModelTimer <= 18) {
+			plaobject->SetModel(dashmodel2);
+		}
+		else if (changeModelTimer >= 19 && changeModelTimer <= 24) {
+			plaobject->SetModel(dashmodel0);
+		}
+	}
+	else if (input->PushKey(DIK_D)) {
+		changeModelTimer++;
+		if (changeModelTimer > 43) {
+			changeModelTimer = 0;
+		}
+
+
+		if (changeModelTimer >= 1 && changeModelTimer <= 10) {
+			plaobject->SetModel(walkmodel1);
+		}
+		else if (changeModelTimer >= 11 && changeModelTimer <= 21) {
+			plaobject->SetModel(plamodel);
+		}
+		else if (changeModelTimer >= 22 && changeModelTimer <= 32) {
+			plaobject->SetModel(walkmodel2);
+		}
+		else if (changeModelTimer >= 33 && changeModelTimer <= 43) {
+			plaobject->SetModel(plamodel);
+		}
+	}
+	else {
+		plaobject->SetModel(plamodel);
+	}
 
 	fbxObject->SetPosition({ 0,-10,10 });
 
@@ -40,11 +98,25 @@ void SceneObjects::Initialize(SceneManager* controller)
 
 void SceneObjects::Delete()
 {
-	/*delete skydomeO_;
-	delete skydomeM_;*/
+
+	delete skydomeO_;
+	delete skydomeM_;
+	delete asobj_[0];
+	delete asobj_[1];
+	delete asmodel;
+	delete plaobject;
+	delete plamodel;
+	delete walkmodel1;
+	delete walkmodel1;
+	delete jumpmodel;
+	delete jumpmodelL;
+	delete dashmodel0;
+	delete dashmodel1;
+	delete dashmodel2;
 	delete fbxObject;
 	delete fbxModel;
 	delete chip_;
+
 }
 
 void SceneObjects::Reset()

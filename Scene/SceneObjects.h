@@ -31,7 +31,7 @@ public:
 
 	void Initialize(SceneManager* controller);
 
-	void Update();
+	void Update(Input* input );
 
 	void Draw();
 
@@ -41,9 +41,6 @@ public:
 
 public:
 	SceneObjects* sceneObj = nullptr;
-
-	FbxModel* fbxModel = nullptr;
-	FbxObject3d* fbxObject = nullptr;
 	Sprite* sprite_ = nullptr;
 
 	//天球
@@ -52,6 +49,22 @@ public:
 
 	Model* model = nullptr;
 	Object3d* object = nullptr;
+
+
+	Model* asmodel = nullptr;
+	Object3d* asobj_[2] = {0};
+
+	Model* plamodel = nullptr;
+	Object3d* plaobject = nullptr;
+	Model* walkmodel1 = nullptr;
+	Model* walkmodel2 = nullptr;
+	Model* jumpmodel = nullptr;
+	Model* jumpmodelL = nullptr;
+	Model* dashmodel0 = nullptr;
+	Model* dashmodel1 = nullptr;
+	Model* dashmodel2 = nullptr;
+	int changeModelTimer = 0;
+	int changeModelTimerD = 0;
 
 	Player* player_ = nullptr;
 	SceneManager* controller_;
