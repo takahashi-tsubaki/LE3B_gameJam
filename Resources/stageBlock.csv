@@ -1,3 +1,4 @@
-//コマンド,posX,posY,posZ
-POP,0,5,100
+//コマンド,posX,posY,posZ,番号
+POP,0,-3,100,0
+POP,0,5,100,1
 

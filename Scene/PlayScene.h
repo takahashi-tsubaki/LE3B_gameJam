@@ -43,8 +43,7 @@ public:
 	/// <summary>
 	/// 敵の発生
 	/// </summary>
-	void GenerBlock(Vector3 BlockPos);
-	void GenerBlock2(Vector3 BlockPos);
+	void GenerBlock(Vector3 BlockPos, int num);
 
     //void Pause(Input* input);
 

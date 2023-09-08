@@ -57,8 +57,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 	//ImGui::End();*/
 
 	sceneObj_->skydomeO_->Update();
-	sceneObj_->asobj->Update();
-
+	sceneObj_->asobj_[0]->Update();
+	sceneObj_->asobj_[1]->Update();
 	//block発生
 	UpdataBlockCommands();
 
@@ -98,8 +98,8 @@ void PlayScene::Draw()
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
 	sceneObj_->skydomeO_->Draw();
-	sceneObj_->asobj->Draw();
-
+	sceneObj_->asobj_[0]->Draw();
+	sceneObj_->asobj_[1]->Draw();
 
 
 	///// <summary>
@@ -190,16 +190,20 @@ void PlayScene::UpdataBlockCommands()
 			std::getline(line_stream, word, ',');
 			float z = static_cast<float>(std::atof(word.c_str()));
 
-			GenerBlock(Vector3(x, y, z));
+			//blockの番号
+			std::getline(line_stream, word, ',');
+			int num = static_cast<float>(std::atof(word.c_str()));
+
+			GenerBlock(Vector3(x, y, z),num);
 		}
 	}
 }
 
-void PlayScene::GenerBlock(Vector3 BlockPos)
+void PlayScene::GenerBlock(Vector3 BlockPos, int num)
 {
-	sceneObj_->asobj->worldTransform.translation_.x = BlockPos.x;
-	sceneObj_->asobj->worldTransform.translation_.y = BlockPos.y;
-	sceneObj_->asobj->worldTransform.translation_.z = BlockPos.z;
+	sceneObj_->asobj_[num]->worldTransform.translation_.x = BlockPos.x;
+	sceneObj_->asobj_[num]->worldTransform.translation_.y = BlockPos.y;
+	sceneObj_->asobj_[num]->worldTransform.translation_.z = BlockPos.z;
 }
 
 

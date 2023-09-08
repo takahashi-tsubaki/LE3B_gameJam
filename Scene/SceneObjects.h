@@ -47,7 +47,7 @@ public:
 	Object3d* object = nullptr;
 
 	Model* asmodel = nullptr;
-	Object3d* asobj = nullptr;
+	Object3d* asobj_[2] = {0};
 
 	SceneManager* controller_;
 };
