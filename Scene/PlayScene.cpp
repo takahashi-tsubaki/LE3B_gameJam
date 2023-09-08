@@ -33,7 +33,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)){controller_->PushScene(S_PAUSE);}
 
-	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	}
+	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	
 	controller_->camera_->Update();
 	}
 
@@ -75,12 +75,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	UpdataBlockCommands();
 
 	//リセット処理
-	if (input->TriggerKey(DIK_R))
-	{
-		
-		//player_->Initialize(controller_->dxCommon_,enemy_);
-		//enemy_->Initialize(controller_->dxCommon_,player_);
-	}
+	if (input->TriggerKey(DIK_R)){}
 
 	
 }
