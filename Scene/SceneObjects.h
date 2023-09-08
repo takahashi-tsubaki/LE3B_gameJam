@@ -47,6 +47,9 @@ public:
 	Object3d* skydomeO_ = nullptr;
 	Model* skydomeM_ = nullptr;
 
+	FbxModel* fbxModel = nullptr;
+	FbxObject3d* fbxObject = nullptr;
+
 	Model* model = nullptr;
 	Object3d* object = nullptr;
 
