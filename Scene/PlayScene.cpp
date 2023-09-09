@@ -33,12 +33,17 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)){controller_->PushScene(S_PAUSE);}
 
+	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK))
+	{
+
+
 	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	
 	controller_->camera_->Update();
 	}
 
-	player_->Update(input,gamePad);
+	player_->Update(input, gamePad);
 	controller_->camera_->SetEye({ player_->GetWorldPos().x,player_->GetWorldPos().y, player_->GetWorldPos().z - 100 });
+	controller_->camera_->SetTarget(player_->GetWorldPos());
 	controller_->camera_->Update();
 
 	//左クリック時
@@ -64,20 +69,26 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	ImGui::End();
 
 	sceneObj_->skydomeO_->Update();
+=======
 	sceneObj_->asobj_[0]->Update();
 	sceneObj_->asobj_[1]->Update();
 	sceneObj_->plaobject->Update();
 
-	
 	controller_->camera_->Update();
 
 	//block発生
 	UpdataBlockCommands();
 
 	//リセット処理
+	if (input->TriggerKey(DIK_R))
+	{
+
+		//player_->Initialize(controller_->dxCommon_,enemy_);
+		//enemy_->Initialize(controller_->dxCommon_,player_);
+	}
 	if (input->TriggerKey(DIK_R)){}
 
-	
+
 }
 
 void PlayScene::Draw()
@@ -105,6 +116,7 @@ void PlayScene::Draw()
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
 	sceneObj_->skydomeO_->Draw();
+=======
 
 	sceneObj_->asobj_[0]->Draw();
 	sceneObj_->asobj_[1]->Draw();
