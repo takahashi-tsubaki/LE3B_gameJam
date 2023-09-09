@@ -36,6 +36,12 @@ void SceneObjects::Initialize(SceneManager* controller)
 	dashmodel2 = Model::CreateFromOBJ("dash2");
 	plaobject->SetModel(plamodel);
 	plaobject->SetScale({0.1f,0.1f,0.1f});
+
+	chip_ = new Chip();
+	chip_->Initialize();
+
+	player_ = new Player();
+	player_->Initialize(controller_->dxCommon_);
 }
 
 void SceneObjects::Update(Input* input)
@@ -83,16 +89,6 @@ void SceneObjects::Update(Input* input)
 	else {
 		plaobject->SetModel(plamodel);
 	}
-
-	fbxObject->SetPosition({ 0,-10,10 });
-
-
-	chip_ = new Chip();
-	chip_->Initialize();
-
-	player_ = new Player();
-	player_->Initialize(controller_->dxCommon_);
-
 
 }
 

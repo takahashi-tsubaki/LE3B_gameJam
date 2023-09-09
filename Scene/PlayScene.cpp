@@ -33,10 +33,6 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)){controller_->PushScene(S_PAUSE);}
 
-	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK))
-	{
-
-
 	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	
 	controller_->camera_->Update();
 	}
@@ -69,7 +65,6 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	ImGui::End();
 
 	sceneObj_->skydomeO_->Update();
-=======
 	sceneObj_->asobj_[0]->Update();
 	sceneObj_->asobj_[1]->Update();
 	sceneObj_->plaobject->Update();
@@ -86,7 +81,6 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		//player_->Initialize(controller_->dxCommon_,enemy_);
 		//enemy_->Initialize(controller_->dxCommon_,player_);
 	}
-	if (input->TriggerKey(DIK_R)){}
 
 
 }
@@ -116,7 +110,6 @@ void PlayScene::Draw()
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
 	sceneObj_->skydomeO_->Draw();
-=======
 
 	sceneObj_->asobj_[0]->Draw();
 	sceneObj_->asobj_[1]->Draw();
