@@ -97,7 +97,7 @@ void PlayScene::Draw()
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 	// 背景スプライト描画
 
-	sprite_->Draw();
+
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
@@ -155,7 +155,7 @@ void PlayScene::Draw()
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
-	//sprite_->Draw();
+	sprite_->Draw();
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
