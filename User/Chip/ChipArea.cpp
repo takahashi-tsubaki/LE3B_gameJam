@@ -9,7 +9,7 @@ ChipArea::~ChipArea()
 {
 }
 
-/// シーンの更新を行う
+/// エリアの初期化
 void ChipArea::Initialize() {
 
 	model_ = Model::CreateFromOBJ("Cube1");
@@ -62,7 +62,7 @@ void ChipArea::Initialize() {
 	rayHit = new RaycastHit;*/
 }
 
-/// シーンの更新を行う
+/// エリアの更新を行う
 void ChipArea::Update() {
 	object_->worldTransform.translation_.z = 1;
 	object_->worldTransform.scale_ = {2.5f,2.5f,1.0f};
@@ -72,7 +72,10 @@ void ChipArea::Update() {
 		coliderPosTest_[i]->worldTransform.translation_ = sphere[i]->center;
 		spherePos[i] = object_->worldTransform.translation_;
 		if (sphere[i]->GetIsHit() == true && sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP) {
-
+			isSet = true;
+		}
+		else {
+			isSet = false;
 		}
 	}
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
@@ -84,7 +87,7 @@ void ChipArea::Update() {
 	object_->Update();
 }
 
-/// シーンの描画を行う
+/// エリアの描画を行う
 void ChipArea::Draw(DirectXCommon* dxCommon) {
 	Object3d::PreDraw(dxCommon->GetCommandList());
 	object_->Draw();
