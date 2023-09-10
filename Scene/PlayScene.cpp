@@ -21,7 +21,8 @@ void PlayScene::Initialize()
 
 	LoadBlockData();
 	player_ = sceneObj_->player_;
-
+	sprite_ =  Sprite::Create(1, { 0,0 });
+	sprite_->Initialize();
 }
 
 void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
@@ -146,7 +147,7 @@ void PlayScene::Draw()
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
-	//sprite_->Draw();
+	sprite_->Draw();
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
