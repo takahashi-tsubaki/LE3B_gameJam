@@ -26,13 +26,20 @@ void SceneObjects::Initialize(SceneManager* controller)
 
 	fbxObject->SetPosition({ 0,-10,10 });
 
-	asobj_[0] = Object3d::Create();
+	//for分に
+	for (int i = 0; i < blockNum; i++)
+	{
+		asobj_[i] = Object3d::Create();
+		asmodel = Model::CreateFromOBJ("as");
+		asobj_[i]->SetModel(asmodel);
+	}
+	/*asobj_[0] = Object3d::Create();
 	asmodel = Model::CreateFromOBJ("as");
 	asobj_[0]->SetModel(asmodel);
 
 	asobj_[1] = Object3d::Create();
 	asmodel = Model::CreateFromOBJ("as");
-	asobj_[1]->SetModel(asmodel);
+	asobj_[1]->SetModel(asmodel);*/
 }
 
 void SceneObjects::Delete()
@@ -41,8 +48,15 @@ void SceneObjects::Delete()
 	delete skydomeM_;
 	delete fbxObject;
 	delete fbxModel;
-	delete asobj_[0];
-	delete asobj_[1];
+
+	//for分に
+	for (int i = 0; i < blockNum; i++)
+	{
+		delete asobj_[i];
+	}
+	/*delete asobj_[0];
+	delete asobj_[1];*/
+
 	delete asmodel;
 }
 

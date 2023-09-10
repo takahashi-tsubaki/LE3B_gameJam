@@ -57,8 +57,15 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 	//ImGui::End();*/
 
 	sceneObj_->skydomeO_->Update();
-	sceneObj_->asobj_[0]->Update();
-	sceneObj_->asobj_[1]->Update();
+
+	//for分に
+	for (int i = 0; i < blockNum; i++)
+	{
+		sceneObj_->asobj_[i]->Update();
+	}
+	/*sceneObj_->asobj_[0]->Update();
+	sceneObj_->asobj_[1]->Update();*/
+
 	//block発生
 	UpdataBlockCommands();
 
@@ -97,9 +104,15 @@ void PlayScene::Draw()
 
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
+	//for分に
 	sceneObj_->skydomeO_->Draw();
-	sceneObj_->asobj_[0]->Draw();
-	sceneObj_->asobj_[1]->Draw();
+
+	for (int i = 0; i < blockNum; i++)
+	{
+		sceneObj_->asobj_[i]->Draw();
+	}
+	/*sceneObj_->asobj_[0]->Draw();
+	sceneObj_->asobj_[1]->Draw();*/
 
 
 	///// <summary>

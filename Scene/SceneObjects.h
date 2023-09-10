@@ -46,8 +46,10 @@ public:
 	Model* model = nullptr;
 	Object3d* object = nullptr;
 
+	//ステージのブロックの数
+	int blockNum = 45;
 	Model* asmodel = nullptr;
-	Object3d* asobj_[2] = {0};
+	Object3d* asobj_[45] = {0};
 
 	SceneManager* controller_;
 };

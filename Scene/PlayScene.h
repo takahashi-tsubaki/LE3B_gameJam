@@ -54,6 +54,6 @@ private:	//メンバ変数
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
 
-
+	int blockNum = 45;
 };
 
