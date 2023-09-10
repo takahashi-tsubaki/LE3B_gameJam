@@ -10,7 +10,7 @@ public:
 	PlayerDash(PlayerActionManager* ActionManager);
 	~PlayerDash() override;
 
-	void Initialize(FbxObject3d* gameObject) override;
+	void Initialize(Object3d* object) override;
 	void Update(Input* input, GamePad* gamePad) override;
 	void Draw()override;
 
@@ -18,7 +18,7 @@ public:
 
 	void ResetParams();
 private:
-	FbxObject3d* fbxObject_;
+	Object3d* object_;
 	Vector3 velocity_{ 0,0,0 };
 	float speed = 0.5f;
 	const float MAX_ACCEL = 2.0f;//加速の最大値

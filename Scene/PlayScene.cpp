@@ -39,8 +39,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	}
 
 	player_->Update(input, gamePad);
-	controller_->camera_->SetEye({ player_->GetWorldPos().x,player_->GetWorldPos().y, player_->GetWorldPos().z - 100 });
-	controller_->camera_->SetTarget(player_->GetWorldPos());
+	controller_->camera_->SetEye({ player_->GetPosition().x,player_->GetPosition().y, player_->GetPosition().z - 100 });
+	controller_->camera_->SetTarget(player_->GetPosition());
 	controller_->camera_->Update();
 
 	//左クリック時
@@ -119,7 +119,7 @@ void PlayScene::Draw()
 	sceneObj_->asobj_[0]->Draw();
 	sceneObj_->asobj_[1]->Draw();
 
-	sceneObj_->plaobject->Draw();
+	//sceneObj_->plaobject->Draw();
 	player_->Draw();
 
 	///// <summary>
