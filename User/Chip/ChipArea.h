@@ -11,18 +11,18 @@
 #include"CollisionAttribute.h"
 
 
-class Chip
+class ChipArea
 {
 public:
-	Chip();
-	~Chip();
+	ChipArea();
+	~ChipArea();
 
 
 	/// シーンの更新を行う
 	void Initialize();
 
 	/// シーンの更新を行う
-	void Update(Input* input,MouseInput* mouse);
+	void Update();
 
 	/// シーンの描画を行う
 	void Draw(DirectXCommon* dxCommon);
@@ -32,12 +32,13 @@ public:
 
 	//
 	void SetPos(Vector3 pos) { object_->worldTransform.translation_ = pos; }
-	void SetReticle(Vector3 ret) { reticle->worldTransform.translation_ = ret; }
+	void SetScale(Vector3 scale) { object_->worldTransform.scale_ = scale; }
+	//void SetReticle(Vector3 ret) { reticle->worldTransform.translation_ = ret; }
 
 
 	// 種族番号取得
-	int SetTribe(int tribe) { Tribe_ = tribe; }
-	int HowTribe() { return Tribe_; }
+	//int SetTribe(int tribe) { Tribe_ = tribe; }
+	//int HowTribe() { return Tribe_; }
 
 	WorldTransform GetTransform() { return object_->worldTransform; }
 
@@ -47,23 +48,20 @@ private:
 
 public:
 	Model* model_;
-	Object3d* reticle;
 	Object3d* object_;
-	Vector3 areaPos_;
 
-	float mouseSensitivity_ = 0.099f;	//マウス感度 0.05
+	//float mouseSensitivity_ = 0.099f;	//マウス感度 0.05
 private:
-	int Tribe_ = 1;
-	bool isChipGet_;
-	bool nowDrag_;
-	bool isAreaSet;
+
+	// 領域用
+	bool isSet;
 
 	//コライダー
 public:
 	void SetSphere(std::vector<SphereCollider*> sphere_) { sphere = sphere_; }
 	std::vector<SphereCollider*> GetSphere() { return sphere; }
 private:
-	int SPHERE_COLISSION_NUM = 2;	//コライダー（スフィア）の数
+	int SPHERE_COLISSION_NUM = 1;	//コライダー（スフィア）の数
 	std::vector<Matrix4>* collisionBonesMat;	//当たり判定用のボーンのワールド行列 // fbx化後の仕様予定
 	std::vector<SphereCollider*> sphere;
 	std::vector<Vector3> spherePos;
