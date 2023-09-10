@@ -24,7 +24,10 @@ void TitleScene::Initialize()
 void TitleScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	controller_->camera_->eye_ = {0,0,-100.0f};
+
 	sceneObj_->chip_->Update(input,mouse);
+	sceneObj_->chipArea_->Update();
+
 	sceneObj_->skydomeO_->Update();
 	controller_->camera_->Update();
 	gamePad->Update();
@@ -67,7 +70,9 @@ void TitleScene::Draw()
 
 	//// 3Dオブジェクト描画後処理
 	Object3d::PostDraw();
+	sceneObj_->chipArea_->Draw(controller_->dxCommon_);
 	sceneObj_->chip_->Draw(controller_->dxCommon_);
+
 #pragma endregion
 
 

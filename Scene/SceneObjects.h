@@ -19,6 +19,8 @@
 
 
 #include "Chip.h"
+#include "ChipArea.h"
+#include "ChipManager.h"
 
 #include "Player.h"
 
@@ -72,5 +74,6 @@ public:
 	Player* player_ = nullptr;
 	SceneManager* controller_;
 	Chip* chip_ = nullptr;
+	ChipArea* chipArea_ = nullptr;
 };
 

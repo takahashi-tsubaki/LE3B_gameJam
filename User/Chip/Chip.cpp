@@ -11,6 +11,7 @@ Chip::~Chip()
 
 /// シーンの更新を行う
 void Chip::Initialize() {
+
 	nowDrag_ = false;
 	isChipGet_ = false;
 
@@ -19,7 +20,7 @@ void Chip::Initialize() {
 	object_ = Object3d::Create();
 	object_->SetModel(model_);
 	object_->Initialize();
-	object_->position_ = { 0,0,0 };
+	object_->position_ = { 0,0,1 };
 
 	reticle = Object3d::Create();
 	reticle->SetModel(model_);
@@ -40,9 +41,7 @@ void Chip::Initialize() {
 		if (i == 0) {
 			sphere[i] = new SphereCollider;
 			CollisionManager::GetInstance()->AddCollider(sphere[i]);
-			spherePos[i] = Affin::GetWorldTrans(object_->worldTransform.matWorld_);
 			sphere[i]->SetObject3d(object_);
-			sphere[i]->SetBasisPos(&spherePos[i]);
 			sphere[i]->SetRadius(1.0f);
 			sphere[i]->Update();
 			sphere[i]->SetAttribute(COLLISION_ATTR_POWERCHIP);
@@ -50,9 +49,7 @@ void Chip::Initialize() {
 		if (i == 1) {
 			sphere[i] = new SphereCollider;
 			CollisionManager::GetInstance()->AddCollider(sphere[i]);
-			spherePos[i] = Affin::GetWorldTrans(reticle->worldTransform.matWorld_);
-			sphere[i]->SetObject3d(reticle);
-			sphere[i]->SetBasisPos(&spherePos[i]);
+			sphere[i]->SetObject3d(reticle);			
 			sphere[i]->SetRadius(1.0f);
 			sphere[i]->Update();
 			sphere[i]->SetAttribute(COLLISION_ATTR_CURSOR);
@@ -84,12 +81,12 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 	Vector2 mousepos = mouse->GetMousePosition();
 	reticle->worldTransform.translation_ = { mousepos.x * mouseSensitivity_,mousepos.y * mouseSensitivity_,0 };	/// カメラ座標「目」｛0，0，-100｝前提
 
-	spherePos[0] = object_->worldTransform.translation_;
-	spherePos[1] = reticle->worldTransform.translation_;
-
 	if (mouse->TriggerMouseButton(0)) {
 		if (nowDrag_ == false) {
 			nowDrag_ = true;
+
+			isAreaSet = false;
+
 		}
 		else if (nowDrag_ == true) {
 			nowDrag_ = false;
@@ -106,10 +103,21 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 		{
 			isChipGet_ = false;
 		}
+		if (sphere[0]->GetIsHit() == true && sphere[0]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP_AREA) {
+			object_->worldTransform.translation_ = sphere[i]->GetCollisionInfo().object->worldTransform.translation_;
+			object_->worldTransform.translation_.z = 0;
+			isAreaSet = true;
+			//nowDrag_ = false;
+		}
+
 	}
-	if (isChipGet_ == true) {
+	if (isChipGet_ == true ) {
 		object_->worldTransform.translation_ = reticle->worldTransform.translation_;
 	}
+	if (isAreaSet == true) {
+		//object_->worldTransform.translation_ = areaPos_;
+	}
+
 
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
 
@@ -125,7 +133,6 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 void Chip::Draw(DirectXCommon* dxCommon) {
 	Object3d::PreDraw(dxCommon->GetCommandList());
 	object_->Draw();
-	//reticle->Draw();
 	Object3d::PostDraw();
 }
 

@@ -285,6 +285,9 @@
     <ClCompile Include="Engine\Player\PlayerManager\PlayerJump.cpp">
       <Filter>ソース ファイル\Player\PlayerManager</Filter>
     </ClCompile>
+    <ClCompile Include="User\Chip\ChipArea.cpp">
+      <Filter>ソース ファイル\Chip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\WinApp.h">
@@ -472,6 +475,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Player\PlayerManager\PlayerJump.h">
       <Filter>ヘッダー ファイル\Player\PlayerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Chip\ChipArea.h">
+      <Filter>ヘッダー ファイル\Chip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
