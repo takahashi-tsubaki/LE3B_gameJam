@@ -96,7 +96,7 @@ void PlayScene::Draw()
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 	// 背景スプライト描画
-
+	sprite_->Draw();
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
@@ -114,7 +114,7 @@ void PlayScene::Draw()
 
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
-	sceneObj_->skydomeO_->Draw();
+	//sceneObj_->skydomeO_->Draw();
 
 	sceneObj_->asobj_[0]->Draw();
 	sceneObj_->asobj_[1]->Draw();
@@ -155,7 +155,7 @@ void PlayScene::Draw()
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
-	sprite_->Draw();
+	
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
