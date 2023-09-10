@@ -55,6 +55,10 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		mouseCheckNum = 1;
 		mousePos = mousePos;
 	}
+	sceneObj_->chip_->Update(input, mouse);
+	sceneObj_->chipArea_->Update();
+	sceneObj_->chip2_->Update(input, mouse);
+	sceneObj_->chipArea2_->Update();
 
 	mouse->Update();
 
@@ -68,7 +72,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	sceneObj_->skydomeO_->Update();
 	sceneObj_->asobj_[0]->Update();
 	sceneObj_->asobj_[1]->Update();
-	sceneObj_->plaobject->Update();
+	sceneObj_->plaobject->Update();	
 
 	controller_->camera_->Update();
 
@@ -124,6 +128,10 @@ void PlayScene::Draw()
 
 	//// 3Dオブジェクト描画後処理
 	Object3d::PostDraw();
+	sceneObj_->chipArea_->Draw(controller_->dxCommon_);
+	sceneObj_->chip_->Draw(controller_->dxCommon_);
+	sceneObj_->chipArea2_->Draw(controller_->dxCommon_);
+	sceneObj_->chip2_->Draw(controller_->dxCommon_);
 #pragma endregion
 
 

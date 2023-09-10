@@ -82,6 +82,7 @@
     <ClCompile Include="Scene\SceneObjects.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="User\Chip\Chip.cpp" />
+    <ClCompile Include="User\Chip\ChipArea.cpp" />
     <ClCompile Include="User\Chip\ChipManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +147,7 @@
     <ClInclude Include="Scene\SceneObjects.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="User\Chip\Chip.h" />
+    <ClInclude Include="User\Chip\ChipArea.h" />
     <ClInclude Include="User\Chip\ChipManager.h" />
   </ItemGroup>
   <ItemGroup>

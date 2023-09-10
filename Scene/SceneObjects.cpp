@@ -38,6 +38,21 @@ void SceneObjects::Initialize(SceneManager* controller)
 	//plaobject->SetModel(plamodel);
 	chip_ = new Chip();
 	chip_->Initialize();
+	chip_->object_->worldTransform.translation_ = { -30,-20,0 };
+	chip_->object_->color_ = { 1,0,0,1 };
+
+	chip2_ = new Chip();
+	chip2_->Initialize();
+	chip2_->object_->worldTransform.translation_ = { -30,-25,0 };
+	chip2_->object_->color_ = { 0,0,1,1 };
+
+	chipArea_ = new ChipArea();
+	chipArea_->Initialize();
+	chipArea_->SetPos({ -43.0f,25.0f,0.0f });
+
+	chipArea2_ = new ChipArea();
+	chipArea2_->Initialize();
+	chipArea2_->SetPos({ -43.0f,17.0f,0.0f });
 
 	player_ = new Player();
 	player_->Initialize(controller_->dxCommon_);
