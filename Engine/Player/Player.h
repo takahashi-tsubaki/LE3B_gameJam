@@ -42,6 +42,8 @@ public:
 
 	PlayerActionManager* GetPlayerActionManager() { return pActManager_.get(); };
 
+	void CheckCollision();
+
 private:
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
