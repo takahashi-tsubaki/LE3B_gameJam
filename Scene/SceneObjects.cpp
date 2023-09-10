@@ -41,9 +41,16 @@ void SceneObjects::Initialize(SceneManager* controller)
 	chip_ = new Chip();
 	chip_->Initialize();
 
+	chip2_ = new Chip();
+	chip2_->Initialize();
+
 	chipArea_ = new ChipArea();
 	chipArea_->Initialize();
-	chipArea_->SetPos({ -10.0f,20.0f,0.0f });
+	chipArea_->SetPos({ -43.0f,25.0f,0.0f });
+
+	chipArea2_ = new ChipArea();
+	chipArea2_->Initialize();
+	chipArea2_->SetPos({ -43.0f,17.0f,0.0f });
 
 	player_ = new Player();
 	player_->Initialize(controller_->dxCommon_);

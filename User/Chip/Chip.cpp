@@ -84,9 +84,7 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 	if (mouse->TriggerMouseButton(0)) {
 		if (nowDrag_ == false) {
 			nowDrag_ = true;
-
 			isAreaSet = false;
-
 		}
 		else if (nowDrag_ == true) {
 			nowDrag_ = false;
