@@ -10,7 +10,6 @@ TitleScene::TitleScene(SceneManager* controller, SceneObjects* sceneObj)
 TitleScene::~TitleScene()
 {
 
-
 	sceneObj_->Reset();
 	//delete sceneObj_->skydomeO_;
 	/*sceneObj_->Delete();*/
