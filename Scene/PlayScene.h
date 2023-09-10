@@ -55,6 +55,7 @@ public:
 private:	//メンバ変数
 	const float PI = 3.141592;
 	Camera* camera_ = nullptr;
+	Sprite* sprite_ = nullptr;
 
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
