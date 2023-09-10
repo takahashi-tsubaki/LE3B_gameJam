@@ -35,9 +35,7 @@ void SceneObjects::Initialize(SceneManager* controller)
 	dashmodel0 = Model::CreateFromOBJ("dash0");
 	dashmodel1 = Model::CreateFromOBJ("dash1");
 	dashmodel2 = Model::CreateFromOBJ("dash2");
-	plaobject->SetModel(plamodel);
-	plaobject->SetScale({0.1f,0.1f,0.1f});
-
+	//plaobject->SetModel(plamodel);
 	chip_ = new Chip();
 	chip_->Initialize();
 

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "DirectXCommon.h"
 #include "Input.h"
 #include "GamePad.h"
@@ -37,9 +37,8 @@ public:
 
 	void Draw();
 
-	void SetWorldPos(Vector3 potision) { playerFbxO_.get()->worldTransform.translation_ = potision; }
-
-	Vector3 GetWorldPos(){return playerFbxO_.get()->worldTransform.translation_ ;}
+	void SetPosition(Vector3 position) { playerO_->worldTransform.translation_ = position; }
+	Vector3 GetPosition(){ return playerO_->worldTransform.translation_;}
 
 	PlayerActionManager* GetPlayerActionManager() { return pActManager_.get(); };
 
@@ -51,9 +50,6 @@ private:
 
 	Object3d* playerO_ = nullptr;
 	Model* playerM_ = nullptr;
-
-	std::unique_ptr<FbxObject3d> playerFbxO_;
-	std::unique_ptr<FbxModel> playerFbxM_;
 
 	//当たり判定に必要なもの
 	int SPHERE_COLISSION_NUM = 1;	//コライダー（スフィア）の数

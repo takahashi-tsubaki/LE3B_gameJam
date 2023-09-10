@@ -20,12 +20,18 @@ void Player::Initialize(DirectXCommon* dxCommon)
 	FbxObject3d::SetDevice(dxCommon_->GetDevice());
 	//グラフィックスパイプライン生成
 	FbxObject3d::CreateGraphicsPipeline();
-	//敵のFbx読み込み
-	playerFbxM_.reset(FbxLoader::GetInstance()->LoadModelFromFile("boss_prot4"));
-	playerFbxO_ = std::make_unique<FbxObject3d>();
-	playerFbxO_->Initialize();
-	playerFbxO_->SetModel(playerFbxM_.get());
+	////敵のFbx読み込み
+	//playerFbxM_.reset(FbxLoader::GetInstance()->LoadModelFromFile("boss_prot4"));
+	//playerFbxO_ = std::make_unique<FbxObject3d>();
+	//playerFbxO_->Initialize();
+	//playerFbxO_->SetModel(playerFbxM_.get());
 
+	playerO_ = Object3d::Create();
+
+	playerM_= Model::CreateFromOBJ("human");
+	playerO_->SetModel(playerM_);
+
+	playerO_->SetScale({ 0.5f,0.5f,0.5f });
 	//////FBX当たり判定初期化
 	//for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
 	//{
@@ -48,12 +54,12 @@ void Player::Initialize(DirectXCommon* dxCommon)
 	//行動マネージャー
 	pActManager_ = std::make_unique<PlayerActionManager>();
 	//pActManager_->ColliderInitialize(&sphere, SPHERE_COLISSION_NUM);
-	pActManager_->ActionInitialize(playerFbxO_.get());
+	pActManager_->ActionInitialize(playerO_);
 }
 
 void Player::Update(Input* input,GamePad* gamePad)
 {
-	playerFbxO_->Update();
+	playerO_->Update();
 	//行動マネージャーの切り替え
 	if (input->TriggerKey(DIK_1))
 	{
@@ -91,11 +97,11 @@ void Player::Update(Input* input,GamePad* gamePad)
 	ImGui::Begin("Player");
 	ImGui::InputInt("ActionNumber", &actionNum);
 	ImGui::InputInt("OldActionNumber", &oldActionNum_);
-	ImGui::InputFloat3("Position", &playerFbxO_->worldTransform.translation_.x);
+	ImGui::InputFloat3("Position", &playerO_->worldTransform.translation_.x);
 	ImGui::End();
 }
 
 void Player::Draw()
 {
-	playerFbxO_->Draw(dxCommon_->GetCommandList());
+	playerO_->Draw();
 }

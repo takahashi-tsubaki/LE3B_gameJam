@@ -11,11 +11,11 @@ public:
 	PlayerMove(PlayerActionManager* ActionManager);
 	~PlayerMove() override;
 
-	void Initialize(FbxObject3d* gameObject) override;
+	void Initialize(Object3d* object) override;
 	void Update(Input* input, GamePad* gamePad) override;
 	void Draw()override;
 private:
-	FbxObject3d* gameObject_;
+	Object3d* object_;
 	Vector3 velocity_{ 0,0,0 };
 	float speed = 0.5f;
 };

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "FbxObject3d.h"
 
 #include "Input.h"
@@ -17,7 +17,7 @@ public:
 	PlayerAction();
 	virtual ~PlayerAction();
 
-	virtual void Initialize(FbxObject3d *fbxObject) = 0;
+	virtual void Initialize(Object3d* object) = 0;
 
 	virtual void Update(Input* input,GamePad* gamePad) = 0;
 
