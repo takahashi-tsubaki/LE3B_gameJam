@@ -16,7 +16,7 @@ void SceneObjects::Initialize(SceneManager* controller)
 	skydomeM_ = Model::CreateFromOBJ("skydome");
 	skydomeO_->SetModel(skydomeM_);
 
-	skydomeO_->SetScale({ 10,10,10 });
+	skydomeO_->SetScale({ 100,100,100 });
 
 	asobj_[0] = Object3d::Create();
 	asmodel = Model::CreateFromOBJ("as");

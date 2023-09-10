@@ -91,6 +91,7 @@ void Player::Update(Input* input,GamePad* gamePad)
 	ImGui::Begin("Player");
 	ImGui::InputInt("ActionNumber", &actionNum);
 	ImGui::InputInt("OldActionNumber", &oldActionNum_);
+	ImGui::InputFloat3("Position", &playerFbxO_->worldTransform.translation_.x);
 	ImGui::End();
 }
 
