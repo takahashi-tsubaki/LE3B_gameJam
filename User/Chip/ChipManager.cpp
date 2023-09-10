@@ -8,10 +8,15 @@ ChipManager::~ChipManager()
 {
 }
 
-
-
-void ChipManager::AddChip(std::string chipName, Chip* chip)
+void ChipManager::Initialize(int junpnum, int runnum, int areanum)
 {
-	assert(chip);
-	chips_.insert(std::make_pair(chipName, chip));
+
 }
+
+
+
+//void ChipManager::AddChip(std::string chipName, Chip* chip)
+//{
+//	assert(chip);
+//	chips_.insert(std::make_pair(chipName, chip));
+//}

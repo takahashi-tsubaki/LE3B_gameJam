@@ -1,4 +1,5 @@
 #include "Chip.h"
+#include "imgui.h"
 
 
 Chip::Chip()
@@ -84,7 +85,9 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 	if (mouse->TriggerMouseButton(0)) {
 		if (nowDrag_ == false) {
 			nowDrag_ = true;
+
 			isAreaSet = false;
+
 		}
 		else if (nowDrag_ == true) {
 			nowDrag_ = false;
@@ -92,29 +95,36 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 	}
 
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
-		if (sphere[i]->GetIsHit() == true && sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP) {
+		if (sphere[1]->GetIsHit() == true && sphere[1]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP&&
+			sphere[0]->GetIsHit() == true && sphere[0]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_CURSOR&&
+			isAreaSet==false) {
 			if (nowDrag_ == true) {
 				isChipGet_ = true;
 			}
-		}
-		else
-		{
-			isChipGet_ = false;
+			else {
+				isChipGet_ = false;
+			}
 		}
 		if (sphere[0]->GetIsHit() == true && sphere[0]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP_AREA) {
-			object_->worldTransform.translation_ = sphere[i]->GetCollisionInfo().object->worldTransform.translation_;
+			object_->worldTransform.translation_ = sphere[0]->GetCollisionInfo().object->worldTransform.translation_;
 			object_->worldTransform.translation_.z = 0;
 			isAreaSet = true;
-			//nowDrag_ = false;
+
+			isChipGet_ = false;
 		}
 
 	}
+	ImGui::Begin("chipFlag");
 	if (isChipGet_ == true ) {
+		ImGui::Text("a");
 		object_->worldTransform.translation_ = reticle->worldTransform.translation_;
 	}
 	if (isAreaSet == true) {
+		ImGui::Text("b");
 		//object_->worldTransform.translation_ = areaPos_;
 	}
+	ImGui::Text("c");
+	ImGui::End();
 
 
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {

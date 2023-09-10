@@ -40,9 +40,13 @@ void SceneObjects::Initialize(SceneManager* controller)
 
 	chip_ = new Chip();
 	chip_->Initialize();
+	chip_->object_->worldTransform.translation_ = { -30,-20,0 };
+	chip_->object_->color_ = { 1,0,0,1 };
 
 	chip2_ = new Chip();
 	chip2_->Initialize();
+	chip2_->object_->worldTransform.translation_ = { -30,-25,0 };
+	chip2_->object_->color_ = { 0,0,1,1 };
 
 	chipArea_ = new ChipArea();
 	chipArea_->Initialize();
