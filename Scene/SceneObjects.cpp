@@ -3,7 +3,8 @@
 #include "Framework.h"
 void SceneObjects::Initialize(SceneManager* controller)
 {
-	//Sprite::LoadTexture(1, L"Resources/kuribo-.jpg");
+	Sprite::LoadTexture(1, L"Resources/ketuma2.png");
+
 	//Sprite::LoadTexture(2, L"Resources/mario.jpg");
 
 	//Sprite::LoadTexture(4, L"Resources/sprite/clear.png");
@@ -15,7 +16,7 @@ void SceneObjects::Initialize(SceneManager* controller)
 	skydomeM_ = Model::CreateFromOBJ("skydome");
 	skydomeO_->SetModel(skydomeM_);
 
-	skydomeO_->SetScale({ 10,10,10 });
+	skydomeO_->SetScale({ 100,100,100 });
 
 	asobj_[0] = Object3d::Create();
 	asmodel = Model::CreateFromOBJ("as");
