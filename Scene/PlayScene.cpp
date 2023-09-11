@@ -95,12 +95,35 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 void PlayScene::Draw()
 {
+#pragma region 3Dオブジェクト描画
+	//// 3Dオブジェクト描画前処理
+	Object3d::PreDraw(controller_->dxCommon_->GetCommandList());
+
+	//// 3Dオブジェクトの描画
+
+	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
+
+	sceneObj_->skydomeO_->Draw();
+	for (int i = 0; i < blockNum; i++)
+	{
+		sceneObj_->asobj_[i]->Draw();
+	}
+	player_->Draw();
+	///// <summary>
+	///// ここに3Dオブジェクトの描画処理を追加できる
+	///// </summary>
+
+	//// 3Dオブジェクト描画後処理
+	Object3d::PostDraw();
+	sceneObj_->chipArea_->Draw(controller_->dxCommon_);
+	sceneObj_->chipArea2_->Draw(controller_->dxCommon_);
+#pragma endregion
 #pragma region 背景スプライト描画
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 	// 背景スプライト描画
 
-
+	sprite_->Draw();
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
@@ -117,15 +140,12 @@ void PlayScene::Draw()
 
 	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
 
-	sceneObj_->skydomeO_->Draw();
+	//sceneObj_->skydomeO_->Draw();
 
-	for (int i = 0; i < blockNum; i++)
-	{
-		sceneObj_->asobj_[i]->Draw();
-	}
+
 
 	//sceneObj_->plaobject->Draw();
-	player_->Draw();
+
 
 	///// <summary>
 	///// ここに3Dオブジェクトの描画処理を追加できる
@@ -133,9 +153,9 @@ void PlayScene::Draw()
 
 	//// 3Dオブジェクト描画後処理
 	Object3d::PostDraw();
-	sceneObj_->chipArea_->Draw(controller_->dxCommon_);
+
 	sceneObj_->chip_->Draw(controller_->dxCommon_);
-	sceneObj_->chipArea2_->Draw(controller_->dxCommon_);
+
 	sceneObj_->chip2_->Draw(controller_->dxCommon_);
 #pragma endregion
 
@@ -160,7 +180,6 @@ void PlayScene::Draw()
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
-	sprite_->Draw();
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
