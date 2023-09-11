@@ -78,5 +78,5 @@ void PlayerDash::ResetParams()
 	isAccel_ = false;
 
 	speed = 0.5f;
-	DashFlameCount = 60.0f;
+	DashFlameCount = 30.0f;
 }
