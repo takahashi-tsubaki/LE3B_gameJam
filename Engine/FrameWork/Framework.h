@@ -4,7 +4,7 @@
 #include "Input.h"
 #include "GamePad.h"
 #include "MouseInput.h"
-
+#include "Audio.h"
 #include "FPS.h"
 
 #include "ImguiManager.h"
@@ -48,5 +48,6 @@ protected:
 	MouseInput* mouse_ = nullptr;
 	DirectXCommon* dxCommon_ = nullptr;
 	ImguiManager* imgui = nullptr;
+	Audio* audio = nullptr;
 	bool endRequest_ = false;
 };

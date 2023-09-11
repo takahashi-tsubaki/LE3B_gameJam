@@ -26,6 +26,8 @@ void Framework::Initialize()
 	mouse_ = new MouseInput();
 	mouse_->Initialize(winApp);
 
+	audio = new Audio();
+	audio->Initialize();
 	/*Sprite::LoadTexture(100,L"Resources/white1x1.png");*/
 
 }
@@ -41,6 +43,7 @@ void Framework::Finalize()
 	delete input;
 	delete winApp;
 	delete dxCommon_;
+	delete audio;
 	delete fps;
 	delete mouse_;
 }

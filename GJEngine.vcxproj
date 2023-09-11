@@ -35,6 +35,7 @@
     <ClCompile Include="Engine\3D\Model.cpp" />
     <ClCompile Include="Engine\3D\Object3d.cpp" />
     <ClCompile Include="Engine\3D\worldTransform.cpp" />
+    <ClCompile Include="Engine\Base\Audio.cpp" />
     <ClCompile Include="Engine\Base\DirectXCommon.cpp" />
     <ClCompile Include="Engine\Base\FPS.cpp" />
     <ClCompile Include="Engine\Base\GamePad.cpp" />
@@ -94,6 +95,7 @@
     <ClInclude Include="Engine\3D\Model.h" />
     <ClInclude Include="Engine\3D\Object3d.h" />
     <ClInclude Include="Engine\3D\worldTransform.h" />
+    <ClInclude Include="Engine\Base\Audio.h" />
     <ClInclude Include="Engine\Base\DirectXCommon.h" />
     <ClInclude Include="Engine\Base\ErrorException.h" />
     <ClInclude Include="Engine\Base\FPS.h" />
