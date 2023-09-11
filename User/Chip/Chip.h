@@ -11,6 +11,7 @@
 #include"CollisionAttribute.h"
 
 
+
 class Chip
 {
 public:
@@ -36,10 +37,12 @@ public:
 
 
 	// 種族番号取得
-	int SetTribe(int tribe) { Tribe_ = tribe; }
+	void SetTribe(int tribe) { Tribe_ = tribe; }
 	int HowTribe() { return Tribe_; }
 
 	WorldTransform GetTransform() { return object_->worldTransform; }
+
+	bool GetisAreaSet() { return isAreaSet; };
 
 private:
 	//void FrontFace();
@@ -50,13 +53,16 @@ public:
 	Object3d* reticle;
 	Object3d* object_;
 	Vector3 areaPos_;
+	Vector3 mousePos_;
 
 	float mouseSensitivity_ = 0.099f;	//マウス感度 0.05
+	bool isGetThis = false;
 private:
-	int Tribe_ = 1;
+	int Tribe_ = 0;
 	bool isChipGet_;
 	bool nowDrag_;
 	bool isAreaSet;
+	
 
 	//コライダー
 public:

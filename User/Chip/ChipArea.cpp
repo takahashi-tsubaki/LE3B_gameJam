@@ -71,13 +71,20 @@ void ChipArea::Update() {
 		sphere[i]->SetRadius(object_->worldTransform.scale_.x);
 		coliderPosTest_[i]->worldTransform.translation_ = sphere[i]->center;
 		spherePos[i] = object_->worldTransform.translation_;
+
+		isSet = false;
+		object_->position_.z = 0;
+
 		if (sphere[i]->GetIsHit() == true && sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP) {
 			isSet = true;
+			object_->position_.z = 1;
 		}
-		else {
-			isSet = false;
+		if (sphere[i]->GetIsHit() == true && sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_CURSOR) {
+			isSet = true;
+			object_->position_.z = 1;
 		}
 	}
+
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
 
 		/*coliderPosTest_[i]->wtf.position = ray->GetDir();*/
