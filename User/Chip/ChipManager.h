@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "ChipPattern.h"
 
 class ChipManager // 電池を統括＆動きを決定するようにするクラス
 {
@@ -24,30 +25,35 @@ public:
 	void Reset() { chips_.clear(); };
 	void AddChip(std::string chipName, Chip* chip);
 	void AddChipArea(std::string chipAreaName, ChipArea* chipArea);
+
+	void InitializeChip(int junpnum = 2, int runnum = 2);
+	void InitializeArea();
+	void ChangeParallel(Input* input);
 private:
 	int pattern = 0;
+	bool isParallel = true;
 
 
-	std::map<std::string ,Chip* > chipMap_;
+	//std::map<std::string ,Chip* > chipMap_;
 
-	std::string chipST;
+	//std::string chipST;
 	std::vector<Chip*> chips_;
-	std::string areaST;
+	//std::string areaST;
 	std::vector<ChipArea*> chipAreas_;
 
 	/// <summary>
 	/// 仮宣言 ⇩
 	/// </summary>
-	Chip* chipR_ = nullptr;
+	Chip* newChipDash = nullptr;
 	ChipArea* chipArea_ = nullptr;
-	Chip* chipB_ = nullptr;
+	Chip* newChipJunp = nullptr;
 	ChipArea* chipArea2_ = nullptr;
 
 
 
 public:
-	Model* model_;
-	Object3d* mouse_;
+	Model* model_ = nullptr;
+	Object3d* mouse_ = nullptr;
 	float mouseSensitivity_ = 0.099f;	//マウス感度 0.05
 	//コライダー
 	/// <summary>
@@ -58,5 +64,5 @@ public:
 	void SetSphere(SphereCollider* sphere_) { sphere = sphere_; }
 	SphereCollider* GetSphere() { return sphere; }
 private:
-	SphereCollider* sphere;
+	SphereCollider* sphere = nullptr;
 };

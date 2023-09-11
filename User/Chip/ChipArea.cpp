@@ -92,6 +92,8 @@ void ChipArea::Update() {
 		coliderPosTest_[i]->Update();
 	}
 	object_->Update();
+
+	subject = nullptr;
 }
 
 /// エリアの描画を行う

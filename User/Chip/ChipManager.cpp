@@ -12,31 +12,9 @@ ChipManager::~ChipManager()
 
 void ChipManager::Initialize(int junpnum, int runnum, int areanum)
 {
-	chipR_ = new Chip();
-	chipR_->Initialize();
-	chipR_->SetTribe(1);
-	chipR_->object_->worldTransform.translation_ = { -30,-20,0 };
-	chipR_->object_->color_ = { 1,0,0,1 };
-	AddChip("1R", chipR_);
+	InitializeChip(junpnum, runnum);
 
-	chipB_ = new Chip();
-	chipB_->Initialize();
-	chipB_->SetTribe(2);
-	chipB_->object_->worldTransform.translation_ = { -30,-25,0 };
-	chipB_->object_->color_ = { 0,0,1,1 };
-	AddChip("1B", chipB_);
-
-	chipArea_ = new ChipArea();
-	chipArea_->Initialize();
-	chipArea_->SetTribe(1);
-	chipArea_->SetPos({ -43.0f,25.0f,0.0f });
-	AddChipArea("A1", chipArea_);
-
-	chipArea2_ = new ChipArea();
-	chipArea2_->Initialize();
-	chipArea2_->SetTribe(2);
-	chipArea2_->SetPos({ -43.0f,17.0f,0.0f });
-	AddChipArea("A2", chipArea2_);
+	InitializeArea();
 
 	model_ = Model::CreateFromOBJ("Cube1");
 
@@ -60,14 +38,19 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 	//if (sphere->GetIsHit() == true && sphere->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP) {
 	//	mouse_->position_.z = 1;
 	//}
+	ChangeParallel(input);
 	CollisionUpdate();
 	pattern = MakePattern();
+	ImGui::Begin("ChipPatteern");
+	ImGui::Text("Pattern: %d", pattern);
+	ImGui::Text("isParallel: %d", isParallel);
 	for (ChipArea* area : chipAreas_) {
 		area->Update();
 	}
 	for (Chip* chip : chips_) {
 		chip->Update(input, mouse);
 	}
+	ImGui::End();
 
 	sphere->Update();
 }
@@ -124,20 +107,38 @@ void ChipManager::CollisionUpdate()
 
 int ChipManager::MakePattern()
 {
-	if (chipAreas_[0]->subject == nullptr|| chipAreas_[1]->subject == nullptr) {
+	if (chipAreas_[0]->subject == nullptr || chipAreas_[1]->subject == nullptr) {
 		return 0;
 	}
-	if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1 ||
-		chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1) {
-		return 0b1 << 1;
+	if (isParallel == true) {
+		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1 ||
+			chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1) {
+			return 0b1 << 1;
+		}
+		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 2 ||
+			chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 1) {
+			return 0b1 << 2;
+		}
+		if (chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2 ||
+			chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2) {
+			return 0b1 << 3;
+		}
 	}
-	if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 2 ||
-		chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 1) {
-		return 0b1 << 2;
+	if (isParallel == false) {
+		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1 ||
+			chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1) {
+			return 0b1 << 4;
+		}
+		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 2 ||
+			chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 1) {
+			return 0b1 << 5;
+		}
+		if (chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2 ||
+			chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2) {
+			return 0b1 << 6;
+		}
 	}
 }
-
-
 
 void ChipManager::AddChip(std::string chipName, Chip* chip)
 {
@@ -149,4 +150,66 @@ void ChipManager::AddChipArea(std::string chipAreaName, ChipArea* chipArea)
 {
 	assert(chipArea);
 	chipAreas_.emplace_back(chipArea);
+}
+
+void ChipManager::InitializeChip(int junpnum, int runnum)
+{
+	float dY = -20;
+	for (int i = 0; i < runnum; i++) {
+		Chip* newChipDash = new Chip();
+		newChipDash->Initialize();
+		newChipDash->SetTribe(1);
+		newChipDash->object_->worldTransform.translation_ = { -30,dY,0 };
+		dY += 5;
+		newChipDash->object_->color_ = { 1,0,0,1 };
+		AddChip("1R", newChipDash);
+	}
+
+
+	float jY = -20;
+	for (int i = 0; i < junpnum; i++) {
+		newChipJunp = new Chip();
+		newChipJunp->Initialize();
+		newChipJunp->SetTribe(2);
+		newChipJunp->object_->worldTransform.translation_ = { -35,jY,0 };
+		jY += 5;
+		newChipJunp->object_->color_ = { 0,0,1,1 };
+		AddChip("1B", newChipJunp);
+	}
+
+}
+
+void ChipManager::InitializeArea()
+{
+
+	chipArea_ = new ChipArea();
+	chipArea_->Initialize();
+	chipArea_->SetTribe(1);
+	chipArea_->SetPos({ -43.0f,25.0f,0.0f });
+	AddChipArea("A1", chipArea_);
+
+	chipArea2_ = new ChipArea();
+	chipArea2_->Initialize();
+	chipArea2_->SetTribe(2);
+	chipArea2_->SetPos({ -43.0f,17.0f,0.0f });
+	AddChipArea("A2", chipArea2_);
+}
+
+void ChipManager::ChangeParallel(Input* input)
+{
+	if (input->TriggerKey(DIK_R)) {
+		if (isParallel == true) {
+			isParallel = false;
+		}
+		else {
+			isParallel = true;
+		}
+	}
+	if (isParallel == true) {
+		chipArea_->SetPos({ -43.0f,25.0f,0.0f });
+		chipArea2_->SetPos({ -43.0f,17.0f,0.0f });
+	}
+	else {
+
+	}
 }

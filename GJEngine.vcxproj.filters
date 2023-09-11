@@ -485,6 +485,9 @@
     <ClInclude Include="Engine\Base\Audio.h">
       <Filter>Base\.h</Filter>
     </ClInclude>
+    <ClInclude Include="User\Chip\ChipPattern.h">
+      <Filter>ヘッダー ファイル\Chip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\FBX.hlsli">
