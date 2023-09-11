@@ -55,10 +55,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		mouseCheckNum = 1;
 		mousePos = mousePos;
 	}
-	sceneObj_->chip_->Update(input, mouse);
-	sceneObj_->chipArea_->Update();
-	sceneObj_->chip2_->Update(input, mouse);
-	sceneObj_->chipArea2_->Update();
+	sceneObj_->chipManager_->Update(input, mouse);
 
 	mouse->Update();
 
@@ -115,15 +112,13 @@ void PlayScene::Draw()
 
 	//// 3Dオブジェクト描画後処理
 	Object3d::PostDraw();
-	sceneObj_->chipArea_->Draw(controller_->dxCommon_);
-	sceneObj_->chipArea2_->Draw(controller_->dxCommon_);
 #pragma endregion
 #pragma region 背景スプライト描画
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 	// 背景スプライト描画
+	//sprite_->Draw();
 
-	sprite_->Draw();
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
@@ -142,8 +137,6 @@ void PlayScene::Draw()
 
 	//sceneObj_->skydomeO_->Draw();
 
-
-
 	//sceneObj_->plaobject->Draw();
 
 
@@ -153,10 +146,9 @@ void PlayScene::Draw()
 
 	//// 3Dオブジェクト描画後処理
 	Object3d::PostDraw();
+	sceneObj_->chipManager_->Draw(controller_->dxCommon_);
 
-	sceneObj_->chip_->Draw(controller_->dxCommon_);
 
-	sceneObj_->chip2_->Draw(controller_->dxCommon_);
 #pragma endregion
 
 
