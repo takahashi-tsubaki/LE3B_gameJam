@@ -29,8 +29,9 @@ public:
 	void InitializeChip(int junpnum = 2, int runnum = 2);
 	void InitializeArea();
 	void ChangeParallel(Input* input);
+	unsigned short GetPattern() { return pattern; };
 private:
-	int pattern = 0;
+	unsigned short pattern;
 	bool isParallel = true;
 
 
