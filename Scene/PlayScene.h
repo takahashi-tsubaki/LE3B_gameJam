@@ -1,4 +1,5 @@
 #pragma once
+#include "Audio.h"
 #include "IScene.h"
 #include "SceneInc.h"
 #include <map>
@@ -56,11 +57,17 @@ private:	//メンバ変数
 	const float PI = 3.141592;
 	Camera* camera_ = nullptr;
 	Sprite* sprite_ = nullptr;
+	Audio* audio = nullptr;
 
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
 
 	int blockNum = 45;
 
+public:
+	//音を止める関数
+	IXAudio2SourceVoice* pSourceVoice[10] = { 0 };
+	//音関係まとめ
+	int soundCheckFlag = 0;
 };
 
