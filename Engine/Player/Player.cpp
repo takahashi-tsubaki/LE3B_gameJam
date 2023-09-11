@@ -32,6 +32,7 @@ void Player::Initialize(DirectXCommon* dxCommon)
 	playerO_->SetModel(playerM_);
 
 	playerO_->SetScale({ 0.5f,0.5f,0.5f });
+	playerO_->SetPosition({8,0,50});
 	//////FBX当たり判定初期化
 	//for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
 	//{
@@ -114,6 +115,8 @@ void Player::Update(Input* input,GamePad* gamePad)
 	ImGui::InputInt("OldActionNumber", &oldActionNum_);
 	ImGui::InputFloat3("Position", &playerO_->worldTransform.translation_.x);
 	ImGui::End();
+
+	CheckCollision();
 }
 
 void Player::Draw()
@@ -171,16 +174,39 @@ void Player::CheckCollision()
 
 		if (sphere[i]->GetIsHit() == true)
 		{
-			////当たったものの属性が敵だった時
-			//if (sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_ENEMYS)
-			//{
-			//	playerO_->worldTransform.translation_.x += callback.move.x;
-			//	playerO_->worldTransform.translation_.y += callback.move.y;
-			//	playerO_->worldTransform.translation_.z += callback.move.z;
-			//	break;
-			//}
+			//当たったものの属性が敵だった時
+			if (sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_LAND)
+			{
+				playerO_->worldTransform.translation_.x += callback.move.x;
+				playerO_->worldTransform.translation_.y += callback.move.y;
+				playerO_->worldTransform.translation_.z += callback.move.z;
+				break;
+			}
+			if (sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_GOAL)
+			{
+				playerO_->worldTransform.translation_.x += callback.move.x;
+				playerO_->worldTransform.translation_.y += callback.move.y;
+				playerO_->worldTransform.translation_.z += callback.move.z;
+				isGoal_ = true;
+				break;
+			}
 		}
 
+
 	}
-#pragma endregion 
+#pragma endregion
+
+	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
+
+		spherePos[i] = playerO_->GetPosition();
+		sphere[i]->Update();
+	}
+}
+
+void Player::ResetParam()
+{
+	playerO_->worldTransform.translation_ = { 0,0,50 };
+	actionNum = 1;
+	oldActionNum_ = 0;	//アクション前フレーム保存変数
+	isGoal_ = false;
 }

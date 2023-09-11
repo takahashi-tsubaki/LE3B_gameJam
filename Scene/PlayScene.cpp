@@ -38,7 +38,11 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	
 	controller_->camera_->Update();
 	}
-
+	if (player_->GetIsGoal() == true)
+	{
+		player_->ResetParam();
+		controller_->ChangeSceneNum(S_CLEAR);
+	}
 	player_->Update(input, gamePad);
 	controller_->camera_->SetEye({ player_->GetPosition().x,player_->GetPosition().y, player_->GetPosition().z - 100 });
 	controller_->camera_->SetTarget(player_->GetPosition());

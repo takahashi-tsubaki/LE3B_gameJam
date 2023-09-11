@@ -42,24 +42,8 @@ public:
 
     void Draw() override;
 
-	/// <summary>
-	/// blockデータの読み込み
-	/// </summary>
-	void LoadBlockData();
-
-	/// <summary>
-	/// block発生コマンドの更新
-	/// </summary>
-	void UpdataBlockCommands();
-
-	/// <summary>
-	/// 敵の発生
-	/// </summary>
-	void GenerBlock(Vector3 BlockPos, int num);
-
 	void LoadCsv(const char* word);
 
-	void UpdateBlock();
 
 	void GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute);
 

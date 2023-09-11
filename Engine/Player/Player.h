@@ -44,6 +44,10 @@ public:
 
 	void CheckCollision();
 
+	bool GetIsGoal() { return isGoal_; }
+
+	void ResetParam();
+
 private:
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -64,6 +68,7 @@ private:
 	int actionNum = 1;
 	int oldActionNum_ = 0;	//アクション前フレーム保存変数
 
+	bool isGoal_ = false;
 
 };
 
