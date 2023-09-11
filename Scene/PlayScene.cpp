@@ -2,7 +2,7 @@
 #include "ImguiManager.h"
 #include "JsonLoader.h"
 #include <fstream>
-
+#include <list>
 PlayScene::PlayScene(SceneManager* controller, SceneObjects* sceneObj)
 {
 	controller_ = controller;
@@ -19,10 +19,11 @@ PlayScene::~PlayScene()
 void PlayScene::Initialize()
 {
 
-	LoadBlockData();
+	LoadCsv("Resources/Csv/stageTest.csv");
 	player_ = sceneObj_->player_;
 	sprite_ =  Sprite::Create(1, { 0,0 });
 	sprite_->Initialize();
+
 }
 
 void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
@@ -79,8 +80,6 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 	controller_->camera_->Update();
 
-	//block発生
-	UpdataBlockCommands();
 
 	//リセット処理
 	if (input->TriggerKey(DIK_R))
@@ -89,7 +88,13 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		//player_->Initialize(controller_->dxCommon_,enemy_);
 		//enemy_->Initialize(controller_->dxCommon_,player_);
 	}
-
+	for (int i = 0; i < 5; i++)
+	{
+		ImGui::Begin("Block");
+		ImGui::InputFloat3("Pos", &sceneObj_->asobj_[i]->worldTransform.translation_.x);
+		ImGui::End();
+	}
+	
 
 }
 
@@ -190,32 +195,34 @@ void PlayScene::Draw()
 #pragma endregion
 }
 
-void PlayScene::LoadBlockData()
+void PlayScene::LoadCsv(const char* word)
 {
-	//ファイルを開く
 	std::ifstream file;
-	file.open("Resources/stageBlock.csv");
+	file.open(word);
+
 
 	assert(file.is_open());
-
 	//ファイルの内容を文字列ストリームにコピー
 	stageBlockCommands << file.rdbuf();
 
 	//ファイルを閉じる
 	file.close();
-}
 
-void PlayScene::UpdataBlockCommands()
-{
-	// 1行分の文字列を入れる変数
+	//
 	std::string line;
 
 	//コマンド実行ループ
-	while (getline(stageBlockCommands, line)) {
+	while (getline(stageBlockCommands, line))
+	{
 		// 1行分の文字数をストリームに変換して解折しやすくなる
 		std::istringstream line_stream(line);
 
 		std::string word;
+		float x, y, z = 0;
+
+		int num = 0;
+		BlockType attribute = BlockType::Init;
+
 		//,区切りで行の先頭文字を取得
 		getline(line_stream, word, ',');
 
@@ -228,30 +235,75 @@ void PlayScene::UpdataBlockCommands()
 		if (word.find("POP") == 0) {
 			// X座標
 			std::getline(line_stream, word, ',');
-			float x = static_cast<float>(std::atof(word.c_str()));
+			x = static_cast<float>(std::atof(word.c_str()));
 
 			// Y座標
 			std::getline(line_stream, word, ',');
-			float y = static_cast<float>(std::atof(word.c_str()));
+			y = static_cast<float>(std::atof(word.c_str()));
 
 			// Z座標
 			std::getline(line_stream, word, ',');
-			float z = static_cast<float>(std::atof(word.c_str()));
+			z = static_cast<float>(std::atof(word.c_str()));
 
 			//blockの番号
 			std::getline(line_stream, word, ',');
-			int num = static_cast<float>(std::atof(word.c_str()));
+			num = static_cast<float>(std::atof(word.c_str()));
 
-			GenerBlock(Vector3(x, y, z),num);
+			//blockの番号
+			std::getline(line_stream, word, ',');
+			attribute = static_cast<BlockType>(std::atof(word.c_str()));
+		}
+		switch (attribute)
+		{
+		case BlockType::Init:
+			break;
+		case BlockType::Normal:
+			GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_LAND);
+			break;
+		case BlockType::Goal:
+			GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_GOAL);
+			break;
+			blockType = BlockType::Init;
 		}
 	}
 }
 
-void PlayScene::GenerBlock(Vector3 BlockPos, int num)
+void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 {
 	sceneObj_->asobj_[num]->worldTransform.translation_.x = BlockPos.x;
 	sceneObj_->asobj_[num]->worldTransform.translation_.y = BlockPos.y;
 	sceneObj_->asobj_[num]->worldTransform.translation_.z = BlockPos.z;
+	sphere.resize(SPHERE_COLISSION_NUM);
+	spherePos.resize(SPHERE_COLISSION_NUM);
+
+	if (attribute == COLLISION_ATTR_LAND)
+	{
+		
+		for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
+		{
+			sphere[i] = new SphereCollider;
+			CollisionManager::GetInstance()->AddCollider(sphere[i]);
+			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
+			sphere[i]->SetBasisPos(&spherePos[i]);
+			sphere[i]->SetRadius(1.0f);
+			sphere[i]->SetAttribute(COLLISION_ATTR_LAND);
+			sphere[i]->Update();
+		}
+	}
+	else if (attribute == COLLISION_ATTR_GOAL)
+	{
+		for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
+		{
+			sphere[i] = new SphereCollider;
+			CollisionManager::GetInstance()->AddCollider(sphere[i]);
+			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
+			sphere[i]->SetBasisPos(&spherePos[i]);
+			sphere[i]->SetRadius(1.0f);
+			sphere[i]->SetAttribute(COLLISION_ATTR_GOAL);
+			sphere[i]->Update();
+		}
+		sceneObj_->asobj_[num]->SetColor({0.0f,0.0f,1.0f,1.0f});
+	}
 }
 
 

@@ -13,3 +13,7 @@ const unsigned short COLLISION_ATTR_POWERCHIP = 0b1 << 3;
 const unsigned short COLLISION_ATTR_CURSOR = 0b1 << 4;
 //設置場所
 const unsigned short COLLISION_ATTR_POWERCHIP_AREA = 0b1 << 5;
+
+const unsigned short COLLISION_ATTR_LAND = 0b1 << 6;
+
+const unsigned short COLLISION_ATTR_GOAL = 0b1 << 7;
