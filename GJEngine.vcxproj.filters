@@ -288,6 +288,9 @@
     <ClCompile Include="User\Chip\ChipArea.cpp">
       <Filter>ソース ファイル\Chip</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Base\Audio.cpp">
+      <Filter>Base\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Base\WinApp.h">
@@ -478,6 +481,9 @@
     </ClInclude>
     <ClInclude Include="User\Chip\ChipArea.h">
       <Filter>ヘッダー ファイル\Chip</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Base\Audio.h">
+      <Filter>Base\.h</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

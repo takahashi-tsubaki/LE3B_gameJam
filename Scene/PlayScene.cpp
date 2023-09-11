@@ -23,16 +23,36 @@ void PlayScene::Initialize()
 	player_ = sceneObj_->player_;
 	sprite_ =  Sprite::Create(1, { 0,0 });
 	sprite_->Initialize();
+
+	audio = new Audio();
+	audio->Initialize();
+
+	audio->LoadWave("oto.wav");
+
 }
 
 void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	gamePad->Update();
 	sceneObj_->Update(input);
-	//シーンチェンジ
-	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X)){controller_->ChangeSceneNum(S_TITLE);}
+	//音声再生
+	if (soundCheckFlag == 0) {
+		//音声再生
 
-	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)){controller_->PushScene(S_PAUSE);}
+		pSourceVoice[0] = audio->PlayWave("oto.wav");
+		pSourceVoice[0]->SetVolume(0.5f);
+		soundCheckFlag = 1;
+	}
+	//シーンチェンジ
+	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X)){
+		controller_->ChangeSceneNum(S_TITLE);
+		pSourceVoice[0]->Stop();
+		soundCheckFlag = 0;
+	}
+
+	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)){
+		controller_->PushScene(S_PAUSE);
+	}
 
 	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	
 	controller_->camera_->Update();
