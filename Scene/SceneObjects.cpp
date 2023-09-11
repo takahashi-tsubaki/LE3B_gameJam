@@ -18,13 +18,13 @@ void SceneObjects::Initialize(SceneManager* controller)
 
 	skydomeO_->SetScale({ 100,100,100 });
 
-	asobj_[0] = Object3d::Create();
-	asmodel = Model::CreateFromOBJ("as");
-	asobj_[0]->SetModel(asmodel);
-
-	asobj_[1] = Object3d::Create();
-	asmodel = Model::CreateFromOBJ("as");
-	asobj_[1]->SetModel(asmodel);
+	//for分に
+	for (int i = 0; i < blockNum; i++)
+	{
+		asobj_[i] = Object3d::Create();
+		asmodel = Model::CreateFromOBJ("as");
+		asobj_[i]->SetModel(asmodel);
+	}
 
 	plaobject = Object3d::Create();
 	plamodel = Model::CreateFromOBJ("human");
@@ -35,11 +35,13 @@ void SceneObjects::Initialize(SceneManager* controller)
 	dashmodel0 = Model::CreateFromOBJ("dash0");
 	dashmodel1 = Model::CreateFromOBJ("dash1");
 	dashmodel2 = Model::CreateFromOBJ("dash2");
-	plaobject->SetModel(plamodel);
-	plaobject->SetScale({0.1f,0.1f,0.1f});
+
 
 	chipManager_ = new ChipManager();
 	chipManager_->Initialize();
+
+	//plaobject->SetModel(plamodel);
+
 
 	player_ = new Player();
 	player_->Initialize(controller_->dxCommon_);
@@ -98,8 +100,11 @@ void SceneObjects::Delete()
 
 	delete skydomeO_;
 	delete skydomeM_;
-	delete asobj_[0];
-	delete asobj_[1];
+	//for分に
+	for (int i = 0; i < blockNum; i++)
+	{
+		delete asobj_[i];
+	}
 	delete asmodel;
 	delete plaobject;
 	delete plamodel;

@@ -9,9 +9,9 @@ PlayerDash::~PlayerDash()
 {
 }
 
-void PlayerDash::Initialize(FbxObject3d* gameObject)
+void PlayerDash::Initialize(Object3d* object)
 {
-	fbxObject_ = gameObject;
+	object_ = object;
 }
 
 void PlayerDash::Update(Input* input, GamePad* gamePad)
@@ -41,7 +41,7 @@ void PlayerDash::Draw()
 void PlayerDash::Dash()
 {
 	velocity_ = { speed,0,0 };
-	fbxObject_->worldTransform.translation_ += velocity_;
+	object_->worldTransform.translation_ += velocity_;
 	if (speed < MAX_ACCEL)
 	{
 		isAccel_ = true;
@@ -78,5 +78,5 @@ void PlayerDash::ResetParams()
 	isAccel_ = false;
 
 	speed = 0.5f;
-	DashFlameCount = 60.0f;
+	DashFlameCount = 30.0f;
 }

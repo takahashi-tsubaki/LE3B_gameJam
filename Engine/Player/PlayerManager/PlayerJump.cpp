@@ -9,9 +9,9 @@ PlayerJump::~PlayerJump()
 {
 }
 
-void PlayerJump::Initialize(FbxObject3d* fbxObject)
+void PlayerJump::Initialize(Object3d* object)
 {
-	fbxObject_ = fbxObject;
+	object_ = object;
 }
 
 void PlayerJump::Update(Input* input, GamePad* gamePad)
@@ -49,10 +49,10 @@ void PlayerJump::Draw()
 void PlayerJump::Jump()
 {
 
-	fbxObject_->worldTransform.translation_.y += jumpHeight;
-	if (fbxObject_->worldTransform.translation_.y < 0.0f)
+	object_->worldTransform.translation_.y += jumpHeight;
+	if (object_->worldTransform.translation_.y < 0.0f)
 	{
-		fbxObject_->worldTransform.translation_.y = 0.0f;
+		object_->worldTransform.translation_.y = 0.0f;
 		isJump_ = false;
 	}
 	jumpHeight -= gravity;

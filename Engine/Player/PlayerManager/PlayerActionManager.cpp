@@ -11,10 +11,10 @@ PlayerActionManager::~PlayerActionManager()
 
 }
 
-void PlayerActionManager::ActionInitialize(FbxObject3d* fbxObject)
+void PlayerActionManager::ActionInitialize(Object3d* object)
 {
-	fbxObject_ = fbxObject;
-	action_.get()->Initialize(fbxObject);
+	object_ = object;
+	action_.get()->Initialize(object_);
 }
 
 void PlayerActionManager::ActionUpdate(Input* input, GamePad* gamePad)
@@ -30,6 +30,6 @@ void PlayerActionManager::ActionDraw()
 void PlayerActionManager::ChangeAction(PlayerAction* Action)
 {
 	action_.reset(Action);
-	ActionInitialize(fbxObject_);
-	action_.get()->Initialize(fbxObject_);
+	ActionInitialize(object_);
+	action_.get()->Initialize(object_);
 }

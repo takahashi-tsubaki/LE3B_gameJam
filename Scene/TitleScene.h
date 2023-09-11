@@ -24,5 +24,9 @@ public:
     void Draw() override;
 
     //void Pause(Input* input);
+
+private:    //メンバ変数
+	Sprite* sprite = nullptr;
+
 };
 

@@ -4,6 +4,8 @@
 
 #include "FbxObject3d.h"
 
+#include "Object3d.h"
+
 class Input;
 class GamePad;
 class MouseInput;
@@ -30,7 +32,7 @@ public:
 	~PlayerActionManager();
 
 public:
-	void ActionInitialize(FbxObject3d* fbxObject);
+	void ActionInitialize(Object3d* object);
 
 	void ActionUpdate(Input* input, GamePad* gamePad);
 
@@ -45,6 +47,7 @@ public:
 	int GetActionNum() { return actionNum_; }
 private:
 	FbxObject3d* fbxObject_;
+	Object3d* object_;
 	int actionNum_ = 0;
 };
 

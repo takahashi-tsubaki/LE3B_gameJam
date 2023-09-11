@@ -39,8 +39,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	}
 
 	player_->Update(input, gamePad);
-	controller_->camera_->SetEye({ player_->GetWorldPos().x,player_->GetWorldPos().y, player_->GetWorldPos().z - 100 });
-	controller_->camera_->SetTarget(player_->GetWorldPos());
+	controller_->camera_->SetEye({ player_->GetPosition().x,player_->GetPosition().y, player_->GetPosition().z - 100 });
+	controller_->camera_->SetTarget(player_->GetPosition());
 	controller_->camera_->Update();
 
 	//左クリック時
@@ -67,8 +67,11 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	ImGui::End();
 
 	sceneObj_->skydomeO_->Update();
-	sceneObj_->asobj_[0]->Update();
-	sceneObj_->asobj_[1]->Update();
+	//for分に
+	for (int i = 0; i < blockNum; i++)
+	{
+		sceneObj_->asobj_[i]->Update();
+	}
 	sceneObj_->plaobject->Update();	
 
 	controller_->camera_->Update();
@@ -89,6 +92,27 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 void PlayScene::Draw()
 {
+#pragma region 3Dオブジェクト描画
+	//// 3Dオブジェクト描画前処理
+	Object3d::PreDraw(controller_->dxCommon_->GetCommandList());
+
+	//// 3Dオブジェクトの描画
+
+	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
+
+	sceneObj_->skydomeO_->Draw();
+	for (int i = 0; i < blockNum; i++)
+	{
+		sceneObj_->asobj_[i]->Draw();
+	}
+	player_->Draw();
+	///// <summary>
+	///// ここに3Dオブジェクトの描画処理を追加できる
+	///// </summary>
+
+	//// 3Dオブジェクト描画後処理
+	Object3d::PostDraw();
+#pragma endregion
 #pragma region 背景スプライト描画
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
@@ -113,11 +137,8 @@ void PlayScene::Draw()
 
 	//sceneObj_->skydomeO_->Draw();
 
-	sceneObj_->asobj_[0]->Draw();
-	sceneObj_->asobj_[1]->Draw();
+	//sceneObj_->plaobject->Draw();
 
-	sceneObj_->plaobject->Draw();
-	player_->Draw();
 
 	///// <summary>
 	///// ここに3Dオブジェクトの描画処理を追加できる
@@ -126,6 +147,8 @@ void PlayScene::Draw()
 	//// 3Dオブジェクト描画後処理
 	Object3d::PostDraw();
 	sceneObj_->chipManager_->Draw(controller_->dxCommon_);
+
+
 #pragma endregion
 
 
@@ -149,7 +172,6 @@ void PlayScene::Draw()
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
-	
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>

@@ -10,7 +10,6 @@ TitleScene::TitleScene(SceneManager* controller, SceneObjects* sceneObj)
 TitleScene::~TitleScene()
 {
 
-
 	sceneObj_->Reset();
 	//delete sceneObj_->skydomeO_;
 	/*sceneObj_->Delete();*/
@@ -18,7 +17,9 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
-
+	Sprite::LoadTexture(2, L"Resources/title.png");
+	sprite = Sprite::Create(2, { 0,0 });
+	sprite->Initialize();
 }
 
 void TitleScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
@@ -90,7 +91,7 @@ void TitleScene::Draw()
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
-	//sprite_->Draw();
+	sprite->Draw();
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
