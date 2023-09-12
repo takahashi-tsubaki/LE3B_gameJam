@@ -37,6 +37,7 @@ private:
 	unsigned short pattern;
 	bool isParallel = true;
 
+	void modeChangePos(int num);
 
 	//std::map<std::string ,Chip* > chipMap_;
 
