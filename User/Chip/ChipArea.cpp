@@ -85,6 +85,9 @@ void ChipArea::Update() {
 		}
 	}
 
+	object_->worldTransform.translation_.x += object_->GetCamera()->eye_.x ;
+	object_->worldTransform.translation_.y += object_->GetCamera()->eye_.y ;
+
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
 
 		/*coliderPosTest_[i]->wtf.position = ray->GetDir();*/

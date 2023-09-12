@@ -6,6 +6,8 @@
 #include <vector>
 #include "ChipPattern.h"
 
+#include "Camera.h"
+
 class ChipManager // 電池を統括＆動きを決定するようにするクラス
 {
 public:
@@ -15,12 +17,13 @@ public:
 	void Initialize(int junpnum = 2, int runnum = 2, int areanum = 2);
 	void Update(Input* input, MouseInput* mouse);
 	void Draw(DirectXCommon* dxCommon);
+	//static void SetCamera(Camera* camera) { ChipManager::camera_ = camera; }
 
 	void SearchPair();
 
 	void CollisionUpdate();
 
-	int MakePattern();
+	unsigned short MakePattern();
 
 	void Reset() { chips_.clear(); };
 	void AddChip(std::string chipName, Chip* chip);

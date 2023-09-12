@@ -54,7 +54,6 @@ private:
 
 	const float MAX_POWER = 100.0f;
 	float power = MAX_POWER;
-	bool isHealPower;
 	Vector3 restPos_;
 
 public:
@@ -63,6 +62,8 @@ public:
 	Object3d* object_;
 	Vector3 areaPos_;
 	Vector3 mousePos_;
+
+	int isDecreasePower;	// 0 none, 1 並列, 2 直列
 
 	float mouseSensitivity_ = 0.099f;	//マウス感度 0.05
 	bool isGetThis = false;

@@ -40,7 +40,12 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 	//}
 	ChangeParallel(input);
 	CollisionUpdate();
-	pattern = MakePattern();
+	if (input->TriggerKey(DIK_SPACE)) {
+		pattern = MakePattern();
+
+
+	}
+
 	ImGui::Begin("ChipPatteern");
 	ImGui::Text("Pattern: %d", pattern);
 	ImGui::Text("isParallel: %d", isParallel);
@@ -105,7 +110,7 @@ void ChipManager::CollisionUpdate()
 	//}
 }
 
-int ChipManager::MakePattern()
+unsigned short ChipManager::MakePattern()
 {
 	if (chipAreas_[0]->subject == nullptr || chipAreas_[1]->subject == nullptr) {
 		return 0;
@@ -161,7 +166,7 @@ void ChipManager::InitializeChip(int junpnum, int runnum)
 		newChipDash->SetTribe(1);
 		newChipDash->SetPos({ -30,dY,0 });
 		newChipDash->SetRestPos({ -30,dY,0 });
-		
+
 		dY += 5;
 		newChipDash->object_->color_ = { 1,0,0,1 };
 		AddChip("1R", newChipDash);
