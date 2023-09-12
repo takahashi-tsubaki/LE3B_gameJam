@@ -17,6 +17,7 @@ protected:
 	GamePad* gamePad_ = nullptr;
 
 	Player* player_ = nullptr;
+	Player* player2_ = nullptr;
 	SceneObjects* sceneObj_;
 
 
@@ -57,12 +58,15 @@ private:	//メンバ変数
 	const float PI = 3.141592;
 	Camera* camera_ = nullptr;
 	Sprite* sprite_ = nullptr;
+	Sprite* sprite2_ = nullptr;
 	Audio* audio = nullptr;
 
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
 
 	int blockNum = 45;
+
+	int modeC = 0;
 
 public:
 	//音を止める関数

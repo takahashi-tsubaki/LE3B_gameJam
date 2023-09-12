@@ -21,9 +21,10 @@ public:
 	void Reset() { chips_.clear(); };
 	void AddChip(std::string chipName, Chip* chip);
 	void AddChipArea(std::string chipAreaName, ChipArea* chipArea);
+
+	void modeChangePos(int num);
+
 private:
-
-
 
 	std::map<std::string ,Chip* > chipMap_;
 

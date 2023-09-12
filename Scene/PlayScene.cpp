@@ -21,8 +21,13 @@ void PlayScene::Initialize()
 
 	LoadBlockData();
 	player_ = sceneObj_->player_;
+
 	sprite_ =  Sprite::Create(1, { 0,0 });
+
+	sprite2_ =  Sprite::Create(3, { 0,0 });
+
 	sprite_->Initialize();
+	sprite2_->Initialize();
 
 	audio = new Audio();
 	audio->Initialize();
@@ -58,6 +63,17 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	controller_->camera_->Update();
 	}
 
+	if (input->TriggerKey(DIK_R))
+	{
+		if (modeC == 0)
+		{
+			modeC = 1;
+		}
+		else {
+			modeC = 0;
+		}
+	}
+
 	player_->Update(input, gamePad);
 	controller_->camera_->SetEye({ player_->GetPosition().x,player_->GetPosition().y, player_->GetPosition().z - 100 });
 	controller_->camera_->SetTarget(player_->GetPosition());
@@ -75,6 +91,9 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		mouseCheckNum = 1;
 		mousePos = mousePos;
 	}
+
+	sceneObj_->chipManager_->modeChangePos(modeC);
+
 	sceneObj_->chipManager_->Update(input, mouse);
 
 	mouse->Update();
@@ -125,6 +144,7 @@ void PlayScene::Draw()
 	{
 		sceneObj_->asobj_[i]->Draw();
 	}
+
 	player_->Draw();
 	///// <summary>
 	///// ここに3Dオブジェクトの描画処理を追加できる
@@ -137,7 +157,14 @@ void PlayScene::Draw()
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 	// 背景スプライト描画
-	//sprite_->Draw();
+	if (modeC == 0)
+	{
+		sprite_->Draw();
+	}
+	else
+	{
+		sprite2_->Draw();
+	}
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
@@ -167,7 +194,6 @@ void PlayScene::Draw()
 	//// 3Dオブジェクト描画後処理
 	Object3d::PostDraw();
 	sceneObj_->chipManager_->Draw(controller_->dxCommon_);
-
 
 #pragma endregion
 
