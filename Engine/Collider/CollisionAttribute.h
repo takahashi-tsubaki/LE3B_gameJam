@@ -17,3 +17,5 @@ const unsigned short COLLISION_ATTR_POWERCHIP_AREA = 0b1 << 5;
 const unsigned short COLLISION_ATTR_LAND = 0b1 << 6;
 
 const unsigned short COLLISION_ATTR_GOAL = 0b1 << 7;
+
+const unsigned short COLLISION_ATTR_WALL = 0b1 << 8;

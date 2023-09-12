@@ -10,6 +10,7 @@ enum class BlockType
 	Init,    //0
 	Normal,  //1
 	Goal,    //2
+	Wall,    //3
 };
 
 class PlayScene :
@@ -56,7 +57,7 @@ private:	//メンバ変数
 
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
-	int blockNum = 45;
+	int blockNum = 100;
 	BlockType blockType = BlockType::Init;
 
 	int SPHERE_COLISSION_NUM = 1;	//コライダー（スフィア）の数

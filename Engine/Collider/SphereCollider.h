@@ -38,6 +38,9 @@ public:
 		return *basisPos;
 	}
 
+	void SetOffSet(Vector3 off) { offset = off; }
+	Vector3 GetOffSet() { return offset; }
+
 private:
 	//オブジェクト中心からのオフセット
 	Vector3 offset;

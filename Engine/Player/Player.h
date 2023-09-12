@@ -19,7 +19,6 @@
 #include"CollisionAttribute.h"
 
 #include "PlayerActionManager.h"
-
 class Player
 {
 public:
@@ -48,6 +47,10 @@ public:
 
 	void ResetParam();
 
+	bool GetIsHit() {return isHit;}
+
+	void Gravity();
+
 private:
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -69,6 +72,15 @@ private:
 	int oldActionNum_ = 0;	//アクション前フレーム保存変数
 
 	bool isGoal_ = false;
+
+	bool isHit = false;
+
+	bool OnGround = false;
+	Vector3 fallV;
+
+	float gravity = 0.0f;
+	const float addSpeed = 0.1f;
+
 
 };
 

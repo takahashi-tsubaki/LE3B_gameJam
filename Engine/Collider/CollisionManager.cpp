@@ -95,6 +95,8 @@ bool CollisionManager::Raycast(const Ray& ray , unsigned short attribute , Rayca
 	//今までで最も近いコライダーとの交点を記録する変数
 	Vector3 inter;
 
+	
+
 	it = colliders.begin();
 	for (; it != colliders.end(); ++it)
 	{

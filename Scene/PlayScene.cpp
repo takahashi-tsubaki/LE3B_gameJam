@@ -21,6 +21,7 @@ void PlayScene::Initialize()
 
 	LoadCsv("Resources/Csv/stageTest.csv");
 	player_ = sceneObj_->player_;
+	player_->ResetParam();
 	sprite_ =  Sprite::Create(1, { 0,0 });
 	sprite_->Initialize();
 
@@ -40,10 +41,13 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	}
 	if (player_->GetIsGoal() == true)
 	{
-		player_->ResetParam();
+
 		controller_->ChangeSceneNum(S_CLEAR);
 	}
+
+
 	player_->Update(input, gamePad);
+
 	controller_->camera_->SetEye({ player_->GetPosition().x,player_->GetPosition().y, player_->GetPosition().z - 100 });
 	controller_->camera_->SetTarget(player_->GetPosition());
 	controller_->camera_->Update();
@@ -222,10 +226,6 @@ void PlayScene::LoadCsv(const char* word)
 		std::istringstream line_stream(line);
 
 		std::string word;
-		float x, y, z = 0;
-
-		int num = 0;
-		BlockType attribute = BlockType::Init;
 
 		//,区切りで行の先頭文字を取得
 		getline(line_stream, word, ',');
@@ -239,36 +239,41 @@ void PlayScene::LoadCsv(const char* word)
 		if (word.find("POP") == 0) {
 			// X座標
 			std::getline(line_stream, word, ',');
-			x = static_cast<float>(std::atof(word.c_str()));
+			float x = static_cast<float>(std::atof(word.c_str()));
 
 			// Y座標
 			std::getline(line_stream, word, ',');
-			y = static_cast<float>(std::atof(word.c_str()));
+			float y = static_cast<float>(std::atof(word.c_str()));
 
 			// Z座標
 			std::getline(line_stream, word, ',');
-			z = static_cast<float>(std::atof(word.c_str()));
+			float z = static_cast<float>(std::atof(word.c_str()));
 
 			//blockの番号
 			std::getline(line_stream, word, ',');
-			num = static_cast<float>(std::atof(word.c_str()));
+			int num = static_cast<float>(std::atof(word.c_str()));
 
 			//blockの番号
 			std::getline(line_stream, word, ',');
-			attribute = static_cast<BlockType>(std::atof(word.c_str()));
+			BlockType attribute = static_cast<BlockType>(std::atof(word.c_str()));
+
+			switch (attribute)
+			{
+			case BlockType::Init:
+				break;
+			case BlockType::Normal:
+				GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_LAND);
+				break;
+			case BlockType::Goal:
+				GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_GOAL);
+				break;
+			case BlockType::Wall:
+				GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_WALL);
+				break;
+				blockType = BlockType::Init;
+			}
 		}
-		switch (attribute)
-		{
-		case BlockType::Init:
-			break;
-		case BlockType::Normal:
-			GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_LAND);
-			break;
-		case BlockType::Goal:
-			GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_GOAL);
-			break;
-			blockType = BlockType::Init;
-		}
+		
 	}
 }
 
@@ -290,7 +295,7 @@ void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
 			sphere[i]->SetBasisPos(&spherePos[i]);
 			sphere[i]->SetRadius(1.0f);
-			sphere[i]->SetAttribute(COLLISION_ATTR_LAND);
+			sphere[i]->SetAttribute(attribute);
 			sphere[i]->Update();
 		}
 	}
@@ -303,10 +308,24 @@ void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
 			sphere[i]->SetBasisPos(&spherePos[i]);
 			sphere[i]->SetRadius(1.0f);
-			sphere[i]->SetAttribute(COLLISION_ATTR_GOAL);
+			sphere[i]->SetAttribute(attribute);
 			sphere[i]->Update();
 		}
 		sceneObj_->asobj_[num]->SetColor({0.0f,0.0f,1.0f,1.0f});
+	}
+	else if (attribute == COLLISION_ATTR_WALL)
+	{
+		for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
+		{
+			sphere[i] = new SphereCollider;
+			CollisionManager::GetInstance()->AddCollider(sphere[i]);
+			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
+			sphere[i]->SetBasisPos(&spherePos[i]);
+			sphere[i]->SetRadius(1.0f);
+			sphere[i]->SetAttribute(attribute);
+			sphere[i]->Update();
+		}
+		sceneObj_->asobj_[num]->SetColor({ 1.0f,0.0f,1.0f,1.0f });
 	}
 }
 

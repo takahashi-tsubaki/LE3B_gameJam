@@ -1,8 +1,10 @@
 #include "PlayerDash.h"
-
-PlayerDash::PlayerDash(PlayerActionManager* ActionManager)
+#include "CollisionAttribute.h"
+PlayerDash::PlayerDash(PlayerActionManager* ActionManager, std::vector<SphereCollider*>sphere, std::vector<Vector3> spherePos)
 {
 	ActionManager_ = ActionManager;
+	sphere_ = sphere;
+	spherePos_ = spherePos;
 }
 
 PlayerDash::~PlayerDash()
@@ -31,6 +33,7 @@ void PlayerDash::Update(Input* input, GamePad* gamePad)
 	{
 		ResetParams();
 	}
+	CheckCollision();
 }
 
 void PlayerDash::Draw()
@@ -40,18 +43,20 @@ void PlayerDash::Draw()
 
 void PlayerDash::Dash()
 {
-	velocity_ = { speed,0,0 };
+	
+	velocity_ = { speed_,0,0 };
 	object_->worldTransform.translation_ += velocity_;
-	if (speed < MAX_ACCEL)
-	{
-		isAccel_ = true;
-		isDecel_ = false;
-	}
-	else
+	//if (speed_ < MAX_ACCEL)
+	//{
+	//	isAccel_ = true;
+	//	isDecel_ = false;
+	//}
+	
+	if (speed_ >= MAX_ACCEL)
 	{
 		DashFlameCount--;
 	}
-	
+
 	if (DashFlameCount < 0)
 	{
 		isDecel_ = true;
@@ -59,16 +64,17 @@ void PlayerDash::Dash()
 	}
 	if (isAccel_ == true)
 	{
-		speed += accel;
+		speed_ += accel;
 	}
 	if (isDecel_ == true)
 	{
-		speed -= accel;
+		speed_ -= accel;
 	}
-	if (speed <= 0)
+	if (speed_ <= 0)
 	{
 		isDash_ = false;
 	}
+	
 }
 
 void PlayerDash::ResetParams()
@@ -77,6 +83,41 @@ void PlayerDash::ResetParams()
 	isDecel_ = false;
 	isAccel_ = false;
 
-	speed = 0.5f;
-	DashFlameCount = 30.0f;
+	speed_ = 0.5f;
+	DashFlameCount = 5.0f;
+}
+
+void PlayerDash::CheckCollision()
+{
+
+	for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
+	{
+		if (sphere_[i]->GetIsHit() == true)
+		{
+			//当たったものの属性が敵だった時
+			if (sphere_[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_WALL)
+			{
+				DashFlameCount = 0;
+				speed_ = 0.0f;
+			}
+			
+		}
+		if (sphere_[i]->GetIsHit() == false)
+		{
+			if (isDash_ == true)
+			{
+				isAccel_ = true;
+				isDecel_ = false;
+			}
+
+		}
+	}
+	
+
+	
+	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
+
+		spherePos_[i] = object_->worldTransform.translation_;
+		sphere_[i]->Update();
+	}
 }
