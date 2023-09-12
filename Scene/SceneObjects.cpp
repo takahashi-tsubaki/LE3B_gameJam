@@ -5,6 +5,10 @@ void SceneObjects::Initialize(SceneManager* controller)
 {
 	Sprite::LoadTexture(1, L"Resources/ketuma2.png");
 	Sprite::LoadTexture(3, L"Resources/ketuma.png");
+	Sprite::LoadTexture(4, L"Resources/ketuma3.png");
+	Sprite::LoadTexture(5, L"Resources/ketuma4.png");
+	Sprite::LoadTexture(6, L"Resources/ketuma5.png");
+	Sprite::LoadTexture(7, L"Resources/ketuma6.png");
 
 	//Sprite::LoadTexture(2, L"Resources/mario.jpg");
 
