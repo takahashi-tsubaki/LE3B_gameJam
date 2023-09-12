@@ -29,29 +29,17 @@ void Player::Initialize(DirectXCommon* dxCommon)
 	playerO_ = Object3d::Create();
 
 	playerM_ = Model::CreateFromOBJ("human");
+	walkmodel1 = Model::CreateFromOBJ("walk1");
+	walkmodel2 = Model::CreateFromOBJ("walk2");
+	jumpmodel = Model::CreateFromOBJ("jump");
+	jumpmodelL = Model::CreateFromOBJ("jumpL");
+	dashmodel0 = Model::CreateFromOBJ("dash0");
+	dashmodel1 = Model::CreateFromOBJ("dash1");
+	dashmodel2 = Model::CreateFromOBJ("dash2");
 	playerO_->SetModel(playerM_);
 
 	playerO_->SetScale({ 0.5f,0.5f,0.5f });
-	//////FBX当たり判定初期化
-	//for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
-	//{
-	//	sphere[i] = new SphereCollider;
-	//	CollisionManager::GetInstance()->AddCollider(sphere[i]);
-	//	spherePos[i] = playerFbxO_.get()->bonesMat[i].GetWorldPos();
-	//	sphere[i]->SetBasisPos(&spherePos[i]);
-	//	sphere[i]->SetRadius(1.0f);
-	//	sphere[i]->SetAttribute(COLLISION_ATTR_PLAYERS);
-	//	sphere[i]->Update();
-	////	//test
-	////	coliderPosTest_[i] = Object3d::Create();
-	////	coliderPosTest_[i]->SetModel(hpModel_.get());
-	////	coliderPosTest_[i]->SetPosition(sphere[i]->center);
-	////	coliderPosTest_[i]->SetScale({ sphere[i]->GetRadius(),sphere[i]->GetRadius() ,sphere[i]->GetRadius() });
-	////	coliderPosTest_[i]->SetRotate({ 0,0,0 });
-	////	coliderPosTest_[i]->Update();
-
-	//}
-
+	
 	sphere.resize(SPHERE_COLISSION_NUM);
 	spherePos.resize(SPHERE_COLISSION_NUM);
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
@@ -112,6 +100,50 @@ void Player::Update(Input* input, GamePad* gamePad)
 	//更...新!!
 	pActManager_->ActionUpdate(input, gamePad);
 	oldActionNum_ = pActManager_->GetActionNum();
+
+	if (input->PushKey(DIK_W)) { playerO_->SetModel(jumpmodelL); }
+	else if (input->PushKey(DIK_S)) { playerO_->SetModel(jumpmodel); }
+	else if (input->PushKey(DIK_A)) {
+		changeModelTimer++;
+		if (changeModelTimer > 24) {
+			changeModelTimer = 0;
+		}
+		if (changeModelTimer >= 1 && changeModelTimer <= 6) {
+			playerO_->SetModel(dashmodel1);
+		}
+		else if (changeModelTimer >= 7 && changeModelTimer <= 12) {
+			playerO_->SetModel(dashmodel0);
+		}
+		else if (changeModelTimer >= 13 && changeModelTimer <= 18) {
+			playerO_->SetModel(dashmodel2);
+		}
+		else if (changeModelTimer >= 19 && changeModelTimer <= 24) {
+			playerO_->SetModel(dashmodel0);
+		}
+	}
+	else if (input->PushKey(DIK_D)) {
+		changeModelTimer++;
+		if (changeModelTimer > 43) {
+			changeModelTimer = 0;
+		}
+
+
+		if (changeModelTimer >= 1 && changeModelTimer <= 10) {
+			playerO_->SetModel(walkmodel1);
+		}
+		else if (changeModelTimer >= 11 && changeModelTimer <= 21) {
+			playerO_->SetModel(playerM_);
+		}
+		else if (changeModelTimer >= 22 && changeModelTimer <= 32) {
+			playerO_->SetModel(walkmodel2);
+		}
+		else if (changeModelTimer >= 33 && changeModelTimer <= 43) {
+			playerO_->SetModel(playerM_);
+		}
+	}
+	else {
+		playerO_->SetModel(playerM_);
+	}
 
 	ImGui::Begin("Player");
 	ImGui::InputInt("ActionNumber", &actionNum);

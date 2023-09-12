@@ -20,6 +20,14 @@ void SceneObjects::Initialize(SceneManager* controller)
 	Sprite::LoadTexture(14,L"Resources/tyokuden5.png");
 	Sprite::LoadTexture(15,L"Resources/tyokuden6.png");
 
+	Sprite::LoadTexture(16, L"Resources/heiden1.png");
+	Sprite::LoadTexture(17, L"Resources/heiden2.png");
+	Sprite::LoadTexture(18, L"Resources/heiden3.png");
+	Sprite::LoadTexture(19, L"Resources/heiden4.png");
+	Sprite::LoadTexture(20, L"Resources/heiden5.png");
+	Sprite::LoadTexture(21, L"Resources/heiden6.png");
+
+
 	//Sprite::LoadTexture(2, L"Resources/mario.jpg");
 
 	//Sprite::LoadTexture(4, L"Resources/sprite/clear.png");

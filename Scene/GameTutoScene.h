@@ -1,7 +1,7 @@
 #pragma once
 #include "IScene.h"
 #include "SceneInc.h"
-class GameOverScene :
+class GameTutoScene :
     public IScene
 {
 protected:
@@ -15,8 +15,8 @@ protected:
 
 public:
 
-	GameOverScene(SceneManager* controller, SceneObjects* sceneObj);
-	~GameOverScene() override;
+	GameTutoScene(SceneManager* controller, SceneObjects* sceneObj);
+	~GameTutoScene() override;
 
 	void Initialize()override;
 

@@ -57,23 +57,34 @@ void PlayScene::Initialize()
 	spriteJumpPosition = spriteJump_->GetPosition();
 	spriteJump_->SetPosition({ spriteJumpPosition });
 
+	//直列回路の電気移動
 	spritetyokuden1_ = Sprite::Create(10, { 0,0 });
 	spritetyokuden1_->Initialize();
-
 	spritetyokuden2_ = Sprite::Create(11, { 0,0 });
 	spritetyokuden2_->Initialize();
-
 	spritetyokuden3_ = Sprite::Create(12, { 0,0 });
 	spritetyokuden3_->Initialize();
-
 	spritetyokuden4_ = Sprite::Create(13, { 0,0 });
 	spritetyokuden4_->Initialize();
-
 	spritetyokuden5_ = Sprite::Create(14, { 0,0 });
 	spritetyokuden5_->Initialize();
-
 	spritetyokuden6_ = Sprite::Create(15, { 0,0 });
 	spritetyokuden6_->Initialize();
+
+	//並列回路の電気移動
+	spriteheiden1_ = Sprite::Create(16, { 0,0 });
+	spriteheiden1_->Initialize();
+	spriteheiden2_ = Sprite::Create(17, { 0,0 });
+	spriteheiden2_->Initialize();
+	spriteheiden3_ = Sprite::Create(18, { 0,0 });
+	spriteheiden3_->Initialize();
+	spriteheiden4_ = Sprite::Create(19, { 0,0 });
+	spriteheiden4_->Initialize();
+	spriteheiden5_ = Sprite::Create(20, { 0,0 });
+	spriteheiden5_->Initialize();
+	spriteheiden6_ = Sprite::Create(21, { 0,0 });
+	spriteheiden6_->Initialize();
+
 
 	audio = new Audio();
 	audio->Initialize();
@@ -224,19 +235,42 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		jumptimer = 0;
 		isJumpFlag = false;
 	}
-	if (isStockFlag == false) {
-		if (input->TriggerKey(DIK_SPACE)) { isTyokudenFlag = true; }
-		if (isTyokudenFlag == true) { tyokudenTimer++; }
-		if (tyokudenTimer >= 30) {
-			tyokudenTimer = 30;
-			isStockFlag = true;
+
+	//並列回路の電気が通る
+	if (modeC == 0) {
+		if (isStockFlag2 == false) {
+			if (input->TriggerKey(DIK_SPACE)) { isHeidenFlag = true; }
+			if (isHeidenFlag == true) { heidenTimer++; }
+			if (heidenTimer >= 30) {
+				heidenTimer = 30;
+				isStockFlag2 = true;
+			}
+		}
+		else if (isStockFlag2 == true) {
+			if (input->TriggerKey(DIK_SPACE)) {
+				heidenTimer = 0;
+				isHeidenFlag = false;
+				isStockFlag2 = false;
+			}
 		}
 	}
-	else if (isStockFlag == true) {
-		if (input->TriggerKey(DIK_SPACE)) {
-			tyokudenTimer = 0;
-			isTyokudenFlag = false;
-			isStockFlag = false;
+
+	//直列回路の電気が通る
+	if (modeC == 1) {
+		if (isStockFlag == false) {
+			if (input->TriggerKey(DIK_SPACE)) { isTyokudenFlag = true; }
+			if (isTyokudenFlag == true) { tyokudenTimer++; }
+			if (tyokudenTimer >= 30) {
+				tyokudenTimer = 30;
+				isStockFlag = true;
+			}
+		}
+		else if (isStockFlag == true) {
+			if (input->TriggerKey(DIK_SPACE)) {
+				tyokudenTimer = 0;
+				isTyokudenFlag = false;
+				isStockFlag = false;
+			}
 		}
 	}
 }
@@ -294,6 +328,12 @@ void PlayScene::Draw()
 	else if (tyokudenTimer >= 21 && tyokudenTimer <= 25) { spritetyokuden5_->Draw(); }
 	else if (tyokudenTimer >= 26 && tyokudenTimer <= 30) { spritetyokuden6_->Draw(); }
 
+	if (heidenTimer >= 1 && heidenTimer <= 5) { spriteheiden1_->Draw(); }
+	else if (heidenTimer >= 6 &&  heidenTimer <= 10) { spriteheiden2_->Draw(); }
+	else if (heidenTimer >= 11 && heidenTimer <= 15) { spriteheiden3_->Draw(); }
+	else if (heidenTimer >= 16 && heidenTimer <= 20) { spriteheiden4_->Draw(); }
+	else if (heidenTimer >= 21 && heidenTimer <= 25) { spriteheiden5_->Draw(); }
+	else if (heidenTimer >= 26 && heidenTimer <= 30) { spriteheiden6_->Draw(); }
 
 	if (pause == 1)
 	{

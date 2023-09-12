@@ -1,33 +1,33 @@
-#include "GameOverScene.h"
+#include "GameTutoScene.h"
 #include "ImguiManager.h"
-GameOverScene::GameOverScene(SceneManager* controller, SceneObjects* sceneObj)
+GameTutoScene::GameTutoScene(SceneManager* controller, SceneObjects* sceneObj)
 {
 	controller_ = controller;
 	sceneObj_ = sceneObj;
 }
 
-GameOverScene::~GameOverScene()
+GameTutoScene::~GameTutoScene()
 {
 	sceneObj_->Reset();
 }
 
-void GameOverScene::Initialize()
+void GameTutoScene::Initialize()
 {
 
 }
 
-void GameOverScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
+void GameTutoScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	gamePad->Update();
 	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X))
 	{
-		controller_->ChangeSceneNum(S_TITLE);
+		controller_->ChangeSceneNum(S_PLAY);
 	}
 	assert(input);
 	controller_->camera_->Update();
 }
 
-void GameOverScene::Draw()
+void GameTutoScene::Draw()
 {
 #pragma region 前景スプライト描画
 	// 前景スプライト描画前処理
