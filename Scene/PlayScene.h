@@ -65,6 +65,22 @@ private:	//メンバ変数
 	Sprite* sprite6_ = nullptr;
 	Audio* audio = nullptr;
 
+	Sprite* spriteJump_ = nullptr;
+	XMFLOAT2 spriteJumpPosition;
+	Sprite* spriteDash_ = nullptr;
+	XMFLOAT2 spriteDashPosition;
+
+	Sprite* spritetyokuden1_ = nullptr;
+	Sprite* spritetyokuden2_ = nullptr;
+	Sprite* spritetyokuden3_ = nullptr;
+	Sprite* spritetyokuden4_ = nullptr;
+	Sprite* spritetyokuden5_ = nullptr;
+	Sprite* spritetyokuden6_ = nullptr;
+	bool isTyokudenFlag = false;
+	bool isStockFlag = false;
+	int tyokudenTimer = 0;
+
+
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
 
@@ -80,5 +96,11 @@ public:
 	IXAudio2SourceVoice* pSourceVoice[10] = { 0 };
 	//音関係まとめ
 	int soundCheckFlag = 0;
+
+	int jumptimer = 0;
+	bool isJumpFlag = false;
+
+	int dashtimer = 0;
+	bool isDashFlag = false;
 };
 

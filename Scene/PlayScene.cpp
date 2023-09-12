@@ -23,7 +23,11 @@ void PlayScene::Initialize()
 	player_ = sceneObj_->player_;
 
 	sprite_ =  Sprite::Create(1, { 0,0 });
+
+	sprite_->Initialize();
+
 	sprite2_ =  Sprite::Create(3, { 0,0 });
+
 
 	sprite3_ =  Sprite::Create(4, { 680,540 });
 	sprite4_ =  Sprite::Create(5, { 680,540 });
@@ -37,6 +41,34 @@ void PlayScene::Initialize()
 	sprite4_->Initialize();
 	sprite5_->Initialize();
 	sprite6_->Initialize();
+
+	spriteDash_ = Sprite::Create(8, { 0,0 });
+	spriteDash_->Initialize();
+	spriteDashPosition = sprite_->GetPosition();
+	spriteDash_->SetPosition({ spriteDashPosition });
+
+	spriteJump_ = Sprite::Create(9, { 0,0 });
+	spriteJump_->Initialize();
+	spriteJumpPosition = spriteJump_->GetPosition();
+	spriteJump_->SetPosition({ spriteJumpPosition });
+
+	spritetyokuden1_ = Sprite::Create(10, { 0,0 });
+	spritetyokuden1_->Initialize();
+
+	spritetyokuden2_ = Sprite::Create(11, { 0,0 });
+	spritetyokuden2_->Initialize();
+
+	spritetyokuden3_ = Sprite::Create(12, { 0,0 });
+	spritetyokuden3_->Initialize();
+
+	spritetyokuden4_ = Sprite::Create(13, { 0,0 });
+	spritetyokuden4_->Initialize();
+
+	spritetyokuden5_ = Sprite::Create(14, { 0,0 });
+	spritetyokuden5_->Initialize();
+
+	spritetyokuden6_ = Sprite::Create(15, { 0,0 });
+	spritetyokuden6_->Initialize();
 
 	audio = new Audio();
 	audio->Initialize();
@@ -113,6 +145,14 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	controller_->camera_->SetTarget(player_->GetPosition());
 	controller_->camera_->Update();
 
+	spriteJumpPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 610.0f;
+	spriteJumpPosition.y = sceneObj_->plaobject->worldTransform.translation_.y + 360.0f;
+	spriteJump_->SetPosition(spriteJumpPosition);
+
+	spriteDashPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 590.0f;
+	spriteDashPosition.y = sceneObj_->plaobject->worldTransform.translation_.x + 310.0f;
+	spriteDash_->SetPosition(spriteDashPosition);
+
 	//左クリック時
 	if (mouse->TriggerMouseButton(0))
 	{
@@ -160,7 +200,35 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		//enemy_->Initialize(controller_->dxCommon_,player_);
 	}
 
-
+	//ジャンプエフェクト処理
+	if (input->TriggerKey(DIK_A)) { isDashFlag = true; }
+	if (isDashFlag == true) { dashtimer++; }
+	if (dashtimer >= 10) {
+		dashtimer = 0;
+		isDashFlag = false;
+	}
+	//ダッシュエフェクト処理
+	if (input->TriggerKey(DIK_W)) { isJumpFlag = true; }
+	if (isJumpFlag == true) { jumptimer++; }
+	if (jumptimer >= 7) {
+		jumptimer = 0;
+		isJumpFlag = false;
+	}
+	if (isStockFlag == false) {
+		if (input->TriggerKey(DIK_SPACE)) { isTyokudenFlag = true; }
+		if (isTyokudenFlag == true) { tyokudenTimer++; }
+		if (tyokudenTimer >= 30) {
+			tyokudenTimer = 30;
+			isStockFlag = true;
+		}
+	}
+	else if (isStockFlag == true) {
+		if (input->TriggerKey(DIK_SPACE)) {
+			tyokudenTimer = 0;
+			isTyokudenFlag = false;
+			isStockFlag = false;
+		}
+	}
 }
 
 void PlayScene::Draw()
@@ -200,6 +268,23 @@ void PlayScene::Draw()
 		sprite2_->Draw();
 	}
 
+
+	if (isJumpFlag == true) {
+		spriteJump_->Draw();
+	}
+
+	if (isDashFlag == true) {
+		spriteDash_->Draw();
+	}
+
+	if (tyokudenTimer >= 1 && tyokudenTimer <= 5) {spritetyokuden1_->Draw();}
+	else if (tyokudenTimer >= 6 && tyokudenTimer <= 10) { spritetyokuden2_->Draw(); }
+	else if (tyokudenTimer >= 11 && tyokudenTimer <= 15) { spritetyokuden3_->Draw(); }
+	else if (tyokudenTimer >= 16 && tyokudenTimer <= 20) { spritetyokuden4_->Draw(); }
+	else if (tyokudenTimer >= 21 && tyokudenTimer <= 25) { spritetyokuden5_->Draw(); }
+	else if (tyokudenTimer >= 26 && tyokudenTimer <= 30) { spritetyokuden6_->Draw(); }
+
+
 	if (pause == 1)
 	{
 		sprite3_->Draw();
@@ -210,6 +295,7 @@ void PlayScene::Draw()
 		sprite4_->Draw();
 		sprite6_->Draw();
 	}
+
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
