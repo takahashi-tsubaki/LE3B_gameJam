@@ -88,6 +88,15 @@ private:	//メンバ変数
 	bool isStockFlag = false;
 	int tyokudenTimer = 0;
 
+	Sprite* spriteheiden1_ = nullptr;
+	Sprite* spriteheiden2_ = nullptr;
+	Sprite* spriteheiden3_ = nullptr;
+	Sprite* spriteheiden4_ = nullptr;
+	Sprite* spriteheiden5_ = nullptr;
+	Sprite* spriteheiden6_ = nullptr;
+	bool isHeidenFlag = false;
+	bool isStockFlag2 = false;
+	int heidenTimer = 0;
 
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
