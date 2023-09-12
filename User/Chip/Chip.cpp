@@ -50,7 +50,7 @@ void Chip::Initialize() {
 		if (i == 1) {
 			sphere[i] = new SphereCollider;
 			CollisionManager::GetInstance()->AddCollider(sphere[i]);
-			sphere[i]->SetObject3d(reticle);			
+			sphere[i]->SetObject3d(reticle);
 			sphere[i]->SetRadius(1.0f);
 			sphere[i]->Update();
 			sphere[i]->SetAttribute(COLLISION_ATTR_CURSOR);
@@ -80,56 +80,77 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 	}
 
 	Vector2 mousepos = mouse->GetMousePosition();
-	reticle->worldTransform.translation_ = { mousepos.x * mouseSensitivity_,mousepos.y * mouseSensitivity_,0 };	/// カメラ座標「目」｛0，0，-100｝前提
+	reticle->worldTransform.translation_ = { reticle->GetCamera()->eye_.x +(mousepos.x * mouseSensitivity_),reticle->GetCamera()->eye_.y +(mousepos.y * mouseSensitivity_),0 };	/// カメラ座標「目」｛0，0，-100｝前提
 
-	if (mouse->TriggerMouseButton(0)) {
+	if (mouse->PushMouseButton(0)) {
 		if (nowDrag_ == false) {
 			nowDrag_ = true;
 
 			isAreaSet = false;
+		}
 
-		}
-		else if (nowDrag_ == true) {
-			nowDrag_ = false;
-		}
+	}
+	else {
+		nowDrag_ = false;
 	}
 
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
-		if (sphere[1]->GetIsHit() == true && sphere[1]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP&&
-			sphere[0]->GetIsHit() == true && sphere[0]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_CURSOR&&
-			isAreaSet==false) {
+
+		if (sphere[0]->GetIsHit() == true && sphere[0]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_CURSOR &&
+			sphere[0]->GetCollisionInfo().collider->GetCollisionInfo().object == object_ && isAreaSet == false) {
+			mousePos_ = sphere[0]->GetCollisionInfo().object->worldTransform.translation_;
 			if (nowDrag_ == true) {
 				isChipGet_ = true;
 			}
 			else {
 				isChipGet_ = false;
 			}
-		}
-		if (sphere[0]->GetIsHit() == true && sphere[0]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP_AREA) {
-			object_->worldTransform.translation_ = sphere[0]->GetCollisionInfo().object->worldTransform.translation_;
-			object_->worldTransform.translation_.z = 0;
-			isAreaSet = true;
 
+
+		}
+
+		if (sphere[0]->GetIsHit() == true && sphere[0]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP_AREA &&
+			sphere[0]->GetCollisionInfo().collider->GetCollisionInfo().object == object_) {
+			areaPos_ = sphere[0]->GetCollisionInfo().object->worldTransform.translation_;
+
+			isAreaSet = true;
 			isChipGet_ = false;
 		}
 
+
 	}
 	ImGui::Begin("chipFlag");
-	if (isChipGet_ == true ) {
+	if (isChipGet_ == true) {
 		ImGui::Text("a");
-		object_->worldTransform.translation_ = reticle->worldTransform.translation_;
+		object_->worldTransform.translation_ = mousePos_;
+		object_->worldTransform.translation_.x = mousePos_.x;
+		object_->worldTransform.translation_.y = mousePos_.y;
+		object_->worldTransform.translation_.z = mousePos_.z;
+	}
+	if (sphere[0]->GetIsHit() != true && sphere[0]->GetCollisionInfo().collider->GetAttribute() != COLLISION_ATTR_POWERCHIP_AREA && nowDrag_ == false) {
+		object_->worldTransform.translation_ = restPos_;
+		object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
+		object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
+		object_->worldTransform.translation_.z = restPos_.z;
 	}
 	if (isAreaSet == true) {
 		ImGui::Text("b");
 		//object_->worldTransform.translation_ = areaPos_;
+		object_->worldTransform.translation_.x = areaPos_.x;
+		object_->worldTransform.translation_.y = areaPos_.y;
+		object_->worldTransform.translation_.z = 0;
 	}
+	/*if (isAreaSet == false && isChipGet_ == false && nowDrag_ == false) {
+		object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
+		object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
+	}*/
+
 	ImGui::Text("c");
 	ImGui::End();
 
-
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
 
-		/*coliderPosTest_[i]->wtf.position = ray->GetDir();*/
+		coliderPosTest_[i]->worldTransform.translation_ = sphere[i]->center;
 		sphere[i]->Update();
 		coliderPosTest_[i]->Update();
 	}
@@ -141,6 +162,8 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 void Chip::Draw(DirectXCommon* dxCommon) {
 	Object3d::PreDraw(dxCommon->GetCommandList());
 	object_->Draw();
+	coliderPosTest_[0]->Draw();
+	coliderPosTest_[1]->Draw();
 	Object3d::PostDraw();
 }
 

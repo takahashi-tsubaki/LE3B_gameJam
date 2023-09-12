@@ -151,6 +151,7 @@
     <ClInclude Include="User\Chip\Chip.h" />
     <ClInclude Include="User\Chip\ChipArea.h" />
     <ClInclude Include="User\Chip\ChipManager.h" />
+    <ClInclude Include="User\Chip\ChipPattern.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\FBX.hlsli" />

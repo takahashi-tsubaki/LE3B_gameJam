@@ -40,9 +40,6 @@
     <Filter Include="ソース ファイル\FrameWork">
       <UniqueIdentifier>{3badd3a2-5cc9-4e84-a769-3e702d27a13c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Light">
-      <UniqueIdentifier>{6c8707a7-eb6f-499d-8c17-3f38166346bb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Math">
       <UniqueIdentifier>{682353d5-b0bc-4be5-8e4d-6ec53f544988}</UniqueIdentifier>
     </Filter>
@@ -114,6 +111,9 @@
     </Filter>
     <Filter Include="ヘッダー ファイル\Player\PlayerManager">
       <UniqueIdentifier>{1de37fb2-76e6-404f-b780-96806c531f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Math\Light">
+      <UniqueIdentifier>{6c8707a7-eb6f-499d-8c17-3f38166346bb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -220,7 +220,7 @@
       <Filter>ソース ファイル\FrameWork</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Light\Light.cpp">
-      <Filter>ソース ファイル\Light</Filter>
+      <Filter>ソース ファイル\Math\Light</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Math\Affin.cpp">
       <Filter>ソース ファイル\Math</Filter>
@@ -484,6 +484,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Base\Audio.h">
       <Filter>Base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Chip\ChipPattern.h">
+      <Filter>ヘッダー ファイル\Chip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -53,7 +53,7 @@ void SceneObjects::Initialize(SceneManager* controller)
 
 
 	chipManager_ = new ChipManager();
-	chipManager_->Initialize();
+	chipManager_->Initialize(2,2,2);
 
 	//plaobject->SetModel(plamodel);
 

@@ -10,6 +10,7 @@
 #include"CollisionManager.h"
 #include"CollisionAttribute.h"
 
+#include "Chip.h"
 
 class ChipArea
 {
@@ -35,10 +36,13 @@ public:
 	void SetScale(Vector3 scale) { object_->worldTransform.scale_ = scale; }
 	//void SetReticle(Vector3 ret) { reticle->worldTransform.translation_ = ret; }
 
+	void OnColision(Chip* chip) { subject = chip; };
+
+
 
 	// 種族番号取得
-	//int SetTribe(int tribe) { Tribe_ = tribe; }
-	//int HowTribe() { return Tribe_; }
+	void SetTribe(int tribe) { Tribe_ = tribe; }
+	int HowTribe() { return Tribe_; }
 
 	WorldTransform GetTransform() { return object_->worldTransform; }
 
@@ -50,12 +54,15 @@ public:
 	Model* model_;
 	Object3d* object_;
 
+
 	//float mouseSensitivity_ = 0.099f;	//マウス感度 0.05
-private:
 
 	// 領域用
 	bool isSet;
-
+	Chip* subject = nullptr;
+private:
+	// 種族番号
+	int Tribe_;
 	//コライダー
 public:
 	void SetSphere(std::vector<SphereCollider*> sphere_) { sphere = sphere_; }
