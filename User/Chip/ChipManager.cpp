@@ -159,7 +159,9 @@ void ChipManager::InitializeChip(int junpnum, int runnum)
 		Chip* newChipDash = new Chip();
 		newChipDash->Initialize();
 		newChipDash->SetTribe(1);
-		newChipDash->object_->worldTransform.translation_ = { -30,dY,0 };
+		newChipDash->SetPos({ -30,dY,0 });
+		newChipDash->SetRestPos({ -30,dY,0 });
+		
 		dY += 5;
 		newChipDash->object_->color_ = { 1,0,0,1 };
 		AddChip("1R", newChipDash);
@@ -171,7 +173,8 @@ void ChipManager::InitializeChip(int junpnum, int runnum)
 		newChipJunp = new Chip();
 		newChipJunp->Initialize();
 		newChipJunp->SetTribe(2);
-		newChipJunp->object_->worldTransform.translation_ = { -35,jY,0 };
+		newChipJunp->SetPos({ -35,jY,0 });
+		newChipJunp->SetRestPos({ -35,jY,0 });
 		jY += 5;
 		newChipJunp->object_->color_ = { 0,0,1,1 };
 		AddChip("1B", newChipJunp);

@@ -116,6 +116,7 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 			isAreaSet = true;
 			isChipGet_ = false;
 		}
+		
 
 	}
 	ImGui::Begin("chipFlag");
@@ -123,11 +124,15 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 		ImGui::Text("a");
 		object_->worldTransform.translation_ = mousePos_;
 	}
+	if (sphere[0]->GetIsHit() != true && sphere[0]->GetCollisionInfo().collider->GetAttribute() != COLLISION_ATTR_POWERCHIP_AREA && nowDrag_ == false) {
+		object_->worldTransform.translation_ = restPos_;
+	}
 	if (isAreaSet == true) {
 		ImGui::Text("b");
 		object_->worldTransform.translation_ = areaPos_;
 		object_->worldTransform.translation_.z = 0;
 	}
+
 	ImGui::Text("c");
 	ImGui::End();
 

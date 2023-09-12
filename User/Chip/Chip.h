@@ -33,6 +33,7 @@ public:
 
 	//
 	void SetPos(Vector3 pos) { object_->worldTransform.translation_ = pos; }
+	void SetRestPos(Vector3 pos) { restPos_= pos; }
 	void SetReticle(Vector3 ret) { reticle->worldTransform.translation_ = ret; }
 
 
@@ -44,9 +45,17 @@ public:
 
 	bool GetisAreaSet() { return isAreaSet; };
 
+
+	float GetPower() { return power; };
+
 private:
 	//void FrontFace();
 	//void ColiderUpdate();
+
+	const float MAX_POWER = 100.0f;
+	float power = MAX_POWER;
+	bool isHealPower;
+	Vector3 restPos_;
 
 public:
 	Model* model_;
