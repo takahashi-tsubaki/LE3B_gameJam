@@ -24,12 +24,12 @@ void ChipManager::Initialize(int junpnum, int runnum, int areanum)
 
 	chipArea_ = new ChipArea();
 	chipArea_->Initialize();
-	chipArea_->SetPos({ -43.0f,25.0f,0.0f });
+	chipArea_->SetPos({ -33.5f,27.5f,0.0f });
 	AddChipArea("A1", chipArea_);
 
 	chipArea2_ = new ChipArea();
 	chipArea2_->Initialize();
-	chipArea2_->SetPos({ -43.0f,17.0f,0.0f });
+	chipArea2_->SetPos({ -33.5f,17.5f,0.0f });
 	AddChipArea("A2", chipArea2_);
 }
 
@@ -78,4 +78,20 @@ void ChipManager::AddChipArea(std::string chipAreaName, ChipArea* chipArea)
 {
 	assert(chipArea);
 	chipAreas_.emplace_back(chipArea);
+}
+
+void ChipManager::modeChangePos(int num)
+{
+	if (num == 0)
+	{
+		chipArea_->SetPos({ -33.5f,27.5f,0.0f });
+		
+		chipArea2_->SetPos({ -33.5f,17.5f,0.0f });
+	}
+	else if (num == 1)
+	{
+		chipArea_->SetPos({ -42.0f,20.0f,0.0f });
+
+		chipArea2_->SetPos({ -25.0f,20.0f,0.0f });
+	}
 }
