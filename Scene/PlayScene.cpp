@@ -153,8 +153,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 	player_->Update(input, gamePad);
 
-	controller_->camera_->SetEye({ player_->GetPosition().x,player_->GetPosition().y, player_->GetPosition().z - 150 });
-	controller_->camera_->SetTarget(player_->GetPosition());
+	controller_->camera_->SetEye({ player_->GetPosition().x -20,player_->GetPosition().y, player_->GetPosition().z - 150 });
+	controller_->camera_->SetTarget({ player_->GetPosition().x - 20,player_->GetPosition().y, player_->GetPosition().z});
 	controller_->camera_->Update();
 
 	spriteJumpPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 610.0f;
