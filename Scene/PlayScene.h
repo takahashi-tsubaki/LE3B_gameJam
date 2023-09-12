@@ -47,9 +47,21 @@ public:
 
     //void Pause(Input* input);
 
+public:
+	int jumptimer = 0;
+	bool isJumpFlag = false;
+
+	int dashtimer = 0;
+	bool isDashFlag = false;
+
 private:	//メンバ変数
 	const float PI = 3.141592;
 	Camera* camera_ = nullptr;
+	Sprite* sprite_ = nullptr;
+	XMFLOAT2 spritePosition;
+	Sprite* spriteDash_ = nullptr;
+	XMFLOAT2 spriteDashPosition;
+	
 
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;

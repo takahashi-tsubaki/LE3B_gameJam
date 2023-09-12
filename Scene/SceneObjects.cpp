@@ -2,8 +2,8 @@
 #include "SceneManager.h"
 void SceneObjects::Initialize(SceneManager* controller)
 {
-	//Sprite::LoadTexture(1, L"Resources/kuribo-.jpg");
-	//Sprite::LoadTexture(2, L"Resources/mario.jpg");
+	Sprite::LoadTexture(1, L"Resources/jump.png");
+	Sprite::LoadTexture(2, L"Resources/dash.png");
 
 	//Sprite::LoadTexture(4, L"Resources/sprite/clear.png");
 	//Sprite::LoadTexture(5, L"Resources/sprite/over.png");

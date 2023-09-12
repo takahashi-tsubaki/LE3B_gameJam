@@ -19,6 +19,15 @@ PlayScene::~PlayScene()
 void PlayScene::Initialize()
 {
 	LoadBlockData();
+	sprite_ = Sprite::Create(1, {0,0});
+	sprite_->Initialize();
+	spritePosition = sprite_->GetPosition();
+	sprite_->SetPosition({ spritePosition });
+
+	spriteDash_ = Sprite::Create(2, { 0,0 });
+	spriteDash_->Initialize();
+	spriteDashPosition = spriteDash_->GetPosition();
+	spriteDash_->SetPosition({ spriteDashPosition });
 }
 
 void PlayScene::Update(Input* input, GamePad* gamePad)
@@ -47,7 +56,13 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 	sceneObj_->asobj_[1]->Update();
 	sceneObj_->plaobject->Update();
 
-	
+	spritePosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 610.0f;
+	spritePosition.y = sceneObj_->plaobject->worldTransform.translation_.y + 470.0f;
+	sprite_->SetPosition(spritePosition);
+
+	spriteDashPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 570.0f;
+	spriteDashPosition.y = sceneObj_->plaobject->worldTransform.translation_.x + 410.0f;
+	spriteDash_->SetPosition(spriteDashPosition);
 
 	//block発生
 	UpdataBlockCommands();
@@ -59,8 +74,23 @@ void PlayScene::Update(Input* input, GamePad* gamePad)
 		//player_->Initialize(controller_->dxCommon_,enemy_);
 		//enemy_->Initialize(controller_->dxCommon_,player_);
 	}
+	//ジャンプエフェクト処理
+	if (input->TriggerKey(DIK_A)){isDashFlag = true;}
+	if (isDashFlag == true){dashtimer++;}
+	if (dashtimer >= 10) {
+		dashtimer = 0;
+		isDashFlag = false;
+	}
+	//ダッシュエフェクト処理
+	if (input->TriggerKey(DIK_W)) { isJumpFlag = true; }
+	if (isJumpFlag == true) { jumptimer++; }
+	if (jumptimer >= 7) {
+		jumptimer = 0;
+		isJumpFlag = false;
+	}
 
-	
+
+
 }
 
 void PlayScene::Draw()
@@ -123,7 +153,14 @@ void PlayScene::Draw()
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
-	//sprite_->Draw();
+	if (isJumpFlag == true) {
+		sprite_->Draw();
+	}
+
+	if (isDashFlag == true) {
+		spriteDash_->Draw();
+	}
+
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>

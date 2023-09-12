@@ -8,193 +8,195 @@
 #include <DirectXMath.h>
 
 /// <summary>
-/// ƒXƒvƒ‰ƒCƒg
+/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
 /// </summary>
 class Sprite
 {
-protected: // ƒGƒCƒŠƒAƒX
-	// Microsoft::WRL::‚ğÈ—ª
+protected: // ã‚¨ã‚¤ãƒªã‚¢ã‚¹
+	// Microsoft::WRL::ã‚’çœç•¥
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
-	// DirectX::‚ğÈ—ª
+	// DirectX::ã‚’çœç•¥
 	using XMFLOAT2 = DirectX::XMFLOAT2;
 	using XMFLOAT3 = DirectX::XMFLOAT3;
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
 
-public: // ƒTƒuƒNƒ‰ƒX
+public: // ã‚µãƒ–ã‚¯ãƒ©ã‚¹
 	/// <summary>
-	/// ’¸“_ƒf[ƒ^\‘¢‘Ì
+	/// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 	/// </summary>
 	struct VertexPosUv
 	{
-		XMFLOAT3 pos; // xyzÀ•W
-		XMFLOAT2 uv;  // uvÀ•W
+		XMFLOAT3 pos; // xyzåº§æ¨™
+		XMFLOAT2 uv;  // uvåº§æ¨™
 	};
 
 	/// <summary>
-	/// ’è”ƒoƒbƒtƒ@—pƒf[ƒ^\‘¢‘Ì
+	/// å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 	/// </summary>
 	struct ConstBufferData
 	{
-		XMFLOAT4 color;	// F (RGBA)
-		XMMATRIX mat;	// ‚R‚c•ÏŠ·s—ñ
+		XMFLOAT4 color;	// è‰² (RGBA)
+		XMMATRIX mat;	// ï¼“ï¼¤å¤‰æ›è¡Œåˆ—
 	};
 
-public: // Ã“Iƒƒ“ƒoŠÖ”
+public: // é™çš„ãƒ¡ãƒ³ãƒé–¢æ•°
 
 	/// <summary>
-	/// Ã“I‰Šú‰»
+	/// é™çš„åˆæœŸåŒ–
 	/// </summary>
-	/// <param name="device">ƒfƒoƒCƒX</param>
-	/// <param name="window_width">‰æ–Ê•</param>
-	/// <param name="window_height">‰æ–Ê‚‚³</param>
+	/// <param name="device">ãƒ‡ãƒã‚¤ã‚¹</param>
+	/// <param name="window_width">ç”»é¢å¹…</param>
+	/// <param name="window_height">ç”»é¢é«˜ã•</param>
 	static void StaticInitialize(ID3D12Device* device, int window_width, int window_height);
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İ
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
 	/// </summary>
-	/// <param name="texnumber">ƒeƒNƒXƒ`ƒƒ”Ô†</param>
-	/// <param name="filename">‰æ‘œƒtƒ@ƒCƒ‹–¼</param>
+	/// <param name="texnumber">ãƒ†ã‚¯ã‚¹ãƒãƒ£ç•ªå·</param>
+	/// <param name="filename">ç”»åƒãƒ•ã‚¡ã‚¤ãƒ«å</param>
 	static void LoadTexture(UINT texnumber, const wchar_t* filename);
 
 	/// <summary>
-	/// •`‰æ‘Oˆ—
+	/// æç”»å‰å‡¦ç†
 	/// </summary>
-	/// <param name="cmdList">•`‰æƒRƒ}ƒ“ƒhƒŠƒXƒg</param>
+	/// <param name="cmdList">æç”»ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ</param>
 	static void PreDraw(ID3D12GraphicsCommandList* cmdList);
 
 	/// <summary>
-	/// •`‰æŒãˆ—
+	/// æç”»å¾Œå‡¦ç†
 	/// </summary>
 	static void PostDraw();
 
 	/// <summary>
-	/// ƒXƒvƒ‰ƒCƒg¶¬
+	/// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆç”Ÿæˆ
 	/// </summary>
-	/// <param name="texNumber">ƒeƒNƒXƒ`ƒƒ”Ô†</param>
-	/// <param name="position">À•W</param>
-	/// <param name="color">F</param>
-	/// <param name="anchorpoint">ƒAƒ“ƒJ[ƒ|ƒCƒ“ƒg</param>
-	/// <param name="isFlipX">¶‰E”½“]</param>
-	/// <param name="isFlipY">ã‰º”½“]</param>
-	/// <returns>¶¬‚³‚ê‚½ƒXƒvƒ‰ƒCƒg</returns>
+	/// <param name="texNumber">ãƒ†ã‚¯ã‚¹ãƒãƒ£ç•ªå·</param>
+	/// <param name="position">åº§æ¨™</param>
+	/// <param name="color">è‰²</param>
+	/// <param name="anchorpoint">ã‚¢ãƒ³ã‚«ãƒ¼ãƒã‚¤ãƒ³ãƒˆ</param>
+	/// <param name="isFlipX">å·¦å³åè»¢</param>
+	/// <param name="isFlipY">ä¸Šä¸‹åè»¢</param>
+	/// <returns>ç”Ÿæˆã•ã‚ŒãŸã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ</returns>
 	static Sprite* Create(UINT texNumber, XMFLOAT2 position, XMFLOAT4 color = { 1, 1, 1, 1 }, XMFLOAT2 anchorpoint = { 0.0f, 0.0f }, bool isFlipX = false, bool isFlipY = false);
 
-protected: // Ã“Iƒƒ“ƒo•Ï”
-	// ƒeƒNƒXƒ`ƒƒ‚ÌÅ‘å–‡”
+protected: // é™çš„ãƒ¡ãƒ³ãƒå¤‰æ•°
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æœ€å¤§æšæ•°
 	static const int srvCount = 512;
-	// ’¸“_”
+	// é ‚ç‚¹æ•°
 	static const int vertNum = 4;
-	// ƒfƒoƒCƒX
+	// ãƒ‡ãƒã‚¤ã‚¹
 	static ID3D12Device* device_;
-	// ƒfƒXƒNƒŠƒvƒ^ƒTƒCƒY
+	// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã‚µã‚¤ã‚º
 	static UINT descriptorHandleIncrementSize;
-	// ƒRƒ}ƒ“ƒhƒŠƒXƒg
+	// ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ
 	static ID3D12GraphicsCommandList* cmdList_;
-	// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ
+	// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£
 	static ComPtr<ID3D12RootSignature> rootSignature;
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgƒIƒuƒWƒFƒNƒg
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	static ComPtr<ID3D12PipelineState> pipelineState;
-	// Ë‰es—ñ
+	// å°„å½±è¡Œåˆ—
 	static XMMATRIX matProjection;
-	// ƒfƒXƒNƒŠƒvƒ^ƒq[ƒv
+	// ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
 	static ComPtr<ID3D12DescriptorHeap> descHeap;
-	// ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	static ComPtr<ID3D12Resource> texBuff[srvCount];
 
-public: // ƒƒ“ƒoŠÖ”
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	/// </summary>
 	Sprite(UINT texNumber, XMFLOAT2 position, XMFLOAT2 size, XMFLOAT4 color, XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	/// <returns>¬”Û</returns>
+	/// <returns>æˆå¦</returns>
 	bool Initialize();
 
 	/// <summary>
-	/// Šp“x‚Ìİ’è
+	/// è§’åº¦ã®è¨­å®š
 	/// </summary>
-	/// <param name="rotation">Šp“x</param>
+	/// <param name="rotation">è§’åº¦</param>
 	void SetRotation(float rotation);
 
 	/// <summary>
-	/// À•W‚Ìİ’è
+	/// åº§æ¨™ã®è¨­å®š
 	/// </summary>
-	/// <param name="position">À•W</param>
+	/// <param name="position">åº§æ¨™</param>
 	void SetPosition(const XMFLOAT2& position);
 
+	const XMFLOAT2& GetPosition() const { return position_; }
+
 	/// <summary>
-	/// ƒTƒCƒY‚Ìİ’è
+	/// ã‚µã‚¤ã‚ºã®è¨­å®š
 	/// </summary>
-	/// <param name="size">ƒTƒCƒY</param>
+	/// <param name="size">ã‚µã‚¤ã‚º</param>
 	void SetSize(const XMFLOAT2& size);
 
 	/// <summary>
-	/// ƒAƒ“ƒJ[ƒ|ƒCƒ“ƒg‚Ìİ’è
+	/// ã‚¢ãƒ³ã‚«ãƒ¼ãƒã‚¤ãƒ³ãƒˆã®è¨­å®š
 	/// </summary>
-	/// <param name="anchorpoint">ƒAƒ“ƒJ[ƒ|ƒCƒ“ƒg</param>
+	/// <param name="anchorpoint">ã‚¢ãƒ³ã‚«ãƒ¼ãƒã‚¤ãƒ³ãƒˆ</param>
 	void SetAnchorPoint(const XMFLOAT2& anchorpoint);
 
 	/// <summary>
-	/// ¶‰E”½“]‚Ìİ’è
+	/// å·¦å³åè»¢ã®è¨­å®š
 	/// </summary>
-	/// <param name="isFlipX">¶‰E”½“]</param>
+	/// <param name="isFlipX">å·¦å³åè»¢</param>
 	void SetIsFlipX(bool isFlipX);
 
 	/// <summary>
-	/// ã‰º”½“]‚Ìİ’è
+	/// ä¸Šä¸‹åè»¢ã®è¨­å®š
 	/// </summary>
-	/// <param name="isFlipX">ã‰º”½“]</param>
+	/// <param name="isFlipX">ä¸Šä¸‹åè»¢</param>
 	void SetIsFlipY(bool isFlipY);
 
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ”ÍˆÍİ’è
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ç¯„å›²è¨­å®š
 	/// </summary>
-	/// <param name="texBase">ƒeƒNƒXƒ`ƒƒ¶ãÀ•W</param>
-	/// <param name="texSize">ƒeƒNƒXƒ`ƒƒƒTƒCƒY</param>
+	/// <param name="texBase">ãƒ†ã‚¯ã‚¹ãƒãƒ£å·¦ä¸Šåº§æ¨™</param>
+	/// <param name="texSize">ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µã‚¤ã‚º</param>
 	void SetTextureRect(const XMFLOAT2& texBase, const XMFLOAT2& texSize);
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw();
 
-protected: // ƒƒ“ƒo•Ï”
-	// ’¸“_ƒoƒbƒtƒ@
+protected: // ãƒ¡ãƒ³ãƒå¤‰æ•°
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	ComPtr<ID3D12Resource> vertBuff;
-	// ’è”ƒoƒbƒtƒ@
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	ComPtr<ID3D12Resource> constBuff;
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
-	// ƒeƒNƒXƒ`ƒƒ”Ô†
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ç•ªå·
 	UINT texNumber_ = 0;
-	// Z²‰ñ‚è‚Ì‰ñ“]Šp
+	// Zè»¸å›ã‚Šã®å›è»¢è§’
 	float rotation_ = 0.0f;
-	// À•W
+	// åº§æ¨™
 	XMFLOAT2 position_{};
-	// ƒXƒvƒ‰ƒCƒg•A‚‚³
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆå¹…ã€é«˜ã•
 	XMFLOAT2 size_ = { 1.0f, 1.0f };
-	// ƒAƒ“ƒJ[ƒ|ƒCƒ“ƒg
+	// ã‚¢ãƒ³ã‚«ãƒ¼ãƒã‚¤ãƒ³ãƒˆ
 	XMFLOAT2 anchorpoint_ = { 0, 0 };
-	// ƒ[ƒ‹ƒhs—ñ
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	XMMATRIX matWorld_{};
-	// F
+	// è‰²
 	XMFLOAT4 color_ = { 1, 1, 1, 1 };
-	// ¶‰E”½“]
+	// å·¦å³åè»¢
 	bool isFlipX_ = false;
-	// ã‰º”½“]
+	// ä¸Šä¸‹åè»¢
 	bool isFlipY_ = false;
-	// ƒeƒNƒXƒ`ƒƒn“_
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£å§‹ç‚¹
 	XMFLOAT2 texBase_ = { 0, 0 };
-	// ƒeƒNƒXƒ`ƒƒ•A‚‚³
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£å¹…ã€é«˜ã•
 	XMFLOAT2 texSize_ = { 1.0f, 1.0f };
 
-private: // ƒƒ“ƒoŠÖ”
+private: // ãƒ¡ãƒ³ãƒé–¢æ•°
 	/// <summary>
-	/// ’¸“_ƒf[ƒ^“]‘—
+	/// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿è»¢é€
 	/// </summary>
 	void TransferVertices();
 };
