@@ -28,7 +28,7 @@ void Player::Initialize(DirectXCommon* dxCommon)
 
 	playerO_ = Object3d::Create();
 
-	playerM_= Model::CreateFromOBJ("human");
+	playerM_ = Model::CreateFromOBJ("human");
 	playerO_->SetModel(playerM_);
 
 	playerO_->SetScale({ 0.5f,0.5f,0.5f });
@@ -72,9 +72,12 @@ void Player::Initialize(DirectXCommon* dxCommon)
 	pActManager_->ActionInitialize(playerO_);
 }
 
-void Player::Update(Input* input,GamePad* gamePad)
+void Player::Update(Input* input, GamePad* gamePad)
 {
-	playerO_->Update();
+	int ground = OnGround;
+
+	CheckCollision();
+
 	//行動マネージャーの切り替え
 	if (input->TriggerKey(DIK_1))
 	{
@@ -97,23 +100,27 @@ void Player::Update(Input* input,GamePad* gamePad)
 			pActManager_->ChangeAction(new PlayerMove(pActManager_.get()));
 		}
 		else if (pActManager_->GetActionNum() == ActionNum::Dash) {
-			pActManager_->ChangeAction(new PlayerDash(pActManager_.get()));
+			pActManager_->ChangeAction(new PlayerDash(pActManager_.get(), sphere, spherePos));
 		}
 		else if (pActManager_->GetActionNum() == ActionNum::Jump) {
-			pActManager_->ChangeAction(new PlayerJump(pActManager_.get()));
+			pActManager_->ChangeAction(new PlayerJump(pActManager_.get(), sphere, spherePos));
 		}
 		//else {}
 
 	}
+
 	//更...新!!
-	pActManager_->ActionUpdate(input,gamePad);
+	pActManager_->ActionUpdate(input, gamePad);
 	oldActionNum_ = pActManager_->GetActionNum();
 
 	ImGui::Begin("Player");
 	ImGui::InputInt("ActionNumber", &actionNum);
 	ImGui::InputInt("OldActionNumber", &oldActionNum_);
 	ImGui::InputFloat3("Position", &playerO_->worldTransform.translation_.x);
+	ImGui::InputInt("ground", &ground);
 	ImGui::End();
+
+	playerO_->Update();
 }
 
 void Player::Draw()
@@ -123,6 +130,21 @@ void Player::Draw()
 
 void Player::CheckCollision()
 {
+
+#pragma region jimennitatu
+	if (!OnGround && pActManager_->GetActionNum() != ActionNum::Jump)
+	{
+		//sitamuki
+		const float fallacc = -0.01f;
+		const float fallVY = -0.3f;
+		//kasoku
+		fallV.y = max(fallV.y + fallacc, fallVY);
+		playerO_->worldTransform.translation_.x += fallV.x;
+		playerO_->worldTransform.translation_.y += fallV.y;
+		playerO_->worldTransform.translation_.z += fallV.z;
+	}
+#pragma endregion
+
 #pragma region オブジェクト同士の押し出し処理
 	class PlayerQueryCallBack : public QueryCallback
 	{
@@ -148,7 +170,6 @@ void Player::CheckCollision()
 			}
 			return true;
 		}
-		void SphereQuery();
 
 		//ワールドの上方向
 		const Vector3 up = { 0,1,0 };
@@ -172,15 +193,88 @@ void Player::CheckCollision()
 		if (sphere[i]->GetIsHit() == true)
 		{
 			////当たったものの属性が敵だった時
-			//if (sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_ENEMYS)
+			//if (sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_LAND)
 			//{
+			//	isHit = true;
 			//	playerO_->worldTransform.translation_.x += callback.move.x;
 			//	playerO_->worldTransform.translation_.y += callback.move.y;
 			//	playerO_->worldTransform.translation_.z += callback.move.z;
 			//	break;
 			//}
+			if (sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_GOAL)
+			{
+				isHit = true;
+				playerO_->worldTransform.translation_.x += callback.move.x;
+				//playerO_->worldTransform.translation_.y += callback.move.y;
+				playerO_->worldTransform.translation_.z += callback.move.z;
+				isGoal_ = true;
+				break;
+			}
+			if (sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_WALL)
+			{
+				isHit = true;
+				playerO_->worldTransform.translation_.x += callback.move.x;
+				//playerO_->worldTransform.translation_.y += callback.move.y;
+				playerO_->worldTransform.translation_.z += callback.move.z;
+				break;
+			}
+		}
+
+		Ray ray;
+		ray.start = sphere[i]->center;
+		ray.start.y += sphere[i]->GetRadius();
+		ray.dir = { 0,-1,0 };
+		RaycastHit rayCastHit;
+		if (OnGround)
+		{
+			const float adsDistance = 0.2f;
+			if (sphere[i]->GetIsHit() == true)
+			{
+				if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LAND,
+					&rayCastHit, sphere[i]->GetRadius() * 1.8f + adsDistance))
+				{
+					OnGround = true;
+					playerO_->worldTransform.translation_.y -= (rayCastHit.distance - sphere[i]->GetRadius() * 1.8f);
+				}
+			}
+
+			else
+			{
+				OnGround = false;
+				fallV = {};
+			}
+		}
+		else if (fallV.y <= 0.0f)
+		{
+			if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LAND,
+				&rayCastHit, sphere[i]->GetRadius() * 1.8f))
+			{
+				OnGround = true;
+				playerO_->worldTransform.translation_.y -= (rayCastHit.distance - sphere[i]->GetRadius() * 1.8f);
+
+			}
 		}
 
 	}
-#pragma endregion 
+#pragma endregion
+
+
+
+	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
+
+		spherePos[i] = playerO_->GetPosition();
+		sphere[i]->Update();
+	}
+
+
+
+}
+
+void Player::ResetParam()
+{
+	playerO_->worldTransform.translation_ = { 0,0,50 };
+	actionNum = 1;
+	oldActionNum_ = 0;	//アクション前フレーム保存変数
+	isGoal_ = false;
+	isHit = false;
 }

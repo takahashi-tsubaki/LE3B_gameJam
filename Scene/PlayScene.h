@@ -5,8 +5,13 @@
 #include <map>
 #include <sstream>
 
-
-struct LevelData;
+enum class BlockType
+{
+	Init,    //0
+	Normal,  //1
+	Goal,    //2
+	Wall,    //3
+};
 
 class PlayScene :
     public IScene
@@ -19,9 +24,6 @@ protected:
 	Player* player_ = nullptr;
 	Player* player2_ = nullptr;
 	SceneObjects* sceneObj_;
-
-
-	LevelData* levelData_ = nullptr;
 
 	Vector2 mousePos;
 	int mouseCheckNum = 0;
@@ -51,6 +53,12 @@ public:
 	/// 敵の発生
 	/// </summary>
 	void GenerBlock(Vector3 BlockPos, int num);
+
+
+	void LoadCsv(const char* word);
+
+
+	void GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute);
 
     //void Pause(Input* input);
 
@@ -84,7 +92,12 @@ private:	//メンバ変数
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
 
-	int blockNum = 45;
+	int blockNum = 100;
+	BlockType blockType = BlockType::Init;
+	int SPHERE_COLISSION_NUM = 1;	//コライダー（スフィア）の数
+	std::vector<Matrix4>* collisionBonesMat;	//当たり判定用のボーンのワールド行列
+	std::vector<SphereCollider*> sphere;
+	std::vector<Vector3> spherePos = {};
 
 	int modeC = 0;
 

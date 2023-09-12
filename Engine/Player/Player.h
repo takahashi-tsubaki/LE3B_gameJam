@@ -19,7 +19,6 @@
 #include"CollisionAttribute.h"
 
 #include "PlayerActionManager.h"
-
 class Player
 {
 public:
@@ -38,11 +37,17 @@ public:
 	void Draw();
 
 	void SetPosition(Vector3 position) { playerO_->worldTransform.translation_ = position; }
-	Vector3 GetPosition(){ return playerO_->worldTransform.translation_;}
+	Vector3 GetPosition() { return playerO_->worldTransform.translation_; }
 
 	PlayerActionManager* GetPlayerActionManager() { return pActManager_.get(); };
 
 	void CheckCollision();
+
+	bool GetIsGoal() { return isGoal_; }
+
+	void ResetParam();
+
+	bool GetIsHit() { return isHit; }
 
 private:
 	DirectXCommon* dxCommon_ = nullptr;
@@ -63,6 +68,16 @@ private:
 
 	int actionNum = 1;
 	int oldActionNum_ = 0;	//アクション前フレーム保存変数
+
+	bool isGoal_ = false;
+
+	bool isHit = false;
+
+	bool OnGround = false;
+	Vector3 fallV;
+
+	float gravity = 0.0f;
+	const float addSpeed = 0.1f;
 
 
 };
