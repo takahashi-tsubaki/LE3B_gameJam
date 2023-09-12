@@ -224,11 +224,12 @@ void ChipManager::ChangeParallel(Input* input)
 		}
 	}
 	if (isParallel == true) {
-		chipArea_->SetPos({ -43.0f,25.0f,0.0f });
-		chipArea2_->SetPos({ -43.0f,17.0f,0.0f });
+		chipArea_->SetPos({ -33.5f,27.5f,0.0f });
+		chipArea2_->SetPos({ -33.5f,17.5f,0.0f });
 	}
 	else {
-
+		chipArea_->SetPos({ -42.0f,20.0f,0.0f });
+		chipArea2_->SetPos({ -25.0f,20.0f,0.0f });
 	}
 }
 

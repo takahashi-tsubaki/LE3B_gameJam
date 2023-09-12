@@ -33,11 +33,12 @@ public:
 	void InitializeArea();
 	void ChangeParallel(Input* input);
 	unsigned short GetPattern() { return pattern; };
+	void modeChangePos(int num);
+
 private:
 	unsigned short pattern;
 	bool isParallel = true;
 
-	void modeChangePos(int num);
 
 	//std::map<std::string ,Chip* > chipMap_;
 
