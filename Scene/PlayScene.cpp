@@ -23,10 +23,24 @@ void PlayScene::Initialize()
 	player_ = sceneObj_->player_;
 
 	sprite_ =  Sprite::Create(1, { 0,0 });
+
 	sprite_->Initialize();
 
 	sprite2_ =  Sprite::Create(3, { 0,0 });
+
+
+	sprite3_ =  Sprite::Create(4, { 680,540 });
+	sprite4_ =  Sprite::Create(5, { 680,540 });
+
+	sprite5_ =  Sprite::Create(6, { 600,424 });
+	sprite6_ =  Sprite::Create(7, { 712,424 });
+
+	sprite_->Initialize();
 	sprite2_->Initialize();
+	sprite3_->Initialize();
+	sprite4_->Initialize();
+	sprite5_->Initialize();
+	sprite6_->Initialize();
 
 	spriteDash_ = Sprite::Create(8, { 0,0 });
 	spriteDash_->Initialize();
@@ -98,6 +112,31 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		}
 		else {
 			modeC = 0;
+		}
+	}
+
+	if (pause == 0)
+	{
+		if (input->TriggerKey(DIK_Q))
+		{
+			pause = 1;
+		}
+		else if (input->TriggerKey(DIK_E))
+		{
+			pause = 2;
+		}
+	}
+	else if (pause == 1 || pause == 2)
+	{
+		if (input->TriggerKey(DIK_E))
+		{
+			pause = 0;
+		}
+		if (input->TriggerKey(DIK_Q))
+		{
+			controller_->ChangeSceneNum(S_TITLE);
+			pSourceVoice[0]->Stop();
+			soundCheckFlag = 0;
 		}
 	}
 
@@ -229,6 +268,7 @@ void PlayScene::Draw()
 		sprite2_->Draw();
 	}
 
+
 	if (isJumpFlag == true) {
 		spriteJump_->Draw();
 	}
@@ -243,6 +283,18 @@ void PlayScene::Draw()
 	else if (tyokudenTimer >= 16 && tyokudenTimer <= 20) { spritetyokuden4_->Draw(); }
 	else if (tyokudenTimer >= 21 && tyokudenTimer <= 25) { spritetyokuden5_->Draw(); }
 	else if (tyokudenTimer >= 26 && tyokudenTimer <= 30) { spritetyokuden6_->Draw(); }
+
+
+	if (pause == 1)
+	{
+		sprite3_->Draw();
+		sprite5_->Draw();
+	}
+	else if (pause == 2)
+	{
+		sprite4_->Draw();
+		sprite6_->Draw();
+	}
 
 
 	/// <summary>

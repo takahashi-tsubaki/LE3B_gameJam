@@ -59,6 +59,10 @@ private:	//メンバ変数
 	Camera* camera_ = nullptr;
 	Sprite* sprite_ = nullptr;
 	Sprite* sprite2_ = nullptr;
+	Sprite* sprite3_ = nullptr;
+	Sprite* sprite4_ = nullptr;
+	Sprite* sprite5_ = nullptr;
+	Sprite* sprite6_ = nullptr;
 	Audio* audio = nullptr;
 
 	Sprite* spriteJump_ = nullptr;
@@ -83,6 +87,9 @@ private:	//メンバ変数
 	int blockNum = 45;
 
 	int modeC = 0;
+
+	//bool pause = FALSE;
+	int pause = 0;
 
 public:
 	//音を止める関数
