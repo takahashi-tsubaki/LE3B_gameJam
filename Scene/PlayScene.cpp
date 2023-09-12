@@ -28,32 +28,32 @@ void PlayScene::Initialize()
 	sprite2_ =  Sprite::Create(3, { 0,0 });
 	sprite2_->Initialize();
 
-	spriteDash_ = Sprite::Create(4, { 0,0 });
+	spriteDash_ = Sprite::Create(8, { 0,0 });
 	spriteDash_->Initialize();
 	spriteDashPosition = sprite_->GetPosition();
 	spriteDash_->SetPosition({ spriteDashPosition });
 
-	spriteJump_ = Sprite::Create(5, { 0,0 });
+	spriteJump_ = Sprite::Create(9, { 0,0 });
 	spriteJump_->Initialize();
 	spriteJumpPosition = spriteJump_->GetPosition();
 	spriteJump_->SetPosition({ spriteJumpPosition });
 
-	spritetyokuden1_ = Sprite::Create(6, { 0,0 });
+	spritetyokuden1_ = Sprite::Create(10, { 0,0 });
 	spritetyokuden1_->Initialize();
 
-	spritetyokuden2_ = Sprite::Create(7, { 0,0 });
+	spritetyokuden2_ = Sprite::Create(11, { 0,0 });
 	spritetyokuden2_->Initialize();
 
-	spritetyokuden3_ = Sprite::Create(8, { 0,0 });
+	spritetyokuden3_ = Sprite::Create(12, { 0,0 });
 	spritetyokuden3_->Initialize();
 
-	spritetyokuden4_ = Sprite::Create(9, { 0,0 });
+	spritetyokuden4_ = Sprite::Create(13, { 0,0 });
 	spritetyokuden4_->Initialize();
 
-	spritetyokuden5_ = Sprite::Create(10, { 0,0 });
+	spritetyokuden5_ = Sprite::Create(14, { 0,0 });
 	spritetyokuden5_->Initialize();
 
-	spritetyokuden6_ = Sprite::Create(11, { 0,0 });
+	spritetyokuden6_ = Sprite::Create(15, { 0,0 });
 	spritetyokuden6_->Initialize();
 
 	audio = new Audio();
