@@ -16,7 +16,7 @@ void PlayerMove::Initialize(Object3d* object)
 
 void PlayerMove::Update(Input* input, GamePad* gamePad)
 {
-	if (input->PushKey(DIK_W))
+	/*if (input->PushKey(DIK_W))
 	{
 		velocity_ = { 0,0,speed };
 		object_->worldTransform.translation_ += velocity_;
@@ -25,7 +25,7 @@ void PlayerMove::Update(Input* input, GamePad* gamePad)
 	{
 		velocity_ = { 0,0,-speed };
 		object_->worldTransform.translation_ += velocity_;
-	}
+	}*/
 	if (input->PushKey(DIK_A))
 	{
 		velocity_ = { -speed,0,0 };

@@ -13,7 +13,8 @@ GameClearScene::~GameClearScene()
 
 void GameClearScene::Initialize()
 {
-
+	player_ = sceneObj_->player_;
+	player_->ResetParam();
 }
 
 void GameClearScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
@@ -23,7 +24,7 @@ void GameClearScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	{
 		controller_->ChangeSceneNum(S_TITLE);
 	}
-
+	player_->Update(input, gamePad);
 	assert(input);
 	controller_->camera_->Update();
 }
