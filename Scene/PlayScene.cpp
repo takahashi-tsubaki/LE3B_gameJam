@@ -147,7 +147,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 	if (player_->GetIsGoal() == true)
 	{
-
+		pSourceVoice[0]->Stop();
+		soundCheckFlag = 0;
 		controller_->ChangeSceneNum(S_CLEAR);
 	}
 
