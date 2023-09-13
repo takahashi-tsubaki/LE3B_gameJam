@@ -14,7 +14,7 @@ GameClearScene::~GameClearScene()
 void GameClearScene::Initialize()
 {
 	player_ = sceneObj_->player_;
-	player_->ResetParam();
+	player_->ResetParam(sceneObj_->startPlayerPos);
 
 
 	//タイマーの表示

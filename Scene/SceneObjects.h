@@ -88,5 +88,7 @@ public:
 	int timeM = 0;
 	int timeTS = 0;
 	int timeS = 0;
+
+	int startPlayerPos = 0;
 };
 
