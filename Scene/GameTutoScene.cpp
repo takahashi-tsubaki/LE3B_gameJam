@@ -114,6 +114,7 @@ void GameTutoScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		isSele4Flag = false;
 	}
 
+
 	if (Sele1Timer >= 30) {
 		controller_->ChangeSceneNum(S_PLAY);
 	}
