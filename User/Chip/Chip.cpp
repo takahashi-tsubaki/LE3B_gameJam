@@ -128,7 +128,8 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 		object_->worldTransform.translation_.y = mousePos_.y;
 		object_->worldTransform.translation_.z = mousePos_.z;
 	}
-	if (sphere[0]->GetIsHit() != true && sphere[0]->GetCollisionInfo().collider->GetAttribute() != COLLISION_ATTR_POWERCHIP_AREA && nowDrag_ == false) {
+	if (sphere[0]->GetIsHit() != true && sphere[0]->GetCollisionInfo().collider->GetAttribute() != COLLISION_ATTR_POWERCHIP_AREA && nowDrag_ == false||
+		isAreaSet == false && isChipGet_ == false && nowDrag_ != false) {
 		//object_->worldTransform.translation_ = restPos_;
 		object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
 		object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
@@ -140,10 +141,6 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 		object_->worldTransform.translation_.x = areaPos_.x;
 		object_->worldTransform.translation_.y = areaPos_.y;
 		object_->worldTransform.translation_.z = 0;
-	}
-	if (isAreaSet == false && isChipGet_ == false && nowDrag_ != false) {
-		object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
-		object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
 	}
 
 	ImGui::Text("c");

@@ -1,5 +1,5 @@
 #pragma once
-
+const unsigned short CHIP_PATT_ALLCLEAR = 0b0000000000000000;
 // パターン属性
 const unsigned short CHIP_PATT_NONE = 0b1 << 0;
 const unsigned short CHIP_PATT_MOVE = 0b1 << 1;
