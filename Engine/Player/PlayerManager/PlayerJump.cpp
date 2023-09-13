@@ -41,11 +41,11 @@ void PlayerJump::Update(Input* input, GamePad* gamePad)
 	}
 	/*CheckCollision();*/
 
-	ImGui::Begin("Jump");
+	/*ImGui::Begin("Jump");
 	ImGui::SetWindowPos({ 500, 100 });
 	ImGui::InputFloat("Height", &jumpHeight);
 
-	ImGui::End();
+	ImGui::End();*/
 
 }
 

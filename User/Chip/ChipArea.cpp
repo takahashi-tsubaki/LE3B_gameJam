@@ -106,7 +106,7 @@ void ChipArea::Draw(DirectXCommon* dxCommon) {
 	Object3d::PreDraw(dxCommon->GetCommandList());
 	object_->Draw();
 	//reticle->Draw();
-	coliderPosTest_[0]->Draw();
+	//coliderPosTest_[0]->Draw();
 	Object3d::PostDraw();
 }
 

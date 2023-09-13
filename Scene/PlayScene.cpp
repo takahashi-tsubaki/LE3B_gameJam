@@ -86,10 +86,12 @@ PlayScene::~PlayScene()
 void PlayScene::Initialize()
 {
 
+	sphereSave.clear();
 	//LoadBlockData();
 
 	//LoadCsv("Resources/Csv/stageBlock.csv");
 	LoadCsv("Resources/Csv/stageTest.csv");
+
 
 	player_ = sceneObj_->player_;
 
@@ -330,6 +332,11 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		}
 		if (input->TriggerKey(DIK_Q))
 		{
+			for (SphereCollider* s : sphereSave)
+			{
+				CollisionManager::GetInstance()->RemoveCollider(s);
+
+			}
 			controller_->ChangeSceneNum(S_TITLE);
 			pSourceVoice[0]->Stop();
 			soundCheckFlag = 0;
@@ -387,12 +394,12 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 	mouse->Update();
 
-	ImGui::Begin("mouseCheck");
-	//ImGui::SetWindowPos({ 200 , 200 });
-	ImGui::SetWindowSize({ 500,100 });
-	ImGui::InputInt("mouseNum", &num_);
-	ImGui::InputFloat2("position", &mousePos.x);
-	ImGui::End();
+	//ImGui::Begin("mouseCheck");
+	////ImGui::SetWindowPos({ 200 , 200 });
+	//ImGui::SetWindowSize({ 500,100 });
+	//ImGui::InputInt("mouseNum", &num_);
+	//ImGui::InputFloat2("position", &mousePos.x);
+	//ImGui::End();
 
 	sceneObj_->skydomeO_->Update();
 	//for分に
@@ -492,7 +499,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 			CollisionManager::GetInstance()->RemoveCollider(s);
 			
 		}
-		sphereSave.clear();
+
 		controller_->ChangeSceneNum(S_CLEAR);
 	}
 }
