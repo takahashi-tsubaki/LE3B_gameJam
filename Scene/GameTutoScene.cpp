@@ -123,6 +123,7 @@ void GameTutoScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		Sele2Timer >= 30||
 		Sele3Timer >= 30) {
 		sceneObj_->startPlayerPos = startPlayerPos;
+
 		controller_->ChangeSceneNum(S_PLAY);
 	}
 

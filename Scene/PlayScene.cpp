@@ -13,6 +13,73 @@ PlayScene::PlayScene(SceneManager* controller, SceneObjects* sceneObj)
 PlayScene::~PlayScene()
 {
 	sceneObj_->Reset();
+	delete sprite_;
+	delete sprite2_;
+	delete sprite3_;
+	delete sprite4_;
+	delete sprite5_;
+	delete sprite6_;
+	delete spriteDash_;
+	delete spriteJump_;
+
+	delete spritetyokuden1_;
+	delete spritetyokuden2_;
+	delete spritetyokuden3_;
+	delete spritetyokuden4_;
+	delete spritetyokuden5_;
+	delete spritetyokuden6_;
+
+	delete spriteheiden1_;
+	delete spriteheiden2_;
+	delete spriteheiden3_;
+	delete spriteheiden4_;
+	delete spriteheiden5_;
+	delete spriteheiden6_;
+	delete timeboard_;
+
+	delete spriteTimeM0_;
+	delete spriteTimeM1_;
+	delete spriteTimeM2_;
+	delete spriteTimeM3_;
+	delete spriteTimeM4_;
+	delete spriteTimeM5_;
+	delete spriteTimeM6_;
+	delete spriteTimeM7_;
+	delete spriteTimeM8_;
+	delete spriteTimeM9_;
+
+	delete spriteTimeTM0_;
+	delete spriteTimeTM1_;
+	delete spriteTimeTM2_;
+	delete spriteTimeTM3_;
+	delete spriteTimeTM4_;
+	delete spriteTimeTM5_;
+	delete spriteTimeTM6_;
+
+	delete spriteTimeS0_;
+	delete spriteTimeS1_;
+	delete spriteTimeS2_;
+	delete spriteTimeS3_;
+	delete spriteTimeS4_;
+	delete spriteTimeS5_;
+	delete spriteTimeS6_;
+	delete spriteTimeS7_;
+	delete spriteTimeS8_;
+	delete spriteTimeS9_;
+
+	delete spriteTimeTS0_;
+	delete spriteTimeTS1_;
+	delete spriteTimeTS2_;
+	delete spriteTimeTS3_;
+	delete spriteTimeTS4_;
+	delete spriteTimeTS5_;
+	delete spriteTimeTS6_;
+
+	/*for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
+	{
+		delete &sphere[i];
+		delete& spherePos[i];
+	}*/
 
 }
 
@@ -64,15 +131,7 @@ void PlayScene::Initialize()
 	sprite5_->Initialize();
 	sprite6_->Initialize();
 
-	spriteDash_ = Sprite::Create(8, { 0,0 });
-	spriteDash_->Initialize();
-	spriteDashPosition = sprite_->GetPosition();
-	spriteDash_->SetPosition({ spriteDashPosition });
-
-	spriteJump_ = Sprite::Create(9, { 0,0 });
-	spriteJump_->Initialize();
-	spriteJumpPosition = spriteJump_->GetPosition();
-	spriteJump_->SetPosition({ spriteJumpPosition });
+	
 
 	//直列回路の電気移動
 	spritetyokuden1_ = Sprite::Create(10, { 0,0 });
@@ -277,18 +336,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		}
 	}
 
-	if (player_->GetIsGoal() == true)
-	{
-		pSourceVoice[0]->Stop();
-		soundCheckFlag = 0;
-		timeFps = sceneObj_->timeFps;
-
-		sceneObj_->timeTM = timeTM ;
-		sceneObj_->timeM = timeM;
-		sceneObj_->timeTS =timeTS ;
-		sceneObj_->timeS = timeS;
-		controller_->ChangeSceneNum(S_CLEAR);
-	}
+	
 
 	GameTimer();
 
@@ -316,13 +364,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	controller_->camera_->SetTarget({ player_->GetPosition().x - 20,player_->GetPosition().y, player_->GetPosition().z });
 	controller_->camera_->Update();
 
-	spriteJumpPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 740.0f;
-	spriteJumpPosition.y = sceneObj_->plaobject->worldTransform.translation_.y + 360.0f;
-	spriteJump_->SetPosition(spriteJumpPosition);
-
-	spriteDashPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 710.0f;
-	spriteDashPosition.y = sceneObj_->plaobject->worldTransform.translation_.x + 310.0f;
-	spriteDash_->SetPosition(spriteDashPosition);
+	
 
 	//左クリック時
 	if (mouse->TriggerMouseButton(0))
@@ -337,6 +379,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		mousePos = mousePos;
 	}
 
+	
+
 	sceneObj_->chipManager_->modeChangePos(modeC);
 
 	sceneObj_->chipManager_->Update(input, mouse);
@@ -346,7 +390,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	ImGui::Begin("mouseCheck");
 	//ImGui::SetWindowPos({ 200 , 200 });
 	ImGui::SetWindowSize({ 500,100 });
-	ImGui::InputInt("mouseNum", &mouseCheckNum);
+	ImGui::InputInt("mouseNum", &num_);
 	ImGui::InputFloat2("position", &mousePos.x);
 	ImGui::End();
 
@@ -409,8 +453,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 			if (isStockFlag == false) {
 				if (input->TriggerKey(DIK_SPACE)) { isTyokudenFlag = true; }
 				if (isTyokudenFlag == true) { tyokudenTimer++; }
-				if (tyokudenTimer >= 30) {
-					tyokudenTimer = 30;
+				if (tyokudenTimer >= 15) {
+					tyokudenTimer = 15;
 					isStockFlag = true;
 				}
 			}
@@ -429,6 +473,27 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		tyokudenTimer = 0;
 		isHeidenFlag = false;
 		isStockFlag2 = false;
+	}
+
+	if (player_->GetIsGoal() == true)
+	{
+		pSourceVoice[0]->Stop();
+		soundCheckFlag = 0;
+		timeFps = sceneObj_->timeFps;
+
+		sceneObj_->timeTM = timeTM;
+		sceneObj_->timeM = timeM;
+		sceneObj_->timeTS = timeTS;
+		sceneObj_->timeS = timeS;
+
+
+		for (SphereCollider* s : sphereSave)
+		{
+			CollisionManager::GetInstance()->RemoveCollider(s);
+			
+		}
+		sphereSave.clear();
+		controller_->ChangeSceneNum(S_CLEAR);
 	}
 }
 
@@ -470,20 +535,12 @@ void PlayScene::Draw()
 	}
 
 
-	if (isJumpFlag == true) {
-		spriteJump_->Draw();
-	}
-
-	if (isDashFlag == true) {
-		spriteDash_->Draw();
-	}
-
-	if (tyokudenTimer >= 1 && tyokudenTimer <= 5) { spritetyokuden1_->Draw(); }
-	else if (tyokudenTimer >= 6 && tyokudenTimer <= 10) { spritetyokuden2_->Draw(); }
-	else if (tyokudenTimer >= 11 && tyokudenTimer <= 15) { spritetyokuden3_->Draw(); }
-	else if (tyokudenTimer >= 16 && tyokudenTimer <= 20) { spritetyokuden4_->Draw(); }
-	else if (tyokudenTimer >= 21 && tyokudenTimer <= 25) { spritetyokuden5_->Draw(); }
-	else if (tyokudenTimer >= 26 && tyokudenTimer <= 30) { spritetyokuden6_->Draw(); }
+	if (tyokudenTimer >= 1 && tyokudenTimer <= 2) { spritetyokuden1_->Draw(); }
+	else if (tyokudenTimer >= 3 && tyokudenTimer <=5 ) { spritetyokuden2_->Draw(); }
+	else if (tyokudenTimer >= 6 && tyokudenTimer <= 8) { spritetyokuden3_->Draw(); }
+	else if (tyokudenTimer >= 9 && tyokudenTimer <= 11) { spritetyokuden4_->Draw(); }
+	else if (tyokudenTimer >= 12 && tyokudenTimer <= 14) { spritetyokuden5_->Draw(); }
+	else if (tyokudenTimer >= 15 && tyokudenTimer <= 15) { spritetyokuden6_->Draw(); }
 
 	if (heidenTimer >= 1 && heidenTimer <= 5) { spriteheiden1_->Draw(); }
 	else if (heidenTimer >= 6 && heidenTimer <= 10) { spriteheiden2_->Draw(); }
@@ -698,7 +755,7 @@ void PlayScene::LoadCsv(const char* word)
 			case BlockType::Wall:
 				GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_WALL);
 				break;
-				
+
 			}
 			blockType = BlockType::Init;
 		}
@@ -714,12 +771,15 @@ void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 	sphere.resize(SPHERE_COLISSION_NUM);
 	spherePos.resize(SPHERE_COLISSION_NUM);
 
+	num_ = num;
+
 	if (attribute == COLLISION_ATTR_LAND)
 	{
 
 		for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
 		{
 			sphere[i] = new SphereCollider;
+			sphereSave.push_back(sphere[i]);
 			CollisionManager::GetInstance()->AddCollider(sphere[i]);
 			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
 			sphere[i]->SetBasisPos(&spherePos[i]);
@@ -733,6 +793,7 @@ void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 		for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
 		{
 			sphere[i] = new SphereCollider;
+			sphereSave.push_back(sphere[i]);
 			CollisionManager::GetInstance()->AddCollider(sphere[i]);
 			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
 			sphere[i]->SetBasisPos(&spherePos[i]);
@@ -747,6 +808,7 @@ void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 		for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
 		{
 			sphere[i] = new SphereCollider;
+			sphereSave.push_back(sphere[i]);
 			CollisionManager::GetInstance()->AddCollider(sphere[i]);
 			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
 			sphere[i]->SetBasisPos(&spherePos[i]);

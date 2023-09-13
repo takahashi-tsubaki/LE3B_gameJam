@@ -120,8 +120,7 @@ void Player::Update(Input* input, GamePad* gamePad)
 	pActManager_->ActionUpdate(input, gamePad);
 	oldActionNum_ = pActManager_->GetActionNum();
 
-	if (input->PushKey(DIK_W)) { playerO_->SetModel(jumpmodelL); }
-	else if (input->PushKey(DIK_S)) { playerO_->SetModel(jumpmodel); }
+	if (input->PushKey(DIK_SPACE)) { playerO_->SetModel(jumpmodelL); }
 	else if (input->PushKey(DIK_A)) {
 		changeModelTimer++;
 		if (changeModelTimer > 24) {

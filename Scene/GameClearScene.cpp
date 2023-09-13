@@ -121,7 +121,7 @@ void GameClearScene::Initialize()
 void GameClearScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	gamePad->Update();
-	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X))
+	if (input->TriggerKey(DIK_SPACE) || gamePad->ButtonTrigger(X))
 	{
 		controller_->ChangeSceneNum(S_TITLE);
 	}
