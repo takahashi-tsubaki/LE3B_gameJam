@@ -1,5 +1,5 @@
 #include "ChipArea.h"
-
+#include "imgui.h"
 
 ChipArea::ChipArea()
 {
@@ -70,7 +70,7 @@ void ChipArea::Update() {
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
 		sphere[i]->SetRadius(object_->worldTransform.scale_.x);
 		coliderPosTest_[i]->worldTransform.translation_ = sphere[i]->center;
-		spherePos[i] = object_->worldTransform.translation_;
+		/*spherePos[i] = object_->worldTransform.translation_;*/
 
 		isSet = false;
 		object_->position_.z = 0;
@@ -85,8 +85,8 @@ void ChipArea::Update() {
 		}
 	}
 
-	object_->worldTransform.translation_.x += object_->GetCamera()->eye_.x ;
-	object_->worldTransform.translation_.y += object_->GetCamera()->eye_.y ;
+	object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
+	object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
 
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
 
@@ -95,8 +95,7 @@ void ChipArea::Update() {
 		coliderPosTest_[i]->Update();
 	}
 	object_->Update();
-
-	subject = nullptr;
+	//subject = nullptr;
 }
 
 /// エリアの描画を行う
@@ -104,11 +103,12 @@ void ChipArea::Draw(DirectXCommon* dxCommon) {
 	Object3d::PreDraw(dxCommon->GetCommandList());
 	object_->Draw();
 	//reticle->Draw();
-	//coliderPosTest_[0]->Draw();
+	coliderPosTest_[0]->Draw();
 	Object3d::PostDraw();
 }
 
 /// リセットを行う
 void ChipArea::Reset() {
-
+	//isSet = false;
+	subject = nullptr;
 }

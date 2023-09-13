@@ -62,6 +62,7 @@ public:
 	Object3d* object_;
 	Vector3 areaPos_;
 	Vector3 mousePos_;
+	bool isRestSet;
 
 	int isDecreasePower;	// 0 none, 1 並列, 2 直列
 

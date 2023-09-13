@@ -25,7 +25,7 @@ public:
 
 	unsigned short MakePattern();
 
-	void Reset() { chips_.clear(); };
+	void Reset();
 	void AddChip(std::string chipName, Chip* chip);
 	void AddChipArea(std::string chipAreaName, ChipArea* chipArea);
 
@@ -35,8 +35,12 @@ public:
 	unsigned short GetPattern() { return pattern; };
 	void modeChangePos(int num);
 
+	bool isMove = false;
+
 private:
 	unsigned short pattern;
+
+
 	bool isParallel = true;
 
 
