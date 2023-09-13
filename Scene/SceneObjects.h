@@ -81,5 +81,12 @@ public:
 	//Chip* chip2_ = nullptr;
 	//ChipArea* chipArea2_ = nullptr;
 	ChipManager* chipManager_ = nullptr;
+
+	int timeFps = 0;
+
+	int timeTM = 0;
+	int timeM = 0;
+	int timeTS = 0;
+	int timeS = 0;
 };
 

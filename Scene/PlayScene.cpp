@@ -192,7 +192,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		soundCheckFlag = 1;
 	}
 
-	GameTimer();
+
 
 	//シーンチェンジ
 	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X)) {
@@ -265,7 +265,20 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	{
 		pSourceVoice[0]->Stop();
 		soundCheckFlag = 0;
+		timeFps = sceneObj_->timeFps;
+
+		sceneObj_->timeTM = timeTM ;
+		sceneObj_->timeM = timeM;
+		sceneObj_->timeTS =timeTS ;
+		sceneObj_->timeS = timeS;
 		controller_->ChangeSceneNum(S_CLEAR);
+	}
+
+	GameTimer();
+
+	player_->chipPat_ = sceneObj_->chipManager_->GetPattern();
+	if (sceneObj_->chipManager_->isMove == true) {
+		player_->chipOnMove_ = true;
 	}
 
 	player_->Update(input, gamePad);
@@ -656,8 +669,9 @@ void PlayScene::LoadCsv(const char* word)
 			case BlockType::Wall:
 				GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_WALL);
 				break;
-				blockType = BlockType::Init;
+				
 			}
+			blockType = BlockType::Init;
 		}
 
 	}
