@@ -153,10 +153,14 @@ private:	//メンバ変数
 	std::vector<SphereCollider*> sphere;
 	std::vector<Vector3> spherePos = {};
 
+	std::list<SphereCollider*> sphereSave;
+
 	int modeC = 0;
 
 	//bool pause = FALSE;
 	int pause = 0;
+
+	int num_;
 
 public:
 	//音を止める関数
