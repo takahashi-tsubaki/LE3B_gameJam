@@ -40,6 +40,10 @@ void SceneObjects::Initialize(SceneManager* controller)
 
 	Sprite::LoadTexture(32, L"Resources/timeNum/timerBoard.png");
 
+	Sprite::LoadTexture(52, L"Resources/clear/ClearA.png");
+	Sprite::LoadTexture(53, L"Resources/clear/ClearB.png");
+	Sprite::LoadTexture(54, L"Resources/clear/ClearC.png");
+
 	//Sprite::LoadTexture(2, L"Resources/mario.jpg");
 
 	//Sprite::LoadTexture(4, L"Resources/sprite/clear.png");
