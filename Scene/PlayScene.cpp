@@ -287,6 +287,14 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	{
 		player_->SetPosition({1000,0,50});
 	}
+	if (startplayerPos == 2)
+	{
+		player_->SetPosition({ 1000,0,50 });
+	}
+	if (startplayerPos == 3)
+	{
+		player_->SetPosition({ 1000,0,50 });
+	}
 
 	player_->Update(input, gamePad);
 
