@@ -79,8 +79,8 @@ void PlayerJump::ParamReset()
 void PlayerJump::Gravity()
 {
 	//sitamuki
-	const float fallacc = -0.01f;
-	const float fallVY = -0.2f;
+	const float fallacc = -0.02f;
+	const float fallVY = -0.5f;
 	//kasoku
 	fallV.y = max(fallV.y + fallacc, fallVY);
 	object_->worldTransform.translation_.x += fallV.x;
