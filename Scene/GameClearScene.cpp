@@ -15,6 +15,15 @@ void GameClearScene::Initialize()
 {
 	player_ = sceneObj_->player_;
 	player_->ResetParam();
+
+	clearA = Sprite::Create(52, { 0,0 });
+	clearA->Initialize();
+
+	clearB = Sprite::Create(53, { 0,0 });
+	clearB->Initialize();
+
+	clearB = Sprite::Create(54, { 0,0 });
+	clearB->Initialize();
 }
 
 void GameClearScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
@@ -36,6 +45,13 @@ void GameClearScene::Draw()
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
 
 	//sprite_->Draw();
+
+	{
+		clearA->Draw();
+		/*clearB->Draw();
+		clearC->Draw();*/
+	}
+
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
