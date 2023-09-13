@@ -57,9 +57,9 @@ public:
 
 
 	//ステージのブロックの数
-	int blockNum = 200;
+	int blockNum = 300;
 	Model* asmodel = nullptr;
-	Object3d* asobj_[200] = { 0 };
+	Object3d* asobj_[300] = { 0 };
 
 	Model* plamodel = nullptr;
 	Object3d* plaobject = nullptr;

@@ -12,6 +12,10 @@ protected:
 	SceneObjects* sceneObj_;
 	Player* player_ = nullptr;
 
+	Sprite* clearA = nullptr;
+	Sprite* clearB = nullptr;
+	Sprite* clearC = nullptr;
+
 public:
 
 	GameClearScene(SceneManager* controller, SceneObjects* sceneObj);

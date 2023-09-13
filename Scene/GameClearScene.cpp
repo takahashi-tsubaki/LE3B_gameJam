@@ -16,6 +16,7 @@ void GameClearScene::Initialize()
 	player_ = sceneObj_->player_;
 	player_->ResetParam();
 
+
 	//タイマーの表示
 	timeboard_ = Sprite::Create(32, { 820,50 });
 	timeboard_->Initialize();
@@ -104,6 +105,16 @@ void GameClearScene::Initialize()
 		spriteTimeS9_ = Sprite::Create(31, { 1000,50 });
 		spriteTimeS9_->Initialize();
 	}
+
+
+	clearA = Sprite::Create(52, { 0,0 });
+	clearA->Initialize();
+
+	clearB = Sprite::Create(53, { 0,0 });
+	clearB->Initialize();
+
+	clearB = Sprite::Create(54, { 0,0 });
+	clearB->Initialize();
 
 }
 
@@ -196,6 +207,17 @@ void GameClearScene::Draw()
 #pragma region 前景スプライト描画
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
+
+
+
+	//sprite_->Draw();
+
+	{
+		clearA->Draw();
+		/*clearB->Draw();
+		clearC->Draw();*/
+	}
+
 
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
