@@ -287,11 +287,11 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	controller_->camera_->SetTarget({ player_->GetPosition().x - 20,player_->GetPosition().y, player_->GetPosition().z });
 	controller_->camera_->Update();
 
-	spriteJumpPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 610.0f;
+	spriteJumpPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 740.0f;
 	spriteJumpPosition.y = sceneObj_->plaobject->worldTransform.translation_.y + 360.0f;
 	spriteJump_->SetPosition(spriteJumpPosition);
 
-	spriteDashPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 590.0f;
+	spriteDashPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 710.0f;
 	spriteDashPosition.y = sceneObj_->plaobject->worldTransform.translation_.x + 310.0f;
 	spriteDash_->SetPosition(spriteDashPosition);
 
