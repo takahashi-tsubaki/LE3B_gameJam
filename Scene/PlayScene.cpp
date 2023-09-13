@@ -28,6 +28,8 @@ void PlayScene::Initialize()
 
 	player_->ResetParam();
 
+	startplayerPos = sceneObj_->startPlayerPos;
+
 	sprite_ = Sprite::Create(1, { 0,0 });
 
 	sprite_->Initialize();
@@ -279,6 +281,11 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	player_->chipPat_ = sceneObj_->chipManager_->GetPattern();
 	if (sceneObj_->chipManager_->isMove == true) {
 		player_->chipOnMove_ = true;
+	}
+
+	if (startplayerPos == 1)
+	{
+		player_->SetPosition({1000,0,50});
 	}
 
 	player_->Update(input, gamePad);

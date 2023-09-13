@@ -177,5 +177,7 @@ public:
 	int timeTS = 0;
 	int timeS = 0;
 
+	int startplayerPos = 0;
+
 };
 

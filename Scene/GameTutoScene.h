@@ -69,6 +69,8 @@ private:	//メンバ変数
 	int Sele4Timer = 0;
 
 
+	int startPlayerPos = 0;
+
 };
 
 

@@ -93,29 +93,34 @@ void GameTutoScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	if (isSele1Flag == true) {Sele1Timer++;}
 	if (Sele1Timer > 30) {
 		Sele1Timer = 30;
+		startPlayerPos = 1;
 		isSele1Flag = false;
 	}
 
 	if (isSele2Flag == true) { Sele2Timer++; }
 	if (Sele2Timer > 30) {
 		Sele2Timer = 30;
+		startPlayerPos = 2;
 		isSele2Flag = false;
 	}
 
 	if (isSele3Flag == true) { Sele3Timer++; }
 	if (Sele3Timer > 30) {
 		Sele3Timer = 30;
+		startPlayerPos = 3;
 		isSele3Flag = false;
 	}
 
 	if (isSele4Flag == true) { Sele4Timer++; }
 	if (Sele4Timer >= 30) {
 		Sele4Timer = 30;
+		startPlayerPos = 4;
 		isSele4Flag = false;
 	}
 
 
 	if (Sele1Timer >= 30) {
+		sceneObj_->startPlayerPos = startPlayerPos;
 		controller_->ChangeSceneNum(S_PLAY);
 	}
 
