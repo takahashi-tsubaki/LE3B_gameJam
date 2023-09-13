@@ -25,7 +25,7 @@ public:
 
 	unsigned short MakePattern();
 
-	void Reset() { chips_.clear(); };
+	void Reset();
 	void AddChip(std::string chipName, Chip* chip);
 	void AddChipArea(std::string chipAreaName, ChipArea* chipArea);
 

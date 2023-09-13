@@ -144,6 +144,16 @@ unsigned short ChipManager::MakePattern()
 	}
 }
 
+void ChipManager::Reset()
+{
+	for (ChipArea* area : chipAreas_) {
+		area->Reset();
+	}
+	for (Chip* chip : chips_) {
+		chip->Reset();
+	}
+}
+
 void ChipManager::AddChip(std::string chipName, Chip* chip)
 {
 	assert(chip);

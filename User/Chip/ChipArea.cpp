@@ -108,5 +108,6 @@ void ChipArea::Draw(DirectXCommon* dxCommon) {
 
 /// リセットを行う
 void ChipArea::Reset() {
-
+	isSet = false;
+	subject = nullptr;
 }
