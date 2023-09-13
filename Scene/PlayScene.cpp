@@ -269,15 +269,6 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		soundCheckFlag = 1;
 	}
 
-
-
-	//シーンチェンジ
-	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X)) {
-		controller_->ChangeSceneNum(S_TITLE);
-		pSourceVoice[0]->Stop();
-		soundCheckFlag = 0;
-	}
-
 	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)) {
 		controller_->PushScene(S_PAUSE);
 	}

@@ -120,9 +120,8 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 
 
 	}
-	ImGui::Begin("chipFlag");
+
 	if (isChipGet_ == true) {
-		ImGui::Text("a");
 		//object_->worldTransform.translation_ = mousePos_;
 		object_->worldTransform.translation_.x = mousePos_.x;
 		object_->worldTransform.translation_.y = mousePos_.y;
@@ -137,15 +136,12 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 		resetRestSet_ = false;
 	}
 	if (isAreaSet == true) {
-		ImGui::Text("b");
 		//object_->worldTransform.translation_ = areaPos_;
 		object_->worldTransform.translation_.x = areaPos_.x;
 		object_->worldTransform.translation_.y = areaPos_.y;
 		object_->worldTransform.translation_.z = 0;
 	}
 
-	ImGui::Text("c");
-	ImGui::End();
 
 	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
 
