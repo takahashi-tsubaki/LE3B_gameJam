@@ -1,50 +1,50 @@
-#include "WinApp.h"
+ï»¿#include "WinApp.h"
 #include <imgui_impl_win32.h>
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
-	//ImGui—pƒEƒBƒ“ƒhƒEƒvƒƒV[ƒWƒƒŒÄ‚Ño‚µ
+	//ImGuiç”¨ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£å‘¼ã³å‡ºã—
 	if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wparam, lparam)) { return true; }
-	//ƒƒbƒZ[ƒW•ªŠò
+	//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸åˆ†å²
 	switch (msg)
 	{
-	case WM_DESTROY://ƒEƒBƒ“ƒhƒE‚ª”jŠü‚³‚ê‚½
+	case WM_DESTROY://ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒç ´æ£„ã•ã‚ŒãŸ
 
-		PostQuitMessage(0);// OS‚É‘Î‚µ‚ÄAƒAƒvƒŠ‚ÌI—¹‚ð“`‚¦‚é
+		PostQuitMessage(0);// OSã«å¯¾ã—ã¦ã€ã‚¢ãƒ—ãƒªã®çµ‚äº†ã‚’ä¼ãˆã‚‹
 		return 0;
 
 	}
-	return DefWindowProc(hwnd, msg, wparam, lparam);//•W€‚Ìˆ—‚ðs‚¤
+	return DefWindowProc(hwnd, msg, wparam, lparam);//æ¨™æº–ã®å‡¦ç†ã‚’è¡Œã†
 }
 void WinApp::Initialize()
 {
 
 	w.cbSize = sizeof(WNDCLASSEX);
-	w.lpfnWndProc = (WNDPROC)WindowProc;//ƒR[ƒ‹ƒoƒbƒNŠÖ”‚ÌŽw’è
-	w.lpszClassName = _T("DirectXTest");//ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒNƒ‰ƒX–¼(“K“–‚Å‚¢‚¢‚Å‚·)
-	w.hInstance = GetModuleHandle(0);//ƒnƒ“ƒhƒ‹‚ÌŽæ“¾
+	w.lpfnWndProc = (WNDPROC)WindowProc;//ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã®æŒ‡å®š
+	w.lpszClassName = _T("DirectXTest");//ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹å(é©å½“ã§ã„ã„ã§ã™)
+	w.hInstance = GetModuleHandle(0);//ãƒãƒ³ãƒ‰ãƒ«ã®å–å¾—
 	w.hCursor = LoadCursor(NULL, IDC_ARROW);
 
-	RegisterClassEx(&w);//ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒNƒ‰ƒX(‚±‚¤‚¢‚¤‚Ìì‚é‚©‚ç‚æ‚ë‚µ‚­‚Á‚ÄOS‚É—\‚·‚é)
+	RegisterClassEx(&w);//ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹(ã“ã†ã„ã†ã®ä½œã‚‹ã‹ã‚‰ã‚ˆã‚ã—ãã£ã¦OSã«äºˆå‘Šã™ã‚‹)
 	
 	RECT wrc = { 0,0,window_width, window_height };
-	//ŠÖ”‚ðŽg‚Á‚ÄƒEƒBƒ“ƒhƒE‚ÌƒTƒCƒY‚ð•â³‚·‚é
+	//é–¢æ•°ã‚’ä½¿ã£ã¦ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚µã‚¤ã‚ºã‚’è£œæ­£ã™ã‚‹
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
-	//ƒEƒBƒ“ƒhƒEƒIƒuƒWƒFƒNƒg‚Ì¶¬
-	hwnd = CreateWindow(w.lpszClassName,//ƒNƒ‰ƒX–¼Žw’è
-	_T("ƒgƒtƒFƒLƒA"),//ƒ^ƒCƒgƒ‹ƒo[‚Ì•¶Žš
-	WS_OVERLAPPEDWINDOW,//ƒ^ƒCƒgƒ‹ƒo[‚Æ‹«ŠEü‚ª‚ ‚éƒEƒBƒ“ƒhƒE
-	CW_USEDEFAULT,//•\Ž¦xÀ•W‚ÍOS‚É‚¨”C‚¹
-	CW_USEDEFAULT,//•\Ž¦yÀ•W‚ÍOS‚É‚¨”C‚¹
-	wrc.right - wrc.left,//ƒEƒBƒ“ƒhƒE•
-	wrc.bottom - wrc.top,//ƒEƒBƒ“ƒhƒE‚
-	nullptr,//eƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹
-	nullptr,//ƒƒjƒ…[ƒnƒ“ƒhƒ‹
-	w.hInstance,//ŒÄ‚Ño‚µƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒnƒ“ƒhƒ‹
-	nullptr);//’Ç‰Áƒpƒ‰ƒ[ƒ^[
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
+	hwnd = CreateWindow(w.lpszClassName,//ã‚¯ãƒ©ã‚¹åæŒ‡å®š
+	_T("ãƒŠãƒ©ãƒ“ã‚«ã‚¤ãƒ­"),//ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ã®æ–‡å­—
+	WS_OVERLAPPEDWINDOW,//ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ã¨å¢ƒç•Œç·šãŒã‚ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
+	CW_USEDEFAULT,//è¡¨ç¤ºxåº§æ¨™ã¯OSã«ãŠä»»ã›
+	CW_USEDEFAULT,//è¡¨ç¤ºyåº§æ¨™ã¯OSã«ãŠä»»ã›
+	wrc.right - wrc.left,//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å¹…
+	wrc.bottom - wrc.top,//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é«˜
+	nullptr,//è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+	nullptr,//ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ³ãƒ‰ãƒ«
+	w.hInstance,//å‘¼ã³å‡ºã—ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãƒãƒ³ãƒ‰ãƒ«
+	nullptr);//è¿½åŠ ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼
 
 	ShowWindow(hwnd, SW_SHOW);
 
@@ -57,14 +57,14 @@ void WinApp::Update()
 
 void WinApp::Finalize()
 {
-	//ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^‰ðœ
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²è§£é™¤
 	UnregisterClass(w.lpszClassName, w.hInstance);
 }
 
 bool WinApp::ProcessMessage()
 {
 	MSG msg{};
-	//ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒWˆ—
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å‡¦ç†
 	if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 	{
 		TranslateMessage(&msg);

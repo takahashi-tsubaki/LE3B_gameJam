@@ -4,6 +4,7 @@
 #include "PlayerJump.h"
 
 #include "ImguiManager.h"
+#include "ChipPattern.h"
 
 Player::Player()
 {
@@ -64,24 +65,42 @@ void Player::Update(Input* input, GamePad* gamePad)
 {
 	int ground = OnGround;
 
+	if (input->PushKey(DIK_D))
+	{
+		move.x = speed;
+		playerO_->worldTransform.translation_.x += move.x;
+	}
+	if (input->PushKey(DIK_A))
+	{
+		move.x = -speed;
+		playerO_->worldTransform.translation_.x += move.x;
+	}
+
+
+	/*Move();*/
+	
+
+	Respawn();
 	CheckCollision();
 
-	//行動マネージャーの切り替え
-	if (input->TriggerKey(DIK_1))
-	{
-		actionNum = ActionNum::Move;
-		pActManager_->SetActionNum(actionNum);
-	}
-	if (input->TriggerKey(DIK_2))
+	////行動マネージャーの切り替え
+	//if (chipPat_ == CHIP_PATT_MOVE)
+	//{
+	//	actionNum = ActionNum::Move;
+	//	pActManager_->SetActionNum(actionNum);
+	//}
+	if (chipPat_ == CHIP_PATT_DASH)
 	{
 		actionNum = ActionNum::Dash;
 		pActManager_->SetActionNum(actionNum);
 	}
-	if (input->TriggerKey(DIK_3))
+	if (chipPat_ == CHIP_PATT_JUNP)
 	{
 		actionNum = ActionNum::Jump;
 		pActManager_->SetActionNum(actionNum);
 	}
+	
+
 	//前フレームとAction_Numが違ったら行動代入
 	if (oldActionNum_ != pActManager_->GetActionNum()) {
 		if (pActManager_->GetActionNum() == ActionNum::Move) {
@@ -91,7 +110,7 @@ void Player::Update(Input* input, GamePad* gamePad)
 			pActManager_->ChangeAction(new PlayerDash(pActManager_.get(), sphere, spherePos));
 		}
 		else if (pActManager_->GetActionNum() == ActionNum::Jump) {
-			pActManager_->ChangeAction(new PlayerJump(pActManager_.get(), sphere, spherePos));
+			pActManager_->ChangeAction(new PlayerJump(pActManager_.get()));
 		}
 		//else {}
 
@@ -164,11 +183,11 @@ void Player::CheckCollision()
 {
 
 #pragma region jimennitatu
-	if (!OnGround && pActManager_->GetActionNum() != ActionNum::Jump)
+	if (!OnGround/* && pActManager_->GetActionNum() != ActionNum::Jump*/)
 	{
 		//sitamuki
-		const float fallacc = -0.01f;
-		const float fallVY = -0.3f;
+		const float fallacc = -0.05f;
+		const float fallVY = -0.5f;
 		//kasoku
 		fallV.y = max(fallV.y + fallacc, fallVY);
 		playerO_->worldTransform.translation_.x += fallV.x;
@@ -237,7 +256,7 @@ void Player::CheckCollision()
 			{
 				isHit = true;
 				playerO_->worldTransform.translation_.x += callback.move.x;
-				//playerO_->worldTransform.translation_.y += callback.move.y;
+				playerO_->worldTransform.translation_.y += callback.move.y;
 				playerO_->worldTransform.translation_.z += callback.move.z;
 				isGoal_ = true;
 				break;
@@ -309,4 +328,18 @@ void Player::ResetParam()
 	oldActionNum_ = 0;	//アクション前フレーム保存変数
 	isGoal_ = false;
 	isHit = false;
+}
+
+void Player::Move()
+{
+	move  = { speed,0,0};
+	playerO_->worldTransform.translation_ += move;
+}
+
+void Player::Respawn()
+{
+	if (playerO_->worldTransform.translation_.y <= -20.0f)
+	{
+		playerO_->worldTransform.translation_ = { 0,30,50 };
+	}
 }

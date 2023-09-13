@@ -49,6 +49,10 @@ public:
 
 	bool GetIsHit() { return isHit; }
 
+	void Move();
+
+	void Respawn();
+
 private:
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -88,6 +92,14 @@ private:
 	float gravity = 0.0f;
 	const float addSpeed = 0.1f;
 
+	Vector3 move;
+	float speed = 0.25f;
+
+
+public:
+	//
+	unsigned short chipPat_;
+	bool chipOnMove_;
 
 };
 

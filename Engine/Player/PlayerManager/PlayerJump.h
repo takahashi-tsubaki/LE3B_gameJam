@@ -7,7 +7,7 @@ class PlayerJump :
 protected:
 	PlayerActionManager* ActionManager_;
 public:
-	PlayerJump(PlayerActionManager* ActionManager, std::vector<SphereCollider*>sphere, std::vector<Vector3> spherePos);
+	PlayerJump(PlayerActionManager* ActionManager);
 	~PlayerJump() override;
 
 	void Initialize(Object3d* object) override;
@@ -38,9 +38,7 @@ private:
 
 	float panelCount = 1.0f;
 
-	int SPHERE_COLISSION_NUM = 1;	//コライダー（スフィア）の数
-	std::vector<SphereCollider*>sphere_;
-	std::vector<Vector3> spherePos_ = {};
+	float jumpTimer = 0.0f;
 
 };
 
