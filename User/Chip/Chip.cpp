@@ -80,7 +80,7 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 	}
 
 	Vector2 mousepos = mouse->GetMousePosition();
-	reticle->worldTransform.translation_ = { reticle->GetCamera()->eye_.x +(mousepos.x * mouseSensitivity_),reticle->GetCamera()->eye_.y +(mousepos.y * mouseSensitivity_),0 };	/// カメラ座標「目」｛0，0，-100｝前提
+	reticle->worldTransform.translation_ = { reticle->GetCamera()->eye_.x + (mousepos.x * mouseSensitivity_),reticle->GetCamera()->eye_.y + (mousepos.y * mouseSensitivity_),0 };	/// カメラ座標「目」｛0，0，-100｝前提
 
 	if (mouse->PushMouseButton(0)) {
 		if (nowDrag_ == false) {
@@ -98,7 +98,8 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 
 		if (sphere[0]->GetIsHit() == true && sphere[0]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_CURSOR &&
 			sphere[0]->GetCollisionInfo().collider->GetCollisionInfo().object == object_ && isAreaSet == false) {
-			mousePos_ = sphere[0]->GetCollisionInfo().object->worldTransform.translation_;
+			//mousePos_ = sphere[0]->GetCollisionInfo().object->worldTransform.translation_;
+			mousePos_ = reticle->worldTransform.translation_;
 			if (nowDrag_ == true) {
 				isChipGet_ = true;
 			}
@@ -122,16 +123,18 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 	ImGui::Begin("chipFlag");
 	if (isChipGet_ == true) {
 		ImGui::Text("a");
-		object_->worldTransform.translation_ = mousePos_;
+		//object_->worldTransform.translation_ = mousePos_;
 		object_->worldTransform.translation_.x = mousePos_.x;
 		object_->worldTransform.translation_.y = mousePos_.y;
 		object_->worldTransform.translation_.z = mousePos_.z;
 	}
-	if (sphere[0]->GetIsHit() != true && sphere[0]->GetCollisionInfo().collider->GetAttribute() != COLLISION_ATTR_POWERCHIP_AREA && nowDrag_ == false) {
-		object_->worldTransform.translation_ = restPos_;
+	if (sphere[0]->GetIsHit() != true && sphere[0]->GetCollisionInfo().collider->GetAttribute() != COLLISION_ATTR_POWERCHIP_AREA && nowDrag_ == false||
+		isAreaSet == false && isChipGet_ == false && nowDrag_ == true||resetRestSet_ == true) {
+		//object_->worldTransform.translation_ = restPos_;
 		object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
 		object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
 		object_->worldTransform.translation_.z = restPos_.z;
+		resetRestSet_ = false;
 	}
 	if (isAreaSet == true) {
 		ImGui::Text("b");
@@ -140,10 +143,6 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 		object_->worldTransform.translation_.y = areaPos_.y;
 		object_->worldTransform.translation_.z = 0;
 	}
-	/*if (isAreaSet == false && isChipGet_ == false && nowDrag_ == false) {
-		object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
-		object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
-	}*/
 
 	ImGui::Text("c");
 	ImGui::End();
@@ -162,12 +161,25 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 void Chip::Draw(DirectXCommon* dxCommon) {
 	Object3d::PreDraw(dxCommon->GetCommandList());
 	object_->Draw();
-	coliderPosTest_[0]->Draw();
-	coliderPosTest_[1]->Draw();
+	//coliderPosTest_[0]->Draw();
+	//coliderPosTest_[1]->Draw();
 	Object3d::PostDraw();
 }
 
 /// リセットを行う
 void Chip::Reset() {
+	object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
+	object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
+	object_->worldTransform.translation_.z = restPos_.z;
+	isRestSet = false;
+	isGetThis = false;
+	isChipGet_ = false;
+	nowDrag_ = false;
+	isAreaSet = false;
+	resetRestSet_ = true;
+	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
+		sphere[i]->Update();
+	}
+	object_->Update();
 
 }

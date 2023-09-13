@@ -32,9 +32,11 @@ public:
 	void Reset();
 
 	//
-	void SetPos(Vector3 pos) { object_->worldTransform.translation_ = pos; }
+	void SetPos(Vector3 pos) { object_->worldTransform.translation_ = pos; restPos_ = pos;}
 	void SetScale(Vector3 scale) { object_->worldTransform.scale_ = scale; }
 	//void SetReticle(Vector3 ret) { reticle->worldTransform.translation_ = ret; }
+
+	void SetRestPos(Vector3 pos) { restPos_ = pos; }
 
 	void OnColision(Chip* chip) { subject = chip; };
 
@@ -61,6 +63,7 @@ public:
 	bool isSet;
 	Chip* subject = nullptr;
 private:
+	Vector3 restPos_;
 	// 種族番号
 	int Tribe_;
 	//コライダー

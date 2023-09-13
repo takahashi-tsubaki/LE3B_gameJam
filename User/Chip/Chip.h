@@ -55,6 +55,7 @@ private:
 	const float MAX_POWER = 100.0f;
 	float power = MAX_POWER;
 	Vector3 restPos_;
+	bool resetRestSet_;
 
 public:
 	Model* model_;
@@ -62,6 +63,7 @@ public:
 	Object3d* object_;
 	Vector3 areaPos_;
 	Vector3 mousePos_;
+	bool isRestSet;
 
 	int isDecreasePower;	// 0 none, 1 並列, 2 直列
 

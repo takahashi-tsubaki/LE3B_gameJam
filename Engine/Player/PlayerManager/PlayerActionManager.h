@@ -18,7 +18,7 @@ enum ActionNum
 	Move = 1,
 	Dash = 2,
 	Jump = 3,
-
+	JumpDash = 4,
 };
 
 class PlayerActionManager

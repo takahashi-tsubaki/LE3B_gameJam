@@ -38,26 +38,46 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 	//if (sphere->GetIsHit() == true && sphere->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP) {
 	//	mouse_->position_.z = 1;
 	//}
-	ChangeParallel(input);
-	CollisionUpdate();
-	if (input->TriggerKey(DIK_SPACE)) {
-		pattern = MakePattern();
 
+	//ChangeParallel(input);
 
+	if (input->PushKey(DIK_P)) {
+		Reset();
 	}
+	
+	ImGui::Begin("ChipAreapos");
+	for (ChipArea* area : chipAreas_) {
+		area->Update();
+		ImGui::Text("pos:%f,%f,%f", area->object_->worldTransform.translation_.x, area->object_->worldTransform.translation_.y, area->object_->worldTransform.translation_.z);
+	}
+	ImGui::End();
+	ImGui::Begin("Chippos");
+	for (Chip* chip : chips_) {
+		chip->Update(input, mouse);
+		ImGui::Text("pos:%f,%f,%f", chip->object_->worldTransform.translation_.x, chip->object_->worldTransform.translation_.y, chip->object_->worldTransform.translation_.z);
+	}
+	
+	isMove = false;
+	if (input->PushKey(DIK_SPACE)) {
+		CollisionUpdate();
+		//pattern = MakePattern();
+		if (pattern != 0) {
+
+			isMove = true;
+		}
+	}
+	CollisionUpdate();
+	pattern = MakePattern();
+	ImGui::End();
+	sphere->Update();
 
 	ImGui::Begin("ChipPatteern");
 	ImGui::Text("Pattern: %d", pattern);
+	ImGui::Text("isMove: %d", isMove);
 	ImGui::Text("isParallel: %d", isParallel);
-	for (ChipArea* area : chipAreas_) {
-		area->Update();
-	}
-	for (Chip* chip : chips_) {
-		chip->Update(input, mouse);
-	}
 	ImGui::End();
 
-	sphere->Update();
+
 }
 
 void ChipManager::Draw(DirectXCommon* dxCommon)
@@ -82,32 +102,31 @@ void ChipManager::CollisionUpdate()
 	/// <summary>
 	/// �����蔻��
 	/// </summary>
+
+		//�G�X�V
 	for (ChipArea* area : chipAreas_) {
 		collposA = area->object_->worldTransform.translation_;
-		//�G�X�V
+		area->subject = nullptr;
 		for (Chip* chip : chips_) {
 			collposB = chip->object_->worldTransform.translation_;
 			float a =
 				std::powf(collposB.x - collposA.x, 2.0f) +
-				std::powf(collposB.y - collposA.y, 2.0f) +
-				std::powf(collposB.z - collposA.z, 2.0f);
+				std::powf(collposB.y - collposA.y, 2.0f);
 			float lenR = std::powf((area->GetSphere()[0]->radius + chip->GetSphere()[0]->radius), 2.0);
 
 			// ���Ƌ��̌������
+			//area->subject = nullptr;
 			if (a <= lenR) {
+				//area->subject = nullptr;
 				area->OnColision(chip);
+				//pattern = MakePattern();
 			}
+			/*else {
+				area->subject = nullptr;
+			}*/
+			
 		}
 	}
-	//for (ChipArea* area : chipAreas_) {
-	//	//�G�X�V
-	//	for (Chip* chip : chips_) {
-	//		if (area->GetSphere()[0]->GetIsHit() == true && area->GetSphere()[0]->GetCollisionInfo().object == chip->object_ ) {
-	//			area->OnColision(chip);
-	//		}
-
-	//	}
-	//}
 }
 
 unsigned short ChipManager::MakePattern()
@@ -115,33 +134,50 @@ unsigned short ChipManager::MakePattern()
 	if (chipAreas_[0]->subject == nullptr || chipAreas_[1]->subject == nullptr) {
 		return 0;
 	}
-	if (isParallel == true) {
-		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1 ||
-			chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1) {
-			return 0b1 << 1;
+	else {
+		if (isParallel == true) { // 並列
+			if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1 ||
+				chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1) {
+				return 0b1 << 1;
+			}
+			if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 2 ||
+				chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 1) {
+				return 0b1 << 2;
+			}
+			if (chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2 ||
+				chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2) {
+				return 0b1 << 3;
+			}
 		}
-		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 2 ||
-			chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 1) {
-			return 0b1 << 2;
+		if (isParallel == false) {
+
+			if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1 ||
+				chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1) {
+				return 0b1 << 4;
+			}
+			if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 2 ||
+				chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 1) {
+				return 0b1 << 5;
+			}
+			if (chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2 ||
+				chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2) {
+
+				return 0b1 << 6;
+			}
 		}
-		if (chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2 ||
-			chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2) {
-			return 0b1 << 3;
-		}
+
 	}
-	if (isParallel == false) {
-		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1 ||
-			chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1) {
-			return 0b1 << 4;
-		}
-		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 2 ||
-			chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 1) {
-			return 0b1 << 5;
-		}
-		if (chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2 ||
-			chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2) {
-			return 0b1 << 6;
-		}
+}
+
+void ChipManager::Reset()
+{
+	pattern = 0;
+	isMove = false;
+	for (Chip* chip : chips_) {
+		chip->Reset();
+	}
+	for (ChipArea* area : chipAreas_) {
+		area->Reset();
 	}
 }
 
@@ -204,12 +240,16 @@ void ChipManager::InitializeArea()
 	*/
 	chipArea_ = new ChipArea();
 	chipArea_->Initialize();
+	chipArea_->SetTribe(1);
 	chipArea_->SetPos({ -33.5f,27.5f,0.0f });
+	chipArea_->SetRestPos({ -33.5f,27.5f,0.0f });
 	AddChipArea("A1", chipArea_);
 
 	chipArea2_ = new ChipArea();
 	chipArea2_->Initialize();
+	chipArea2_->SetTribe(2);
 	chipArea2_->SetPos({ -33.5f,17.5f,0.0f });
+	chipArea2_->SetRestPos({ -33.5f,17.5f,0.0f });
 	AddChipArea("A2", chipArea2_);
 }
 
@@ -237,12 +277,14 @@ void ChipManager::modeChangePos(int num)
 {
 	if (num == 0)
 	{
+		isParallel = true;
 		chipArea_->SetPos({ -33.5f,27.5f,0.0f });
 
 		chipArea2_->SetPos({ -33.5f,17.5f,0.0f });
 	}
 	else if (num == 1)
 	{
+		isParallel = false;
 		chipArea_->SetPos({ -42.0f,20.0f,0.0f });
 
 		chipArea2_->SetPos({ -25.0f,20.0f,0.0f });
