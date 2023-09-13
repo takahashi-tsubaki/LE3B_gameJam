@@ -129,11 +129,12 @@ void Chip::Update(Input* input, MouseInput* mouse) {
 		object_->worldTransform.translation_.z = mousePos_.z;
 	}
 	if (sphere[0]->GetIsHit() != true && sphere[0]->GetCollisionInfo().collider->GetAttribute() != COLLISION_ATTR_POWERCHIP_AREA && nowDrag_ == false||
-		isAreaSet == false && isChipGet_ == false && nowDrag_ != false) {
+		isAreaSet == false && isChipGet_ == false && nowDrag_ == true||resetRestSet_ == true) {
 		//object_->worldTransform.translation_ = restPos_;
 		object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
 		object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
 		object_->worldTransform.translation_.z = restPos_.z;
+		resetRestSet_ = false;
 	}
 	if (isAreaSet == true) {
 		ImGui::Text("b");
@@ -175,5 +176,10 @@ void Chip::Reset() {
 	isChipGet_ = false;
 	nowDrag_ = false;
 	isAreaSet = false;
+	resetRestSet_ = true;
+	for (int i = 0; i < SPHERE_COLISSION_NUM; i++) {
+		sphere[i]->Update();
+	}
+	object_->Update();
 
 }

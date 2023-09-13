@@ -112,8 +112,9 @@ void ChipArea::Draw(DirectXCommon* dxCommon) {
 
 /// リセットを行う
 void ChipArea::Reset() {
-	//isSet = false;
+	isSet = false;
 	subject = nullptr;
 	object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
 	object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
+	object_->Update();
 }

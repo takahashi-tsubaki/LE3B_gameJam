@@ -41,7 +41,9 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 
 	//ChangeParallel(input);
 
-
+	if (input->PushKey(DIK_P)) {
+		Reset();
+	}
 	
 	ImGui::Begin("ChipAreapos");
 	for (ChipArea* area : chipAreas_) {
@@ -71,6 +73,8 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 	ImGui::Text("isMove: %d", isMove);
 	ImGui::Text("isParallel: %d", isParallel);
 	ImGui::End();
+
+
 }
 
 void ChipManager::Draw(DirectXCommon* dxCommon)
@@ -163,6 +167,8 @@ unsigned short ChipManager::MakePattern()
 
 void ChipManager::Reset()
 {
+	pattern = 0;
+	isMove = false;
 	for (Chip* chip : chips_) {
 		chip->Reset();
 	}
