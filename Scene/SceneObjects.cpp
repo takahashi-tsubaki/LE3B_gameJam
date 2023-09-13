@@ -27,6 +27,18 @@ void SceneObjects::Initialize(SceneManager* controller)
 	Sprite::LoadTexture(20, L"Resources/heiden5.png");
 	Sprite::LoadTexture(21, L"Resources/heiden6.png");
 
+	Sprite::LoadTexture(22, L"Resources/timeNum/time0.png");
+	Sprite::LoadTexture(23, L"Resources/timeNum/time1.png");
+	Sprite::LoadTexture(24, L"Resources/timeNum/time2.png");
+	Sprite::LoadTexture(25, L"Resources/timeNum/time3.png");
+	Sprite::LoadTexture(26, L"Resources/timeNum/time4.png");
+	Sprite::LoadTexture(27, L"Resources/timeNum/time5.png");
+	Sprite::LoadTexture(28, L"Resources/timeNum/time6.png");
+	Sprite::LoadTexture(29, L"Resources/timeNum/time7.png");
+	Sprite::LoadTexture(30, L"Resources/timeNum/time8.png");
+	Sprite::LoadTexture(31, L"Resources/timeNum/time9.png");
+
+	Sprite::LoadTexture(32, L"Resources/timeNum/timerBoard.png");
 
 	//Sprite::LoadTexture(2, L"Resources/mario.jpg");
 

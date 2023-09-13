@@ -21,24 +21,25 @@ void PlayScene::Initialize()
 
 	//LoadBlockData();
 
-	LoadCsv("Resources/Csv/stageBlock.csv");
+	//LoadCsv("Resources/Csv/stageBlock.csv");
+	LoadCsv("Resources/Csv/stageTest.csv");
 
 	player_ = sceneObj_->player_;
 
 	player_->ResetParam();
 
-	sprite_ =  Sprite::Create(1, { 0,0 });
+	sprite_ = Sprite::Create(1, { 0,0 });
 
 	sprite_->Initialize();
 
-	sprite2_ =  Sprite::Create(3, { 0,0 });
+	sprite2_ = Sprite::Create(3, { 0,0 });
 
 
-	sprite3_ =  Sprite::Create(4, { 680,540 });
-	sprite4_ =  Sprite::Create(5, { 680,540 });
+	sprite3_ = Sprite::Create(4, { 680,540 });
+	sprite4_ = Sprite::Create(5, { 680,540 });
 
-	sprite5_ =  Sprite::Create(6, { 600,424 });
-	sprite6_ =  Sprite::Create(7, { 712,424 });
+	sprite5_ = Sprite::Create(6, { 600,424 });
+	sprite6_ = Sprite::Create(7, { 712,424 });
 
 	sprite_->Initialize();
 	sprite2_->Initialize();
@@ -85,6 +86,89 @@ void PlayScene::Initialize()
 	spriteheiden6_ = Sprite::Create(21, { 0,0 });
 	spriteheiden6_->Initialize();
 
+	//タイマーの表示
+	timeboard_ = Sprite::Create(32, { 820,50 });
+	timeboard_->Initialize();
+
+	{
+		spriteTimeTM0_ = Sprite::Create(22, { 840,50 });
+		spriteTimeTM0_->Initialize();
+		spriteTimeTM1_ = Sprite::Create(23, { 840,50 });
+		spriteTimeTM1_->Initialize();
+		spriteTimeTM2_ = Sprite::Create(24, { 840,50 });
+		spriteTimeTM2_->Initialize();
+		spriteTimeTM3_ = Sprite::Create(25, { 840,50 });
+		spriteTimeTM3_->Initialize();
+		spriteTimeTM4_ = Sprite::Create(26, { 840,50 });
+		spriteTimeTM4_->Initialize();
+		spriteTimeTM5_ = Sprite::Create(27, { 840,50 });
+		spriteTimeTM5_->Initialize();
+		spriteTimeTM6_ = Sprite::Create(28, { 840,50 });
+		spriteTimeTM6_->Initialize();
+	}
+
+	{
+		spriteTimeM0_ = Sprite::Create(22, { 880,50 });
+		spriteTimeM0_->Initialize();
+		spriteTimeM1_ = Sprite::Create(23, { 880,50 });
+		spriteTimeM1_->Initialize();
+		spriteTimeM2_ = Sprite::Create(24, { 880,50 });
+		spriteTimeM2_->Initialize();
+		spriteTimeM3_ = Sprite::Create(25, { 880,50 });
+		spriteTimeM3_->Initialize();
+		spriteTimeM4_ = Sprite::Create(26, { 880,50 });
+		spriteTimeM4_->Initialize();
+		spriteTimeM5_ = Sprite::Create(27, { 880,50 });
+		spriteTimeM5_->Initialize();
+		spriteTimeM6_ = Sprite::Create(28, { 880,50 });
+		spriteTimeM6_->Initialize();
+		spriteTimeM7_ = Sprite::Create(29, { 880,50 });
+		spriteTimeM7_->Initialize();
+		spriteTimeM8_ = Sprite::Create(30, { 880,50 });
+		spriteTimeM8_->Initialize();
+		spriteTimeM9_ = Sprite::Create(31, { 880,50 });
+		spriteTimeM9_->Initialize();
+	}
+
+	{
+		spriteTimeTS0_ = Sprite::Create(22, { 960,50 });
+		spriteTimeTS0_->Initialize();
+		spriteTimeTS1_ = Sprite::Create(23, { 960,50 });
+		spriteTimeTS1_->Initialize();
+		spriteTimeTS2_ = Sprite::Create(24, { 960,50 });
+		spriteTimeTS2_->Initialize();
+		spriteTimeTS3_ = Sprite::Create(25, { 960,50 });
+		spriteTimeTS3_->Initialize();
+		spriteTimeTS4_ = Sprite::Create(26, { 960,50 });
+		spriteTimeTS4_->Initialize();
+		spriteTimeTS5_ = Sprite::Create(27, { 960,50 });
+		spriteTimeTS5_->Initialize();
+		spriteTimeTS6_ = Sprite::Create(28, { 960,50 });
+		spriteTimeTS6_->Initialize();
+	}
+
+	{
+		spriteTimeS0_ = Sprite::Create(22, { 1000,50 });
+		spriteTimeS0_->Initialize();
+		spriteTimeS1_ = Sprite::Create(23, { 1000,50 });
+		spriteTimeS1_->Initialize();
+		spriteTimeS2_ = Sprite::Create(24, { 1000,50 });
+		spriteTimeS2_->Initialize();
+		spriteTimeS3_ = Sprite::Create(25, { 1000,50 });
+		spriteTimeS3_->Initialize();
+		spriteTimeS4_ = Sprite::Create(26, { 1000,50 });
+		spriteTimeS4_->Initialize();
+		spriteTimeS5_ = Sprite::Create(27, { 1000,50 });
+		spriteTimeS5_->Initialize();
+		spriteTimeS6_ = Sprite::Create(28, { 1000,50 });
+		spriteTimeS6_->Initialize();
+		spriteTimeS7_ = Sprite::Create(29, { 1000,50 });
+		spriteTimeS7_->Initialize();
+		spriteTimeS8_ = Sprite::Create(30, { 1000,50 });
+		spriteTimeS8_->Initialize();
+		spriteTimeS9_ = Sprite::Create(31, { 1000,50 });
+		spriteTimeS9_->Initialize();
+	}
 
 	audio = new Audio();
 	audio->Initialize();
@@ -105,19 +189,22 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		pSourceVoice[0]->SetVolume(0.5f);
 		soundCheckFlag = 1;
 	}
+
+	GameTimer();
+
 	//シーンチェンジ
-	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X)){
+	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X)) {
 		controller_->ChangeSceneNum(S_TITLE);
 		pSourceVoice[0]->Stop();
 		soundCheckFlag = 0;
 	}
 
-	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)){
+	if (input->TriggerKey(DIK_TAB) || gamePad->ButtonTrigger(START)) {
 		controller_->PushScene(S_PAUSE);
 	}
 
-	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)){	
-	controller_->camera_->Update();
+	if (input->TriggerKey(DIK_LSHIFT) || gamePad->ButtonTrigger(BACK)) {
+		controller_->camera_->Update();
 	}
 
 	if (input->TriggerKey(DIK_R))
@@ -125,9 +212,25 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		if (modeC == 0)
 		{
 			modeC = 1;
+			if (isStockFlag2 == true)
+			{
+				heidenTimer = 0;
+				isHeidenFlag = false;
+				isStockFlag2 = false;
+
+			}
 		}
-		else {
+		else
+		{
 			modeC = 0;
+			if (isStockFlag == true)
+			{
+
+				tyokudenTimer = 0;
+				isTyokudenFlag = false;
+				isStockFlag = false;
+
+			}
 		}
 	}
 
@@ -165,8 +268,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 
 	player_->Update(input, gamePad);
 
-	controller_->camera_->SetEye({ player_->GetPosition().x -20,player_->GetPosition().y, player_->GetPosition().z - 150 });
-	controller_->camera_->SetTarget({ player_->GetPosition().x - 20,player_->GetPosition().y, player_->GetPosition().z});
+	controller_->camera_->SetEye({ player_->GetPosition().x - 20,player_->GetPosition().y, player_->GetPosition().z - 150 });
+	controller_->camera_->SetTarget({ player_->GetPosition().x - 20,player_->GetPosition().y, player_->GetPosition().z });
 	controller_->camera_->Update();
 
 	spriteJumpPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 610.0f;
@@ -209,7 +312,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	{
 		sceneObj_->asobj_[i]->Update();
 	}
-	sceneObj_->plaobject->Update();	
+	sceneObj_->plaobject->Update();
 
 	controller_->camera_->Update();
 
@@ -246,13 +349,13 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 				isStockFlag2 = true;
 			}
 		}
-		else if (isStockFlag2 == true) {
+		/*else if (isStockFlag2 == true) {
 			if (input->TriggerKey(DIK_SPACE)) {
 				heidenTimer = 0;
 				isHeidenFlag = false;
 				isStockFlag2 = false;
 			}
-		}
+		}*/
 	}
 
 	//直列回路の電気が通る
@@ -265,13 +368,13 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 				isStockFlag = true;
 			}
 		}
-		else if (isStockFlag == true) {
+		/*else if (isStockFlag == true) {
 			if (input->TriggerKey(DIK_SPACE)) {
 				tyokudenTimer = 0;
 				isTyokudenFlag = false;
 				isStockFlag = false;
 			}
-		}
+		}*/
 	}
 }
 
@@ -321,7 +424,7 @@ void PlayScene::Draw()
 		spriteDash_->Draw();
 	}
 
-	if (tyokudenTimer >= 1 && tyokudenTimer <= 5) {spritetyokuden1_->Draw();}
+	if (tyokudenTimer >= 1 && tyokudenTimer <= 5) { spritetyokuden1_->Draw(); }
 	else if (tyokudenTimer >= 6 && tyokudenTimer <= 10) { spritetyokuden2_->Draw(); }
 	else if (tyokudenTimer >= 11 && tyokudenTimer <= 15) { spritetyokuden3_->Draw(); }
 	else if (tyokudenTimer >= 16 && tyokudenTimer <= 20) { spritetyokuden4_->Draw(); }
@@ -329,7 +432,7 @@ void PlayScene::Draw()
 	else if (tyokudenTimer >= 26 && tyokudenTimer <= 30) { spritetyokuden6_->Draw(); }
 
 	if (heidenTimer >= 1 && heidenTimer <= 5) { spriteheiden1_->Draw(); }
-	else if (heidenTimer >= 6 &&  heidenTimer <= 10) { spriteheiden2_->Draw(); }
+	else if (heidenTimer >= 6 && heidenTimer <= 10) { spriteheiden2_->Draw(); }
 	else if (heidenTimer >= 11 && heidenTimer <= 15) { spriteheiden3_->Draw(); }
 	else if (heidenTimer >= 16 && heidenTimer <= 20) { spriteheiden4_->Draw(); }
 	else if (heidenTimer >= 21 && heidenTimer <= 25) { spriteheiden5_->Draw(); }
@@ -346,6 +449,7 @@ void PlayScene::Draw()
 		sprite6_->Draw();
 	}
 
+	DrawGameTimer();
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
@@ -461,7 +565,7 @@ void PlayScene::UpdataBlockCommands()
 			std::getline(line_stream, word, ',');
 			int num = static_cast<float>(std::atof(word.c_str()));
 
-			GenerBlock(Vector3(x, y, z),num);
+			GenerBlock(Vector3(x, y, z), num);
 		}
 	}
 }
@@ -597,5 +701,81 @@ void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 		}
 		sceneObj_->asobj_[num]->SetColor({ 1.0f,0.0f,1.0f,1.0f });
 	}
+}
+
+void PlayScene::GameTimer()
+{
+	timeFps++;
+
+	if (timeFps >= 60)
+	{
+		timeS++;
+		timeFps = 0;
+	}
+	else
+	{
+		timeFps;
+	}
+
+	if (timeS >= 10)
+	{
+		timeTS++;
+		timeS = 0;
+	}
+
+	if (timeTS >= 6)
+	{
+		timeM++;
+		timeTS = 0;
+		if (timeM >= 10)
+		{
+			timeTM++;
+			timeM = 0;
+		}
+	}
+
+}
+
+void PlayScene::DrawGameTimer()
+{
+	timeboard_->Draw();
+
+	if (timeS == 0) { spriteTimeS0_->Draw(); }
+	else if (timeS == 1) { spriteTimeS1_->Draw(); }
+	else if (timeS == 2) { spriteTimeS2_->Draw(); }
+	else if (timeS == 3) { spriteTimeS3_->Draw(); }
+	else if (timeS == 4) { spriteTimeS4_->Draw(); }
+	else if (timeS == 5) { spriteTimeS5_->Draw(); }
+	else if (timeS == 6) { spriteTimeS6_->Draw(); }
+	else if (timeS == 7) { spriteTimeS7_->Draw(); }
+	else if (timeS == 8) { spriteTimeS8_->Draw(); }
+	else if (timeS == 9) { spriteTimeS9_->Draw(); }
+
+	if (timeTS == 0) { spriteTimeTS0_->Draw(); }
+	else if (timeTS == 1) { spriteTimeTS1_->Draw(); }
+	else if (timeTS == 2) { spriteTimeTS2_->Draw(); }
+	else if (timeTS == 3) { spriteTimeTS3_->Draw(); }
+	else if (timeTS == 4) { spriteTimeTS4_->Draw(); }
+	else if (timeTS == 5) { spriteTimeTS5_->Draw(); }
+	else if (timeTS == 6) { spriteTimeTS6_->Draw(); }
+
+	if (timeM == 0) { spriteTimeM0_->Draw(); }
+	else if (timeM == 1) { spriteTimeM1_->Draw(); }
+	else if (timeM == 2) { spriteTimeM2_->Draw(); }
+	else if (timeM == 3) { spriteTimeM3_->Draw(); }
+	else if (timeM == 4) { spriteTimeM4_->Draw(); }
+	else if (timeM == 5) { spriteTimeM5_->Draw(); }
+	else if (timeM == 6) { spriteTimeM6_->Draw(); }
+	else if (timeM == 7) { spriteTimeM7_->Draw(); }
+	else if (timeM == 8) { spriteTimeM8_->Draw(); }
+	else if (timeM == 9) { spriteTimeM9_->Draw(); }
+
+	if (timeTM == 0) { spriteTimeTM0_->Draw(); }
+	else if (timeTM == 1) { spriteTimeTM1_->Draw(); }
+	else if (timeTM == 2) { spriteTimeTM2_->Draw(); }
+	else if (timeTM == 3) { spriteTimeTM3_->Draw(); }
+	else if (timeTM == 4) { spriteTimeTM4_->Draw(); }
+	else if (timeTM == 5) { spriteTimeTM5_->Draw(); }
+	else if (timeTM == 6) { spriteTimeTM6_->Draw(); }
 }
 
