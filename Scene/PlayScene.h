@@ -98,6 +98,8 @@ private:	//メンバ変数
 	bool isStockFlag2 = false;
 	int heidenTimer = 0;
 
+	
+
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
 

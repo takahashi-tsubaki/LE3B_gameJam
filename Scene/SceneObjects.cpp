@@ -27,6 +27,22 @@ void SceneObjects::Initialize(SceneManager* controller)
 	Sprite::LoadTexture(20, L"Resources/heiden5.png");
 	Sprite::LoadTexture(21, L"Resources/heiden6.png");
 
+	Sprite::LoadTexture(33, L"Resources/sele1.png");
+	Sprite::LoadTexture(34, L"Resources/sele2.png");
+	Sprite::LoadTexture(35, L"Resources/sele3.png");
+	Sprite::LoadTexture(36, L"Resources/sele4.png");
+
+	Sprite::LoadTexture(37, L"Resources/ok.png");
+	Sprite::LoadTexture(38, L"Resources/ok1.png");
+
+	Sprite::LoadTexture(39, L"Resources/sele1ani1.png");
+	Sprite::LoadTexture(40, L"Resources/sele1ani2.png");
+	Sprite::LoadTexture(41, L"Resources/sele1ani3.png");
+
+	Sprite::LoadTexture(42, L"Resources/sele2ani1.png");
+	Sprite::LoadTexture(43, L"Resources/sele2ani2.png");
+	Sprite::LoadTexture(44, L"Resources/sele2ani3.png");
+	Sprite::LoadTexture(45, L"Resources/sousa.png");
 
 	//Sprite::LoadTexture(2, L"Resources/mario.jpg");
 
