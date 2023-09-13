@@ -142,6 +142,7 @@ private:	//メンバ変数
 	Sprite* spriteTimeS8_ = nullptr;
 	Sprite* spriteTimeS9_ = nullptr;
 
+
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
 
