@@ -54,8 +54,19 @@ private:	//メンバ変数
 	bool isSele2Flag = false;
 	int Sele2Timer = 0;
 
-	//操作説明
-	Sprite* spriteSele2ani4_ = nullptr;
+	//セレクト2アニメーション
+	Sprite* spriteSele3ani1_ = nullptr;
+	Sprite* spriteSele3ani2_ = nullptr;
+	Sprite* spriteSele3ani3_ = nullptr;
+	bool isSele3Flag = false;
+	int Sele3Timer = 0;
+
+	//操作説明アニメーション
+	Sprite* spriteSele4ani1_ = nullptr;
+	Sprite* spriteSele4ani2_ = nullptr;
+	Sprite* spriteSele4ani3_ = nullptr;
+	bool isSele4Flag = false;
+	int Sele4Timer = 0;
 
 
 };

@@ -42,20 +42,27 @@ void GameTutoScene::Initialize()
 	spriteSele2ani2_->Initialize();
 	spriteSele2ani3_ = Sprite::Create(44, { 0,0 });
 	spriteSele2ani3_->Initialize();
-	/*spriteSele2ani4_ = Sprite::Create(45, { 0,0 });
-	spriteSele2ani4_->Initialize();*/
 	
+	spriteSele3ani1_ = Sprite::Create(46, { 0,0 });
+	spriteSele3ani1_->Initialize();
+	spriteSele3ani2_ = Sprite::Create(47, { 0,0 });
+	spriteSele3ani2_->Initialize();
+	spriteSele3ani3_ = Sprite::Create(48, { 0,0 });
+	spriteSele3ani3_->Initialize();
 
-
+	spriteSele4ani1_ = Sprite::Create(49, { 200,150 });
+	spriteSele4ani1_->Initialize();
+	spriteSele4ani2_ = Sprite::Create(50, { 200,150 });
+	spriteSele4ani2_->Initialize();
+	spriteSele4ani3_ = Sprite::Create(51, { 200,150 });
+	spriteSele4ani3_->Initialize();
 }
 
 void GameTutoScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 {
 	gamePad->Update();
-	if (input->TriggerKey(DIK_RETURN) || gamePad->ButtonTrigger(X))
-	{
-		controller_->ChangeSceneNum(S_PLAY);
-	}
+	sceneObj_->skydomeO_->Update();
+
 	assert(input);
 	controller_->camera_->Update();
 
@@ -76,6 +83,12 @@ void GameTutoScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		else if (isSeleChange == 2) {
 			isSele2Flag = true;
 		}
+		else if (isSeleChange == 3) {
+			isSele3Flag = true;
+		}
+		else if (isSeleChange == 4) {
+			isSele4Flag = true;
+		}
 	}
 	if (isSele1Flag == true) {Sele1Timer++;}
 	if (Sele1Timer > 30) {
@@ -89,13 +102,44 @@ void GameTutoScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		isSele2Flag = false;
 	}
 
+	if (isSele3Flag == true) { Sele3Timer++; }
+	if (Sele3Timer > 30) {
+		Sele3Timer = 30;
+		isSele3Flag = false;
+	}
+
+	if (isSele4Flag == true) { Sele4Timer++; }
+	if (Sele4Timer >= 30) {
+		Sele4Timer = 30;
+		isSele4Flag = false;
+	}
+
 	if (Sele1Timer >= 30) {
 		controller_->ChangeSceneNum(S_PLAY);
+	}
+
+	if (Sele4Timer >= 5) {
+		if (input->TriggerKey(DIK_SPACE)) {
+			Sele4Timer = 0;
+		}
 	}
 }
 
 void GameTutoScene::Draw()
 {
+	//// 3Dオブジェクト描画前処理
+	Object3d::PreDraw(controller_->dxCommon_->GetCommandList());
+
+	//// 3Dオブジェクトの描画
+
+	/*fbxObject->Draw(dxCommon_->GetCommandList());*/
+
+	sceneObj_->skydomeO_->Draw();
+
+
+	//// 3Dオブジェクト描画後処理
+	Object3d::PostDraw();
+
 #pragma region 前景スプライト描画
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(controller_->dxCommon_->GetCommandList());
@@ -124,8 +168,20 @@ void GameTutoScene::Draw()
 		if (Sele2Timer >= 21 && Sele2Timer <= 24) { spriteOk1_->Draw(); }
 		if (Sele2Timer >= 25 && Sele2Timer <= 30) { spriteOk_->Draw(); }
 	}
-	
-	
+	else if (isSeleChange == 3) {
+		if (Sele3Timer >= 1 &&  Sele3Timer <= 30) { spriteSele3ani1_->Draw(); }
+		if (Sele3Timer >= 6 &&  Sele3Timer <= 30) { spriteSele3ani2_->Draw(); }
+		if (Sele3Timer >= 11 && Sele3Timer <= 30) { spriteSele3ani3_->Draw(); }
+		if (Sele3Timer >= 15 && Sele3Timer <= 17) { spriteOk1_->Draw(); }
+		if (Sele3Timer >= 18 && Sele3Timer <= 20) { spriteOk_->Draw(); }
+		if (Sele3Timer >= 21 && Sele3Timer <= 24) { spriteOk1_->Draw(); }
+		if (Sele3Timer >= 25 && Sele3Timer <= 30) { spriteOk_->Draw(); }
+	}
+	else if (isSeleChange == 4) {
+		if (Sele4Timer >= 1 && Sele4Timer <= 30) { spriteSele4ani1_->Draw(); }
+		if (Sele4Timer >= 6 && Sele4Timer <= 30) { spriteSele4ani2_->Draw(); }
+		if (Sele4Timer >=11 && Sele4Timer <= 30) { spriteSele4ani3_->Draw(); }
+	}
 
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
@@ -134,5 +190,6 @@ void GameTutoScene::Draw()
 	// スプライト描画後処理
 	Sprite::PostDraw();
 
+	
 #pragma endregion
 }
