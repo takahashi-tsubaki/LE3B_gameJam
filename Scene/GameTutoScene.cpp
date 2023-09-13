@@ -115,7 +115,7 @@ void GameTutoScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	}
 
 
-	if (Sele1Timer >= 30 || Sele2Timer >= 30 || Sele3Timer >= 30 || Sele4Timer >= 30) {
+	if (Sele1Timer >= 30 || Sele2Timer >= 30 || Sele3Timer >= 30) {
 		controller_->ChangeSceneNum(S_PLAY);
 	}
 

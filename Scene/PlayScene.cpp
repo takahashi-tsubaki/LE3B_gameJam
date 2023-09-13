@@ -48,15 +48,7 @@ void PlayScene::Initialize()
 	sprite5_->Initialize();
 	sprite6_->Initialize();
 
-	spriteDash_ = Sprite::Create(8, { 0,0 });
-	spriteDash_->Initialize();
-	spriteDashPosition = sprite_->GetPosition();
-	spriteDash_->SetPosition({ spriteDashPosition });
-
-	spriteJump_ = Sprite::Create(9, { 0,0 });
-	spriteJump_->Initialize();
-	spriteJumpPosition = spriteJump_->GetPosition();
-	spriteJump_->SetPosition({ spriteJumpPosition });
+	
 
 	//直列回路の電気移動
 	spritetyokuden1_ = Sprite::Create(10, { 0,0 });
@@ -287,13 +279,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	controller_->camera_->SetTarget({ player_->GetPosition().x - 20,player_->GetPosition().y, player_->GetPosition().z });
 	controller_->camera_->Update();
 
-	spriteJumpPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 740.0f;
-	spriteJumpPosition.y = sceneObj_->plaobject->worldTransform.translation_.y + 360.0f;
-	spriteJump_->SetPosition(spriteJumpPosition);
-
-	spriteDashPosition.x = sceneObj_->plaobject->worldTransform.translation_.x + 710.0f;
-	spriteDashPosition.y = sceneObj_->plaobject->worldTransform.translation_.x + 310.0f;
-	spriteDash_->SetPosition(spriteDashPosition);
+	
 
 	//左クリック時
 	if (mouse->TriggerMouseButton(0))
@@ -380,8 +366,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 			if (isStockFlag == false) {
 				if (input->TriggerKey(DIK_SPACE)) { isTyokudenFlag = true; }
 				if (isTyokudenFlag == true) { tyokudenTimer++; }
-				if (tyokudenTimer >= 30) {
-					tyokudenTimer = 30;
+				if (tyokudenTimer >= 15) {
+					tyokudenTimer = 15;
 					isStockFlag = true;
 				}
 			}
@@ -441,20 +427,12 @@ void PlayScene::Draw()
 	}
 
 
-	if (isJumpFlag == true) {
-		spriteJump_->Draw();
-	}
-
-	if (isDashFlag == true) {
-		spriteDash_->Draw();
-	}
-
-	if (tyokudenTimer >= 1 && tyokudenTimer <= 5) { spritetyokuden1_->Draw(); }
-	else if (tyokudenTimer >= 6 && tyokudenTimer <= 10) { spritetyokuden2_->Draw(); }
-	else if (tyokudenTimer >= 11 && tyokudenTimer <= 15) { spritetyokuden3_->Draw(); }
-	else if (tyokudenTimer >= 16 && tyokudenTimer <= 20) { spritetyokuden4_->Draw(); }
-	else if (tyokudenTimer >= 21 && tyokudenTimer <= 25) { spritetyokuden5_->Draw(); }
-	else if (tyokudenTimer >= 26 && tyokudenTimer <= 30) { spritetyokuden6_->Draw(); }
+	if (tyokudenTimer >= 1 && tyokudenTimer <= 2) { spritetyokuden1_->Draw(); }
+	else if (tyokudenTimer >= 3 && tyokudenTimer <=5 ) { spritetyokuden2_->Draw(); }
+	else if (tyokudenTimer >= 6 && tyokudenTimer <= 8) { spritetyokuden3_->Draw(); }
+	else if (tyokudenTimer >= 9 && tyokudenTimer <= 11) { spritetyokuden4_->Draw(); }
+	else if (tyokudenTimer >= 12 && tyokudenTimer <= 14) { spritetyokuden5_->Draw(); }
+	else if (tyokudenTimer >= 15 && tyokudenTimer <= 15) { spritetyokuden6_->Draw(); }
 
 	if (heidenTimer >= 1 && heidenTimer <= 5) { spriteheiden1_->Draw(); }
 	else if (heidenTimer >= 6 && heidenTimer <= 10) { spriteheiden2_->Draw(); }
