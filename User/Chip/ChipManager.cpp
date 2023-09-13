@@ -62,9 +62,12 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 		CollisionUpdate();
 		//pattern = MakePattern();
 		if (pattern != 0) {
+
 			isMove = true;
 		}
 	}
+	CollisionUpdate();
+	pattern = MakePattern();
 	ImGui::End();
 	sphere->Update();
 
@@ -103,6 +106,7 @@ void ChipManager::CollisionUpdate()
 		//�G�X�V
 	for (ChipArea* area : chipAreas_) {
 		collposA = area->object_->worldTransform.translation_;
+		area->subject = nullptr;
 		for (Chip* chip : chips_) {
 			collposB = chip->object_->worldTransform.translation_;
 			float a =
@@ -113,9 +117,9 @@ void ChipManager::CollisionUpdate()
 			// ���Ƌ��̌������
 			//area->subject = nullptr;
 			if (a <= lenR) {
-				area->subject = nullptr;
+				//area->subject = nullptr;
 				area->OnColision(chip);
-				pattern = MakePattern();
+				//pattern = MakePattern();
 			}
 			/*else {
 				area->subject = nullptr;

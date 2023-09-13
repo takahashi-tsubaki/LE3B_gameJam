@@ -341,42 +341,52 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		isJumpFlag = false;
 	}
 
-	//並列回路の電気が通る
-	if (modeC == 0) {
-		if (isStockFlag2 == false) {
-			if (input->TriggerKey(DIK_SPACE)) { isHeidenFlag = true; }
-			if (isHeidenFlag == true) { heidenTimer++; }
-			if (heidenTimer >= 30) {
-				heidenTimer = 30;
-				isStockFlag2 = true;
+	if (sceneObj_->chipManager_->GetPattern() != 0)
+	{
+		//並列回路の電気が通る
+		if (modeC == 0) {
+			if (isStockFlag2 == false) {
+				if (input->TriggerKey(DIK_SPACE)) { isHeidenFlag = true; }
+				if (isHeidenFlag == true) { heidenTimer++; }
+				if (heidenTimer >= 30) {
+					heidenTimer = 30;
+					isStockFlag2 = true;
+				}
 			}
+			/*else if (isStockFlag2 == true) {
+				if (input->TriggerKey(DIK_SPACE)) {
+					heidenTimer = 0;
+					isHeidenFlag = false;
+					isStockFlag2 = false;
+				}
+			}*/
 		}
-		/*else if (isStockFlag2 == true) {
-			if (input->TriggerKey(DIK_SPACE)) {
-				heidenTimer = 0;
-				isHeidenFlag = false;
-				isStockFlag2 = false;
-			}
-		}*/
-	}
 
-	//直列回路の電気が通る
-	if (modeC == 1) {
-		if (isStockFlag == false) {
-			if (input->TriggerKey(DIK_SPACE)) { isTyokudenFlag = true; }
-			if (isTyokudenFlag == true) { tyokudenTimer++; }
-			if (tyokudenTimer >= 30) {
-				tyokudenTimer = 30;
-				isStockFlag = true;
+		//直列回路の電気が通る
+		if (modeC == 1) {
+			if (isStockFlag == false) {
+				if (input->TriggerKey(DIK_SPACE)) { isTyokudenFlag = true; }
+				if (isTyokudenFlag == true) { tyokudenTimer++; }
+				if (tyokudenTimer >= 30) {
+					tyokudenTimer = 30;
+					isStockFlag = true;
+				}
 			}
+			/*else if (isStockFlag == true) {
+				if (input->TriggerKey(DIK_SPACE)) {
+					tyokudenTimer = 0;
+					isTyokudenFlag = false;
+					isStockFlag = false;
+				}
+			}*/
 		}
-		/*else if (isStockFlag == true) {
-			if (input->TriggerKey(DIK_SPACE)) {
-				tyokudenTimer = 0;
-				isTyokudenFlag = false;
-				isStockFlag = false;
-			}
-		}*/
+	}
+	else
+	{
+		heidenTimer = 0;
+		tyokudenTimer = 0;
+		isHeidenFlag = false;
+		isStockFlag2 = false;
 	}
 }
 
