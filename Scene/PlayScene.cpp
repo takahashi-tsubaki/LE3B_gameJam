@@ -175,6 +175,8 @@ void PlayScene::Initialize()
 
 	audio->LoadWave("oto.wav");
 
+	sceneObj_->chipManager_->Reset();
+
 }
 
 void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)

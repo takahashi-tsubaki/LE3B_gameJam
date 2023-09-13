@@ -158,6 +158,7 @@ void SceneObjects::Delete()
 
 void SceneObjects::Reset()
 {
+	chipManager_->Reset();
 }
 
 

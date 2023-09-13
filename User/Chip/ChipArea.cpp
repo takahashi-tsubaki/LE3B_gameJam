@@ -79,6 +79,9 @@ void ChipArea::Update() {
 			isSet = true;
 			object_->position_.z = 1;
 		}
+		if (sphere[i]->GetIsHit() != true && sphere[i]->GetCollisionInfo().collider->GetAttribute() != COLLISION_ATTR_POWERCHIP) {
+			subject = nullptr;
+		}
 		if (sphere[i]->GetIsHit() == true && sphere[i]->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_CURSOR) {
 			isSet = true;
 			object_->position_.z = 1;
@@ -109,6 +112,9 @@ void ChipArea::Draw(DirectXCommon* dxCommon) {
 
 /// リセットを行う
 void ChipArea::Reset() {
-	//isSet = false;
+	isSet = false;
 	subject = nullptr;
+	object_->worldTransform.translation_.x = object_->GetCamera()->eye_.x + restPos_.x;
+	object_->worldTransform.translation_.y = object_->GetCamera()->eye_.y + restPos_.y;
+	object_->Update();
 }

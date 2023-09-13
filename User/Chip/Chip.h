@@ -55,6 +55,7 @@ private:
 	const float MAX_POWER = 100.0f;
 	float power = MAX_POWER;
 	Vector3 restPos_;
+	bool resetRestSet_;
 
 public:
 	Model* model_;
