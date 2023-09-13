@@ -145,7 +145,7 @@ private:	//メンバ変数
 	// blockでステージ生成
 	std::stringstream stageBlockCommands;
 
-	int blockNum = 100;
+	int blockNum = 200;
 	BlockType blockType = BlockType::Init;
 	int SPHERE_COLISSION_NUM = 1;	//コライダー（スフィア）の数
 	std::vector<Matrix4>* collisionBonesMat;	//当たり判定用のボーンのワールド行列

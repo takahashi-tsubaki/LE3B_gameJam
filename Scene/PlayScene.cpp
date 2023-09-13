@@ -21,7 +21,8 @@ void PlayScene::Initialize()
 
 	//LoadBlockData();
 
-	LoadCsv("Resources/Csv/stageBlock.csv");
+	//LoadCsv("Resources/Csv/stageBlock.csv");
+	LoadCsv("Resources/Csv/stageTest.csv");
 
 	player_ = sceneObj_->player_;
 
