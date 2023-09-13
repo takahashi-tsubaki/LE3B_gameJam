@@ -36,7 +36,7 @@ public:
 
 	void Draw();
 
-	void SetPosition(Vector3 position) { playerO_->worldTransform.translation_ = position; }
+	void SetPosition(Vector3 position) { playerO_->worldTransform.translation_ = position; playerO_->Update(); }
 	Vector3 GetPosition() { return playerO_->worldTransform.translation_; }
 
 	PlayerActionManager* GetPlayerActionManager() { return pActManager_.get(); };
@@ -45,7 +45,7 @@ public:
 
 	bool GetIsGoal() { return isGoal_; }
 
-	void ResetParam();
+	void ResetParam(int startplayerPos);
 
 	bool GetIsHit() { return isHit; }
 
@@ -96,10 +96,10 @@ private:
 	float speed = 0.25f;
 
 
+	 int startplayerPos_;
 public:
 	//
 	unsigned short chipPat_;
 	bool chipOnMove_;
-
 };
 

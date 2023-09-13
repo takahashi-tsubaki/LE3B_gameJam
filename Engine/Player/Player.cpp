@@ -321,9 +321,22 @@ void Player::CheckCollision()
 
 }
 
-void Player::ResetParam()
-{
-	playerO_->worldTransform.translation_ = { 0,0,50 };
+void Player::ResetParam(int startplayerPos)
+{		
+	startplayerPos_ = startplayerPos;
+	if (startplayerPos == 1)
+	{
+		playerO_->worldTransform.translation_ = { 462,10,50 };
+	}
+	if (startplayerPos == 2)
+	{
+		playerO_->worldTransform.translation_ = { 0,10,50 };
+	}
+	if (startplayerPos == 3)
+	{
+		playerO_->worldTransform.translation_ = { 190,10,50 };
+	}
+	//playerO_->worldTransform.translation_ = { 0,0,50 };
 	actionNum = 1;
 	oldActionNum_ = 0;	//アクション前フレーム保存変数
 	isGoal_ = false;
@@ -338,8 +351,20 @@ void Player::Move()
 
 void Player::Respawn()
 {
-	if (playerO_->worldTransform.translation_.y <= -20.0f)
+	/*if (playerO_->worldTransform.translation_.y <= -20.0f)
 	{
 		playerO_->worldTransform.translation_ = { 0,30,50 };
+	}*/
+	if (startplayerPos_ == 1&& playerO_->worldTransform.translation_.y <= -20.0f)
+	{
+		playerO_->worldTransform.translation_ = { 462,30,50 };
+	}
+	if (startplayerPos_ == 2&& playerO_->worldTransform.translation_.y <= -20.0f)
+	{
+		playerO_->worldTransform.translation_ = { 0,30,50 };
+	}
+	if (startplayerPos_ == 3&& playerO_->worldTransform.translation_.y <= -20.0f)
+	{
+		playerO_->worldTransform.translation_ = { 190,30,50 };
 	}
 }
