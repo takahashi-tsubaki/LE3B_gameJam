@@ -40,13 +40,9 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 	//}
 
 	//ChangeParallel(input);
-	
 
-	ImGui::Begin("ChipPatteern");
-	ImGui::Text("Pattern: %d", pattern);
-	ImGui::Text("isMove: %d", isMove);
-	ImGui::Text("isParallel: %d", isParallel);
-	ImGui::End();
+
+	
 	ImGui::Begin("ChipAreapos");
 	for (ChipArea* area : chipAreas_) {
 		area->Update();
@@ -58,9 +54,10 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 		chip->Update(input, mouse);
 		ImGui::Text("pos:%f,%f,%f", chip->object_->worldTransform.translation_.x, chip->object_->worldTransform.translation_.y, chip->object_->worldTransform.translation_.z);
 	}
-	CollisionUpdate();
+	
 	isMove = false;
 	if (input->PushKey(DIK_SPACE)) {
+		CollisionUpdate();
 		//pattern = MakePattern();
 		if (pattern != 0) {
 			isMove = true;
@@ -68,6 +65,12 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 	}
 	ImGui::End();
 	sphere->Update();
+
+	ImGui::Begin("ChipPatteern");
+	ImGui::Text("Pattern: %d", pattern);
+	ImGui::Text("isMove: %d", isMove);
+	ImGui::Text("isParallel: %d", isParallel);
+	ImGui::End();
 }
 
 void ChipManager::Draw(DirectXCommon* dxCommon)
@@ -104,13 +107,16 @@ void ChipManager::CollisionUpdate()
 			float lenR = std::powf((area->GetSphere()[0]->radius + chip->GetSphere()[0]->radius), 2.0);
 
 			// ���Ƌ��̌������
+			//area->subject = nullptr;
 			if (a <= lenR) {
+				area->subject = nullptr;
 				area->OnColision(chip);
+				pattern = MakePattern();
 			}
 			/*else {
 				area->subject = nullptr;
 			}*/
-			pattern = MakePattern();
+			
 		}
 	}
 }
@@ -147,20 +153,21 @@ unsigned short ChipManager::MakePattern()
 			}
 			if (chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2 ||
 				chipAreas_[0]->subject->HowTribe() == 2 && chipAreas_[1]->subject->HowTribe() == 2) {
+
 				return 0b1 << 6;
 			}
-		}	
+		}
 
 	}
 }
 
 void ChipManager::Reset()
 {
-	for (ChipArea* area : chipAreas_) {
-		area->Reset();
-	}
 	for (Chip* chip : chips_) {
 		chip->Reset();
+	}
+	for (ChipArea* area : chipAreas_) {
+		area->Reset();
 	}
 }
 
