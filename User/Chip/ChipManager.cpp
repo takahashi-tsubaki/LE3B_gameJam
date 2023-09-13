@@ -38,12 +38,11 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 	//if (sphere->GetIsHit() == true && sphere->GetCollisionInfo().collider->GetAttribute() == COLLISION_ATTR_POWERCHIP) {
 	//	mouse_->position_.z = 1;
 	//}
-	ChangeParallel(input);
+	//ChangeParallel(input);
 	CollisionUpdate();
 	if (input->TriggerKey(DIK_SPACE)) {
 		pattern = MakePattern();
-
-
+		isMove = true;
 	}
 
 	ImGui::Begin("ChipPatteern");
@@ -115,7 +114,7 @@ unsigned short ChipManager::MakePattern()
 	if (chipAreas_[0]->subject == nullptr || chipAreas_[1]->subject == nullptr) {
 		return 0;
 	}
-	if (isParallel == true) {
+	if (isParallel == true) { // 並列
 		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1 ||
 			chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1) {
 			return 0b1 << 1;
@@ -129,7 +128,7 @@ unsigned short ChipManager::MakePattern()
 			return 0b1 << 3;
 		}
 	}
-	if (isParallel == false) {
+	if (isParallel == false) { // 直列
 		if (chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1 ||
 			chipAreas_[0]->subject->HowTribe() == 1 && chipAreas_[1]->subject->HowTribe() == 1) {
 			return 0b1 << 4;

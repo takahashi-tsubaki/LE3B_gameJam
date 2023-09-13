@@ -35,8 +35,12 @@ public:
 	unsigned short GetPattern() { return pattern; };
 	void modeChangePos(int num);
 
+	bool isMove = false;
+
 private:
 	unsigned short pattern;
+
+
 	bool isParallel = true;
 
 
