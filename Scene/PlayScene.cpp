@@ -125,9 +125,25 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		if (modeC == 0)
 		{
 			modeC = 1;
+			if (isStockFlag2 == true)
+			{
+				heidenTimer = 0;
+				isHeidenFlag = false;
+				isStockFlag2 = false;
+
+			}
 		}
-		else {
+		else
+		{
 			modeC = 0;
+			if (isStockFlag == true)
+			{
+
+				tyokudenTimer = 0;
+				isTyokudenFlag = false;
+				isStockFlag = false;
+
+			}
 		}
 	}
 
@@ -246,13 +262,13 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 				isStockFlag2 = true;
 			}
 		}
-		else if (isStockFlag2 == true) {
+		/*else if (isStockFlag2 == true) {
 			if (input->TriggerKey(DIK_SPACE)) {
 				heidenTimer = 0;
 				isHeidenFlag = false;
 				isStockFlag2 = false;
 			}
-		}
+		}*/
 	}
 
 	//直列回路の電気が通る
@@ -265,13 +281,13 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 				isStockFlag = true;
 			}
 		}
-		else if (isStockFlag == true) {
+		/*else if (isStockFlag == true) {
 			if (input->TriggerKey(DIK_SPACE)) {
 				tyokudenTimer = 0;
 				isTyokudenFlag = false;
 				isStockFlag = false;
 			}
-		}
+		}*/
 	}
 }
 
