@@ -13,6 +13,73 @@ PlayScene::PlayScene(SceneManager* controller, SceneObjects* sceneObj)
 PlayScene::~PlayScene()
 {
 	sceneObj_->Reset();
+	delete sprite_;
+	delete sprite2_;
+	delete sprite3_;
+	delete sprite4_;
+	delete sprite5_;
+	delete sprite6_;
+	delete spriteDash_;
+	delete spriteJump_;
+
+	delete spritetyokuden1_;
+	delete spritetyokuden2_;
+	delete spritetyokuden3_;
+	delete spritetyokuden4_;
+	delete spritetyokuden5_;
+	delete spritetyokuden6_;
+
+	delete spriteheiden1_;
+	delete spriteheiden2_;
+	delete spriteheiden3_;
+	delete spriteheiden4_;
+	delete spriteheiden5_;
+	delete spriteheiden6_;
+	delete timeboard_;
+
+	delete spriteTimeM0_;
+	delete spriteTimeM1_;
+	delete spriteTimeM2_;
+	delete spriteTimeM3_;
+	delete spriteTimeM4_;
+	delete spriteTimeM5_;
+	delete spriteTimeM6_;
+	delete spriteTimeM7_;
+	delete spriteTimeM8_;
+	delete spriteTimeM9_;
+
+	delete spriteTimeTM0_;
+	delete spriteTimeTM1_;
+	delete spriteTimeTM2_;
+	delete spriteTimeTM3_;
+	delete spriteTimeTM4_;
+	delete spriteTimeTM5_;
+	delete spriteTimeTM6_;
+
+	delete spriteTimeS0_;
+	delete spriteTimeS1_;
+	delete spriteTimeS2_;
+	delete spriteTimeS3_;
+	delete spriteTimeS4_;
+	delete spriteTimeS5_;
+	delete spriteTimeS6_;
+	delete spriteTimeS7_;
+	delete spriteTimeS8_;
+	delete spriteTimeS9_;
+
+	delete spriteTimeTS0_;
+	delete spriteTimeTS1_;
+	delete spriteTimeTS2_;
+	delete spriteTimeTS3_;
+	delete spriteTimeTS4_;
+	delete spriteTimeTS5_;
+	delete spriteTimeTS6_;
+
+	/*for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
+	{
+		delete &sphere[i];
+		delete& spherePos[i];
+	}*/
 
 }
 
@@ -253,18 +320,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		}
 	}
 
-	if (player_->GetIsGoal() == true)
-	{
-		pSourceVoice[0]->Stop();
-		soundCheckFlag = 0;
-		timeFps = sceneObj_->timeFps;
-
-		sceneObj_->timeTM = timeTM ;
-		sceneObj_->timeM = timeM;
-		sceneObj_->timeTS =timeTS ;
-		sceneObj_->timeS = timeS;
-		controller_->ChangeSceneNum(S_CLEAR);
-	}
+	
 
 	GameTimer();
 
@@ -294,6 +350,8 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		mousePos = mousePos;
 	}
 
+	
+
 	sceneObj_->chipManager_->modeChangePos(modeC);
 
 	sceneObj_->chipManager_->Update(input, mouse);
@@ -303,7 +361,7 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 	ImGui::Begin("mouseCheck");
 	//ImGui::SetWindowPos({ 200 , 200 });
 	ImGui::SetWindowSize({ 500,100 });
-	ImGui::InputInt("mouseNum", &mouseCheckNum);
+	ImGui::InputInt("mouseNum", &num_);
 	ImGui::InputFloat2("position", &mousePos.x);
 	ImGui::End();
 
@@ -386,6 +444,27 @@ void PlayScene::Update(Input* input, GamePad* gamePad, MouseInput* mouse)
 		tyokudenTimer = 0;
 		isHeidenFlag = false;
 		isStockFlag2 = false;
+	}
+
+	if (player_->GetIsGoal() == true)
+	{
+		pSourceVoice[0]->Stop();
+		soundCheckFlag = 0;
+		timeFps = sceneObj_->timeFps;
+
+		sceneObj_->timeTM = timeTM;
+		sceneObj_->timeM = timeM;
+		sceneObj_->timeTS = timeTS;
+		sceneObj_->timeS = timeS;
+
+
+		for (SphereCollider* s : sphereSave)
+		{
+			CollisionManager::GetInstance()->RemoveCollider(s);
+			
+		}
+		sphereSave.clear();
+		controller_->ChangeSceneNum(S_CLEAR);
 	}
 }
 
@@ -647,7 +726,7 @@ void PlayScene::LoadCsv(const char* word)
 			case BlockType::Wall:
 				GenerBlocks(Vector3(x, y, z), num, COLLISION_ATTR_WALL);
 				break;
-				
+
 			}
 			blockType = BlockType::Init;
 		}
@@ -663,12 +742,15 @@ void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 	sphere.resize(SPHERE_COLISSION_NUM);
 	spherePos.resize(SPHERE_COLISSION_NUM);
 
+	num_ = num;
+
 	if (attribute == COLLISION_ATTR_LAND)
 	{
 
 		for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
 		{
 			sphere[i] = new SphereCollider;
+			sphereSave.push_back(sphere[i]);
 			CollisionManager::GetInstance()->AddCollider(sphere[i]);
 			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
 			sphere[i]->SetBasisPos(&spherePos[i]);
@@ -682,6 +764,7 @@ void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 		for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
 		{
 			sphere[i] = new SphereCollider;
+			sphereSave.push_back(sphere[i]);
 			CollisionManager::GetInstance()->AddCollider(sphere[i]);
 			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
 			sphere[i]->SetBasisPos(&spherePos[i]);
@@ -696,6 +779,7 @@ void PlayScene::GenerBlocks(Vector3 BlockPos, int num, unsigned short attribute)
 		for (int i = 0; i < SPHERE_COLISSION_NUM; i++)
 		{
 			sphere[i] = new SphereCollider;
+			sphereSave.push_back(sphere[i]);
 			CollisionManager::GetInstance()->AddCollider(sphere[i]);
 			spherePos[i] = sceneObj_->asobj_[num]->worldTransform.translation_;
 			sphere[i]->SetBasisPos(&spherePos[i]);
