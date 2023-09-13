@@ -18,7 +18,7 @@ void GameClearScene::Initialize()
 
 
 	//タイマーの表示
-	timeboard_ = Sprite::Create(32, { 820,50 });
+	timeboard_ = Sprite::Create(32, { 820,150 });
 	timeboard_->Initialize();
 
 	timeS = sceneObj_->timeS;
@@ -27,82 +27,82 @@ void GameClearScene::Initialize()
 	timeTM = sceneObj_->timeTM;
 
 	{
-		spriteTimeTM0_ = Sprite::Create(22, { 840,50 });
+		spriteTimeTM0_ = Sprite::Create(22, { 840,150 });
 		spriteTimeTM0_->Initialize();
-		spriteTimeTM1_ = Sprite::Create(23, { 840,50 });
+		spriteTimeTM1_ = Sprite::Create(23, { 840,150 });
 		spriteTimeTM1_->Initialize();
-		spriteTimeTM2_ = Sprite::Create(24, { 840,50 });
+		spriteTimeTM2_ = Sprite::Create(24, { 840,150 });
 		spriteTimeTM2_->Initialize();
-		spriteTimeTM3_ = Sprite::Create(25, { 840,50 });
+		spriteTimeTM3_ = Sprite::Create(25, { 840,150 });
 		spriteTimeTM3_->Initialize();
-		spriteTimeTM4_ = Sprite::Create(26, { 840,50 });
+		spriteTimeTM4_ = Sprite::Create(26, { 840,150 });
 		spriteTimeTM4_->Initialize();
-		spriteTimeTM5_ = Sprite::Create(27, { 840,50 });
+		spriteTimeTM5_ = Sprite::Create(27, { 840,150 });
 		spriteTimeTM5_->Initialize();
-		spriteTimeTM6_ = Sprite::Create(28, { 840,50 });
+		spriteTimeTM6_ = Sprite::Create(28, { 840,150 });
 		spriteTimeTM6_->Initialize();
 	}
 
 	{
-		spriteTimeM0_ = Sprite::Create(22, { 880,50 });
+		spriteTimeM0_ = Sprite::Create(22, { 880,150 });
 		spriteTimeM0_->Initialize();
-		spriteTimeM1_ = Sprite::Create(23, { 880,50 });
+		spriteTimeM1_ = Sprite::Create(23, { 880,150 });
 		spriteTimeM1_->Initialize();
-		spriteTimeM2_ = Sprite::Create(24, { 880,50 });
+		spriteTimeM2_ = Sprite::Create(24, { 880,150 });
 		spriteTimeM2_->Initialize();
-		spriteTimeM3_ = Sprite::Create(25, { 880,50 });
+		spriteTimeM3_ = Sprite::Create(25, { 880,150 });
 		spriteTimeM3_->Initialize();
-		spriteTimeM4_ = Sprite::Create(26, { 880,50 });
+		spriteTimeM4_ = Sprite::Create(26, { 880,150 });
 		spriteTimeM4_->Initialize();
-		spriteTimeM5_ = Sprite::Create(27, { 880,50 });
+		spriteTimeM5_ = Sprite::Create(27, { 880,150 });
 		spriteTimeM5_->Initialize();
-		spriteTimeM6_ = Sprite::Create(28, { 880,50 });
+		spriteTimeM6_ = Sprite::Create(28, { 880,150 });
 		spriteTimeM6_->Initialize();
-		spriteTimeM7_ = Sprite::Create(29, { 880,50 });
+		spriteTimeM7_ = Sprite::Create(29, { 880,150 });
 		spriteTimeM7_->Initialize();
-		spriteTimeM8_ = Sprite::Create(30, { 880,50 });
+		spriteTimeM8_ = Sprite::Create(30, { 880,150 });
 		spriteTimeM8_->Initialize();
-		spriteTimeM9_ = Sprite::Create(31, { 880,50 });
+		spriteTimeM9_ = Sprite::Create(31, { 880,150 });
 		spriteTimeM9_->Initialize();
 	}
 
 	{
-		spriteTimeTS0_ = Sprite::Create(22, { 960,50 });
+		spriteTimeTS0_ = Sprite::Create(22, { 960,150 });
 		spriteTimeTS0_->Initialize();
-		spriteTimeTS1_ = Sprite::Create(23, { 960,50 });
+		spriteTimeTS1_ = Sprite::Create(23, { 960,150 });
 		spriteTimeTS1_->Initialize();
-		spriteTimeTS2_ = Sprite::Create(24, { 960,50 });
+		spriteTimeTS2_ = Sprite::Create(24, { 960,150 });
 		spriteTimeTS2_->Initialize();
-		spriteTimeTS3_ = Sprite::Create(25, { 960,50 });
+		spriteTimeTS3_ = Sprite::Create(25, { 960,150 });
 		spriteTimeTS3_->Initialize();
-		spriteTimeTS4_ = Sprite::Create(26, { 960,50 });
+		spriteTimeTS4_ = Sprite::Create(26, { 960,150 });
 		spriteTimeTS4_->Initialize();
-		spriteTimeTS5_ = Sprite::Create(27, { 960,50 });
+		spriteTimeTS5_ = Sprite::Create(27, { 960,150 });
 		spriteTimeTS5_->Initialize();
-		spriteTimeTS6_ = Sprite::Create(28, { 960,50 });
+		spriteTimeTS6_ = Sprite::Create(28, { 960,150 });
 		spriteTimeTS6_->Initialize();
 	}
 
 	{
-		spriteTimeS0_ = Sprite::Create(22, { 1000,50 });
+		spriteTimeS0_ = Sprite::Create(22, { 1000,150 });
 		spriteTimeS0_->Initialize();
-		spriteTimeS1_ = Sprite::Create(23, { 1000,50 });
+		spriteTimeS1_ = Sprite::Create(23, { 1000,150 });
 		spriteTimeS1_->Initialize();
-		spriteTimeS2_ = Sprite::Create(24, { 1000,50 });
+		spriteTimeS2_ = Sprite::Create(24, { 1000,150 });
 		spriteTimeS2_->Initialize();
-		spriteTimeS3_ = Sprite::Create(25, { 1000,50 });
+		spriteTimeS3_ = Sprite::Create(25, { 1000,150 });
 		spriteTimeS3_->Initialize();
-		spriteTimeS4_ = Sprite::Create(26, { 1000,50 });
+		spriteTimeS4_ = Sprite::Create(26, { 1000,150 });
 		spriteTimeS4_->Initialize();
-		spriteTimeS5_ = Sprite::Create(27, { 1000,50 });
+		spriteTimeS5_ = Sprite::Create(27, { 1000,150 });
 		spriteTimeS5_->Initialize();
-		spriteTimeS6_ = Sprite::Create(28, { 1000,50 });
+		spriteTimeS6_ = Sprite::Create(28, { 1000,150 });
 		spriteTimeS6_->Initialize();
-		spriteTimeS7_ = Sprite::Create(29, { 1000,50 });
+		spriteTimeS7_ = Sprite::Create(29, { 1000,150 });
 		spriteTimeS7_->Initialize();
-		spriteTimeS8_ = Sprite::Create(30, { 1000,50 });
+		spriteTimeS8_ = Sprite::Create(30, { 1000,150 });
 		spriteTimeS8_->Initialize();
-		spriteTimeS9_ = Sprite::Create(31, { 1000,50 });
+		spriteTimeS9_ = Sprite::Create(31, { 1000,150 });
 		spriteTimeS9_->Initialize();
 	}
 
@@ -155,7 +155,7 @@ void GameClearScene::Draw()
 	// 背景スプライト描画
 	
 
-	DrawGameTimer();
+	
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
@@ -217,7 +217,7 @@ void GameClearScene::Draw()
 		/*clearB->Draw();
 		clearC->Draw();*/
 	}
-
+	DrawGameTimer();
 
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる

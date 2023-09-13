@@ -45,17 +45,13 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 		Reset();
 	}
 	
-	ImGui::Begin("ChipAreapos");
 	for (ChipArea* area : chipAreas_) {
 		area->Update();
-		ImGui::Text("pos:%f,%f,%f", area->object_->worldTransform.translation_.x, area->object_->worldTransform.translation_.y, area->object_->worldTransform.translation_.z);
 	}
-	ImGui::End();
-	ImGui::Begin("Chippos");
 	for (Chip* chip : chips_) {
 		chip->Update(input, mouse);
-		ImGui::Text("pos:%f,%f,%f", chip->object_->worldTransform.translation_.x, chip->object_->worldTransform.translation_.y, chip->object_->worldTransform.translation_.z);
 	}
+	
 	
 	isMove = false;
 	if (input->PushKey(DIK_SPACE)) {
@@ -68,14 +64,13 @@ void ChipManager::Update(Input* input, MouseInput* mouse)
 	}
 	CollisionUpdate();
 	pattern = MakePattern();
-	ImGui::End();
 	sphere->Update();
 
-	ImGui::Begin("ChipPatteern");
+	/*ImGui::Begin("ChipPatteern");
 	ImGui::Text("Pattern: %d", pattern);
 	ImGui::Text("isMove: %d", isMove);
 	ImGui::Text("isParallel: %d", isParallel);
-	ImGui::End();
+	ImGui::End();*/
 
 
 }

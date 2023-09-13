@@ -163,12 +163,12 @@ void Player::Update(Input* input, GamePad* gamePad)
 		playerO_->SetModel(playerM_);
 	}
 
-	ImGui::Begin("Player");
+	/*ImGui::Begin("Player");
 	ImGui::InputInt("ActionNumber", &actionNum);
 	ImGui::InputInt("OldActionNumber", &oldActionNum_);
 	ImGui::InputFloat3("Position", &playerO_->worldTransform.translation_.x);
 	ImGui::InputInt("ground", &ground);
-	ImGui::End();
+	ImGui::End();*/
 
 	playerO_->Update();
 }
