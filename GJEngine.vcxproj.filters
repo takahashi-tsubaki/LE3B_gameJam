@@ -138,7 +138,7 @@
     <ClCompile Include="Scene\GameClearScene.cpp">
       <Filter>ソース ファイル\Scene\SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\GameOverScene.cpp">
+    <ClCompile Include="Scene\GameTutoScene.cpp">
       <Filter>ソース ファイル\Scene\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="Scene\IScene.cpp">
@@ -338,7 +338,7 @@
     <ClInclude Include="Scene\IScene.h">
       <Filter>ヘッダー ファイル\Scene\SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\GameOverScene.h">
+    <ClInclude Include="Scene\GameTutoScene.h">
       <Filter>ヘッダー ファイル\Scene\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="Scene\GameClearScene.h">

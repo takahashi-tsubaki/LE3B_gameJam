@@ -73,7 +73,7 @@
     <ClCompile Include="Engine\Player\PlayerManager\PlayerMove.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\GameClearScene.cpp" />
-    <ClCompile Include="Scene\GameOverScene.cpp" />
+    <ClCompile Include="Scene\GameTutoScene.cpp" />
     <ClCompile Include="Scene\gameScene.cpp" />
     <ClCompile Include="Scene\IScene.cpp" />
     <ClCompile Include="Scene\PauseScene.cpp" />
@@ -138,7 +138,7 @@
     <ClInclude Include="Engine\Player\PlayerManager\PlayerJump.h" />
     <ClInclude Include="Engine\Player\PlayerManager\PlayerMove.h" />
     <ClInclude Include="Scene\GameClearScene.h" />
-    <ClInclude Include="Scene\GameOverScene.h" />
+    <ClInclude Include="Scene\GameTutoScene.h" />
     <ClInclude Include="Scene\gameScene.h" />
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\PauseScene.h" />

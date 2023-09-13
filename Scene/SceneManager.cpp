@@ -63,9 +63,9 @@ void SceneManager::ChangeScene()
 			_scene.emplace(new GameClearScene(&*this, sceneObjects_));
 			SceneInitialize();
 			break;
-		case S_OVER:
+		case S_TUTO:
 			_scene.pop();
-			_scene.emplace(new GameOverScene(&*this, sceneObjects_));
+			_scene.emplace(new GameTutoScene(&*this, sceneObjects_));
 			SceneInitialize();
 			break;
 		case S_PAUSE:
@@ -105,8 +105,8 @@ void SceneManager::PushScene(int number)
 		_scene.emplace(new GameClearScene(&*this, sceneObjects_));
 
 		break;
-	case S_OVER:
-		_scene.emplace(new GameOverScene(&*this, sceneObjects_));
+	case S_TUTO:
+		_scene.emplace(new GameTutoScene(&*this, sceneObjects_));
 
 		break;
 	case S_PAUSE:

@@ -57,6 +57,15 @@ private:
 
 	Object3d* playerO_ = nullptr;
 	Model* playerM_ = nullptr;
+	Model* walkmodel1 = nullptr;
+	Model* walkmodel2 = nullptr;
+	Model* jumpmodel = nullptr;
+	Model* jumpmodelL = nullptr;
+	Model* dashmodel0 = nullptr;
+	Model* dashmodel1 = nullptr;
+	Model* dashmodel2 = nullptr;
+	int changeModelTimer = 0;
+	int changeModelTimerD = 0;
 
 	//当たり判定に必要なもの
 	int SPHERE_COLISSION_NUM = 1;	//コライダー（スフィア）の数
